@@ -1,38 +1,222 @@
-.App {
-  text-align: center;
+html * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+html{
+    font-size: 1vw;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    font-family: 'Montserrat', sans-serif;
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+/*MAGIA FLEXBOX EN ROOT*/
+#root{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100vw;
+    min-height: 100vh;
+    background-color: rgba(9, 1, 54, 0.863);
 }
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+/* MAGIA FLEXBOX EN HEADER */
+header, footer{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgba(7, 1, 32, 0.76);
+    border: 0.1rem solid black;
+    width: 95%;
+    /* margin-top: 1rem; */
+    padding: 0 1rem;
+    min-height: 5rem;
 }
-
-.App-link {
-  color: #61dafb;
+header{
+    border-top: transparent;
 }
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
+/* MAGIA MAIN */
+main{
+    width: 95%;
+    flex-grow: 1;
+}
+/* MAGIA FOOTER */
+footer{
+    color:white;
+    margin-top: 0;
+    border-bottom: transparent;   
+}
+/* ESTILOS NAVBAR */
+header nav, footer nav{
+    display: flex;
+    /* background-color: lightyellow; */
+    justify-content: space-between;
+    align-items: center;
+    width: 20%;
+}
+footer nav{
+    width: 8%;
+}
+header nav a, footer nav a{
+    color: white;
+    text-decoration: none;
+}
+header nav a:hover, footer nav a:hover{
+    text-decoration: underline;
+}
+header nav a.active, footer nav a.active{
+    color: rgba(255, 136, 0, 0.541); 
+}
+.tituloNavBar{
+    display:flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.tituloNavBar a{
+    text-decoration: none;
+}
+.tituloNavBar a h1{
+    margin-left: 1rem;
+    color: white;
+    text-shadow: 0.05rem 0.05rem rgba(255, 136, 0, 0.541), -0.05rem -0.05rem rgba(255, 136, 0, 0.541);
+}
+/*FOTO LOGO Y FOTO USUARIO*/
+.foto.logo, .foto.usuario{
+    background-size: contain;
+    background-position: center;
+    width: 3rem;
+    height: 3rem;
+    background-repeat: no-repeat;
+    transition: all 5s;
+}
+.foto.logo:hover, .foto.usuario:hover{
     transform: rotate(360deg);
-  }
+    transition: all 5s;
+}
+/* ESTILO HERO */
+.hero{
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 33rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    transition: all 5s;
+}
+.hero:hover{
+    background-position: top;
+    transition: all 5s;
+}
+/* ESTILO H2 DEL HERO */
+.hero h2{
+    font-size: 1.5rem;
+    color:white;
+    text-shadow: 0.1rem 0.1rem rgba(255, 136, 0, 0.541);
+}
+/* ESTILO CALL TO ACTION HERO */
+#callToActionHero{
+    background-color: rgba(0, 0, 0, 0.541);
+    color:white;
+    padding: 1rem;
+    border: transparent;
+    /* border: 0.1rem solid red; */
+    font-size: 1rem;
+    transition: all 1s;
+}
+#callToActionHero:hover{
+    background-color: rgba(255, 136, 0, 0.541);
+    color: black;
+    transition: all 1s;
+}
+/* ESTILOS CARRUSEL */
+.carrusel{
+    background-color: rgba(0, 0, 0, 0.158);
+    padding: 1rem 0;
+}
+.carrusel h2{
+    text-align: center;
+    font-size: 2rem;
+    color: white;
+    text-shadow: 0.1rem 0.1rem rgba(255, 136, 0, 0.541), -0.1rem -0.1rem rgba(255, 136, 0, 0.541);
+}
+.carruselContainer{
+    display: flex;
+    align-self: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 95%;
+    height: 40rem;
+}
+.ciudadesCarrusel{
+    width: 45%;
+    height: 45%;
+    margin: 1rem 1rem;
+    text-align: center;
+    /* display:flex; */
+    /* flex-direction: column; */
+    justify-content: space-evenly;
+    align-items: flex-start;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    transition: all 1s;
+    
+}
+.ciudadesCarrusel p{
+    font-size: 2.5rem;
+    color: white;
+    /* background-color: rgba(238, 4, 4, 0.541); */
+    text-shadow: 0.1rem 0.1rem rgba(238, 109, 4, 0.76), -0.1rem -0.1rem rgba(238, 4, 4, 0.76);
+}
+.nombresCiudadesCarrusel{
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    /* background-color: rgba(238, 109, 4, 0.76); */
+    background-color: rgba(0, 0, 0, 0.75);
+}
+.carruselHandler{
+    display:flex;
+    width: 100%;
+}
+.carruselHandler button{
+    width: 2rem;
+    height: 2rem;
+    margin: 0 1rem;
+    background-color: rgba(255, 255, 255, 0.493);
+    font-size: 1rem;
+    border-radius: 100%;
+    align-self: center;
+}
+.ciudadesCarrusel:hover{
+    background-position: bottom;
+    transition: all 4s;
+}
+/* FOTOS REDES */
+.fotosRedes{
+    width: 20%;
+    height: 2.5rem;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    /* background-color: tomato; */
+}
+/* .fotosRedes div{
+    width: 35%;
+    height: 100%;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-color: thistle;
+} */
+.fotosRedes a{
+    width: 2.5rem;
+    height: 100%;
+}
+.fotosRedes a div{
+    height: 100%;
+    width: 2.5rem;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
