@@ -1,5 +1,6 @@
 import { useRef, useState, useEffect } from "react"
 import Slide from './Slide'
+import BotonCarrusel from "./BotonCarrusel"
 const Carrusel = () =>{
     const contenidoCarrusel = [
         [
@@ -43,7 +44,6 @@ const Carrusel = () =>{
     }
     const timeoutId = useRef(0);
     // console.log("Valor de ref de timeout inicial " + timeoutId.current)
-
     const limpiarTiempo = () =>{    
         clearInterval(timeoutId.current)
         console.log("matado intervalo " + timeoutId.current)
@@ -58,7 +58,21 @@ const Carrusel = () =>{
         }, 4000)
         console.log("iniciado el intervalo" + timeoutId.current)
     },[slide, render])
-
+    const goToSlide = (e) =>{
+        // console.log(e.target.className.includes("btnActual"))
+        if(e.target.className.includes("btnActual")){
+            return false
+        }
+        if(e.target.className.includes("btnSiguiente")){
+            // console.log("quiso pasar al siguiente")
+            nextSlide()
+        }
+        if(e.target.className.includes("btnAnterior")){
+            // console.log("quiso pasar al anterior")
+            previousSlide()
+        }
+    }
+    const arrayBotonesCar = ["", "", ""]
     return( 
         <div className="carrusel" onMouseEnter={limpiarTiempo} onMouseLeave={reiniciarTiempo}>
             <h2>Popular myTineraries</h2>
@@ -68,6 +82,9 @@ const Carrusel = () =>{
                     {contenidoCarrusel.map((slideData, index) => <Slide key={index} datos={slideData} actual={slide.actual === index} anterior={slide.previous === index} siguiente={slide.next === index}/>)}
                 </div>
                 <button onClick={nextSlide} onMouseOver={limpiarTiempo}>{'>'}</button>
+            </div>
+            <div className="botonesAbajoCarrusel">
+                {arrayBotonesCar.map((boton, index) => <BotonCarrusel key={index} actual={slide.actual === index} anterior={slide.previous === index} siguiente={slide.next === index} funcion={goToSlide}/>)}
             </div>
         </div>
     )
