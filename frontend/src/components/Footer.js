@@ -4,20 +4,20 @@ const Footer = () => {
         <footer>
             <h4>FWB - 2021</h4>
             <div className="fotosRedes">
-                <p>Redes:</p>
-                <a href="https://facebook.com/" target="_blank" >
+                <p>Social media:</p>
+                <a href="https://facebook.com/" target="_blank" rel="noreferrer">
                     <div style={{backgroundImage: "url('./assets/logoface.png')"}}></div>
                 </a>
-                <a href="https://twitter.com/" target="_blank">
+                <a href="https://instagram.com/" target="_blank" rel="noreferrer">
                     <div style={{backgroundImage: "url('./assets/logoinsta.png')"}}></div>
                 </a>
-                <a href="https://www.instagram.com/" target="_blank">
+                <a href="https://twitter.com/" target="_blank" rel="noreferrer">
                     <div style={{backgroundImage: "url('./assets/logotwitter.png')"}}></div>
                 </a>
             </div>
             <div>
-                <p>Dirección: Av. Pellegrini 4371 Local 2, Rosario</p>
-                <p>Telefono: +543412222222</p>
+                <p>Direction: Av. Pellegrini 4371 Local 2, Rosario</p>
+                <p>Telephone: +543412222222</p>
             </div>
             <nav>
                 <NavLink exact to="/">

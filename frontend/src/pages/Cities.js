@@ -1,9 +1,12 @@
 import Header from "../components/Header"
+import Footer from "../components/Footer"
+import Main from "../components/Main"
 const Cities = () =>{
     return(
         <>
             <Header/>
-            <h1>Página de cities</h1>
+            <Main/>
+            <Footer/>
         </>
     )
 }

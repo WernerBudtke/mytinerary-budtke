@@ -96,7 +96,7 @@ header nav a.active, footer nav a.active{
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    height: 33rem;
+    height: 45rem;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -110,19 +110,22 @@ header nav a.active, footer nav a.active{
 }
 /* ESTILO H2 DEL HERO */
 .hero h2{
-    font-size: 1.5rem;
+    font-size: 2rem;
     color:white;
     text-shadow: 0.1rem 0.1rem rgba(255, 136, 0, 0.541);
 }
 /* ESTILO CALL TO ACTION HERO */
 #callToActionHero{
     background-color: rgba(0, 0, 0, 0.541);
+    border-radius: 2rem;
+    /* rgba(0, 0, 0, 0.541) */
     color:white;
     padding: 1rem;
     border: transparent;
     /* border: 0.1rem solid red; */
     font-size: 1rem;
     transition: all 1s;
+    cursor: pointer;
 }
 #callToActionHero:hover{
     background-color: rgba(255, 136, 0, 0.541);
@@ -181,13 +184,14 @@ header nav a.active, footer nav a.active{
     width: 100%;
 }
 .carruselHandler button{
-    width: 2rem;
-    height: 2rem;
+    width: 2.5rem;
+    height: 2.5rem;
     margin: 0 1rem;
     background-color: rgba(255, 255, 255, 0.493);
     font-size: 1rem;
     border-radius: 100%;
     align-self: center;
+    cursor: pointer;
 }
 .ciudadesCarrusel:hover{
     background-position: bottom;
@@ -202,13 +206,6 @@ header nav a.active, footer nav a.active{
     align-items: center;
     /* background-color: tomato; */
 }
-/* .fotosRedes div{
-    width: 35%;
-    height: 100%;
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-color: thistle;
-} */
 .fotosRedes a{
     width: 2.5rem;
     height: 100%;
@@ -220,3 +217,77 @@ header nav a.active, footer nav a.active{
     background-position: center;
     background-repeat: no-repeat;
 }
+
+
+/* SEGUNDO CARRUSEL */
+.actual{
+    display: flex;
+    align-self: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 100%;
+    height: 40rem;
+}
+.siguiente{
+    display:none;
+}
+.anterior{
+    display:none;
+}
+/* .otro{
+    display:none;
+    transform: translateX(300%);
+    z-index: -20;
+    opacity: 0;
+    transition: all 3s;
+}
+.carrusel2{
+    overflow-x: hidden;
+    width: 100%;
+}
+.carruselHandler2{
+    display:flex;
+    overflow: hidden;
+    width: 100%;
+}
+.carruselHandler2 button{
+    width: 2rem;
+    height: 2rem;
+    margin: 0 1rem;
+    background-color: rgba(255, 255, 255, 0.493);
+    font-size: 1rem;
+    border-radius: 100%;
+    align-self: center;
+}
+
+.carousel.slide{
+    width: 95%;
+    height: 60vh;
+} */
+/* img{
+    width: 45vw;
+    height: 30vh;
+} */
+/* .carousel-unidad{
+    margin-bottom: 2vh;
+    width: 45vw;
+    height: 30vh;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+.carousel-unidad p{
+    color: white;
+    font-size: 3rem;
+    text-align: center;
+}
+.carousel-inner{
+    width: 100%;
+    height: 100%;
+}
+.carousel-item.active{
+    display:flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    width: 100%;
+} */

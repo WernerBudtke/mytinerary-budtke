@@ -1,65 +1,71 @@
 import { useRef, useState, useEffect } from "react"
+import Slide from './Slide'
 const Carrusel = () =>{
-    const contenidoCarrusel = [{nombre: "Buenos Aires", pais:"Argentina", imagen: "bsas.jpg"}, {nombre: "Lima", pais:"Perú", imagen: "lima.jpg"}, {nombre: "Montevideo", pais:"Uruguay", imagen: "montevideo.jpg"}, {nombre: "Roma", pais:"Italia", imagen: "roma.jpg"}]
-    const contenidoCarrusel2 = [{nombre: "Santa Fe", pais:"Argentina", imagen: "bsas.jpg"}, {nombre: "Lima", pais:"Perú", imagen: "lima.jpg"}, {nombre: "Montevideo", pais:"Uruguay", imagen: "montevideo.jpg"}, {nombre: "Roma", pais:"Italia", imagen: "roma.jpg"}]
-    const contenidoCarrusel3 = [{nombre: "Chubut", pais:"Argentina", imagen: "bsas.jpg"}, {nombre: "Lima", pais:"Perú", imagen: "lima.jpg"}, {nombre: "Montevideo", pais:"Uruguay", imagen: "montevideo.jpg"}, {nombre: "Roma", pais:"Italia", imagen: "roma.jpg"}]
-    const contenidoCarrusel4 = [{nombre: "Rosario", pais:"Argentina", imagen: "bsas.jpg"}, {nombre: "Lima", pais:"Perú", imagen: "lima.jpg"}, {nombre: "Montevideo", pais:"Uruguay", imagen: "montevideo.jpg"}, {nombre: "Roma", pais:"Italia", imagen: "roma.jpg"}]
+    const contenidoCarrusel = [
+        [
+            {id: 1, nombre: "Buenos Aires", pais:"Argentina", imagen: "bsas.jpg"}, 
+            {id: 2, nombre: "Buenos Aires", pais:"Argentina", imagen: "lima.jpg"}, 
+            {id: 3, nombre: "Buenos Aires", pais:"Argentina", imagen: "roma.jpg"},
+            {id: 4, nombre: "Buenos Aires", pais:"Argentina", imagen: "montevideo.jpg"}
+        ],
+    
+        [
+            {id: 5, nombre: "Lima", pais:"Perú", imagen: "montevideo.jpg"}, 
+            {id: 6, nombre: "Lima", pais:"Perú", imagen: "bsas.jpg"}, 
+            {id: 7, nombre: "Lima", pais:"Perú", imagen: "roma.jpg"},
+            {id: 8, nombre: "Lima", pais:"Perú", imagen: "lima.jpg"}
+        ],
 
-    const [slide, setSlide] = useState(1)
+        [
+            {id: 9, nombre: "Montevideo",pais:"Uruguay",  imagen: "montevideo.jpg"}, 
+            {id: 10, nombre: "Montevideo",pais:"Uruguay", imagen: "montevideo.jpg"}, 
+            {id: 11, nombre: "Montevideo",pais:"Uruguay", imagen: "montevideo.jpg"},
+            {id: 12, nombre: "Montevideo",pais:"Uruguay", imagen: "montevideo.jpg"}
+        ],
+    ]
+
+    const [slide, setSlide] = useState({actual: 1, next: 2, previous: 0})
+    const [render, setRender] = useState(false)
     const nextSlide =() => {
-        let estadoSlide = slide === contenidoCarrusel.length-1 ? 0 : slide+1
-        setSlide(estadoSlide)
+        let estadoSlide = slide.actual === contenidoCarrusel.length-1 ? 0 : slide.actual+1
+        let estadoSlide2 = slide.next === contenidoCarrusel.length-1 ? 0 : slide.next+1
+        let estadoSlide3 = slide.previous === contenidoCarrusel.length-1 ? 0 : slide.previous+1
+
+        setSlide({actual: estadoSlide, next: estadoSlide2, previous:estadoSlide3})
+        // console.log(slide)
     }
     const previousSlide =() => {
-        let estadoSlide = slide === 0 ? contenidoCarrusel.length-1 : slide-1
-        setSlide(estadoSlide)
+        let estadoSlide = slide.actual === 0 ? contenidoCarrusel.length-1 : slide.actual-1
+        let estadoSlide2 = slide.next === 0 ? contenidoCarrusel.length-1 : slide.next-1
+        let estadoSlide3 = slide.previous === 0 ? contenidoCarrusel.length-1 : slide.previous-1
+        setSlide({actual: estadoSlide, next: estadoSlide2, previous:estadoSlide3})
+        // console.log(slide)
     }
     const timeoutId = useRef(0);
-    console.log("Valor de ref de timeout inicial " + timeoutId.current)
-    useEffect(()=>{
+    // console.log("Valor de ref de timeout inicial " + timeoutId.current)
+
+    const limpiarTiempo = () =>{    
         clearInterval(timeoutId.current)
-        console.log("Inicio intervalo")
+        console.log("matado intervalo " + timeoutId.current)
+    }
+    const reiniciarTiempo = () =>{
+        setRender(!render)
+    }
+    useEffect(() => {
+        limpiarTiempo()
         timeoutId.current = setInterval(() =>{
             nextSlide()
-        }, 3000)
-        console.log("valor de ref post timeout " + timeoutId.current)
-    },[slide])
-    
-    const limpiarTiempo = () =>{
-        console.log("antes de la kill " + timeoutId.current)
-        clearInterval(timeoutId.current)
-        console.log("post kill " + timeoutId.current)
-    }
+        }, 4000)
+        console.log("iniciado el intervalo" + timeoutId.current)
+    },[slide, render])
+
     return( 
-        <div className="carrusel">
+        <div className="carrusel" onMouseEnter={limpiarTiempo} onMouseLeave={reiniciarTiempo}>
             <h2>Popular myTineraries</h2>
             <div className="carruselHandler">
                 <button onClick={previousSlide} onMouseOver={limpiarTiempo}>{'<'}</button>
-                <div className="carruselContainer" onMouseEnter={limpiarTiempo}>
-                    <div className="ciudadesCarrusel" style={{backgroundImage:`url('./assets/${contenidoCarrusel[slide]["imagen"]}')`}}>
-                        <div className="nombresCiudadesCarrusel">
-                            <p>{contenidoCarrusel[slide]["nombre"]}</p>
-                            <p>{contenidoCarrusel[slide]["pais"]}</p>
-                        </div>
-                    </div>
-                    <div className="ciudadesCarrusel" style={{backgroundImage:`url('./assets/${contenidoCarrusel2[slide]["imagen"]}')`}}>
-                        <div className="nombresCiudadesCarrusel">
-                            <p>{contenidoCarrusel2[slide]["nombre"]}</p>
-                            <p>{contenidoCarrusel2[slide]["pais"]}</p>
-                        </div>
-                    </div>
-                    <div className="ciudadesCarrusel" style={{backgroundImage:`url('./assets/${contenidoCarrusel3[slide]["imagen"]}')`}}>
-                        <div className="nombresCiudadesCarrusel">
-                            <p>{contenidoCarrusel3[slide]["nombre"]}</p>
-                            <p>{contenidoCarrusel3[slide]["pais"]}</p>
-                        </div>
-                    </div>
-                    <div className="ciudadesCarrusel" style={{backgroundImage:`url('./assets/${contenidoCarrusel4[slide]["imagen"]}')`}}>
-                        <div className="nombresCiudadesCarrusel">
-                            <p>{contenidoCarrusel4[slide]["nombre"]}</p>
-                            <p>{contenidoCarrusel4[slide]["pais"]}</p>
-                        </div>
-                    </div>
+                <div className="carruselContainer">
+                    {contenidoCarrusel.map((slideData, index) => <Slide key={index} datos={slideData} actual={slide.actual === index} anterior={slide.previous === index} siguiente={slide.next === index}/>)}
                 </div>
                 <button onClick={nextSlide} onMouseOver={limpiarTiempo}>{'>'}</button>
             </div>
