@@ -16,9 +16,9 @@ const Carrusel = () =>{
     }
     const timeoutId = useRef(0);
     const limpiarTiempo = () =>{
-        console.log("antes de la kill " + timeoutId.current)
+        // console.log("antes de la kill " + timeoutId.current)
         clearInterval(timeoutId.current)
-        console.log("post kill " + timeoutId.current)
+        // console.log("post kill " + timeoutId.current)
     }
     
     console.log("Valor de ref de timeout inicial " + timeoutId.current)
