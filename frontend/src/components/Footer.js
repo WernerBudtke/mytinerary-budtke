@@ -1,5 +1,12 @@
 import { NavLink } from "react-router-dom"
 const Footer = () => {
+    const irAlCielo = () =>{
+        window.scrollTo({
+            top: 0,
+            left: 0,
+            behavior: 'smooth'
+        })
+    }
     return(
         <footer>
             <h4>FWB - 2021</h4>
@@ -16,12 +23,12 @@ const Footer = () => {
                 </a>
             </div>
             <div>
-                <p>Direction: Av. Pellegrini 4371 Local 2, Rosario</p>
+                <p>Address: Rio de Janeiro 284 9C, CABA</p>
                 <p>Telephone: +543412222222</p>
             </div>
             <nav>
                 <NavLink exact to="/">
-                    <p>Home</p>
+                    <p onClick={irAlCielo}>Home</p>
                 </NavLink>
                 <NavLink to="/cities">
                     <p>Cities</p>

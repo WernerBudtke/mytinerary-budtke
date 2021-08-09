@@ -145,6 +145,7 @@ header nav a.active, footer nav a.active{
 .carrusel{
     background-color: rgba(0, 0, 0, 0.158);
     padding: 1rem 0;
+    overflow-x: hidden;
 }
 .carrusel h2{
     text-align: center;
@@ -295,63 +296,8 @@ header nav a.active, footer nav a.active{
     z-index: -20;
     opacity: 0;
     transition: all 3s;
-}
-.carrusel2{
-    overflow-x: hidden;
-    width: 100%;
-}
-.carruselHandler2{
-    display:flex;
-    overflow: hidden;
-    width: 100%;
-}
-.carruselHandler2 button{
-    width: 2rem;
-    height: 2rem;
-    margin: 0 1rem;
-    background-color: rgba(255, 255, 255, 0.493);
-    font-size: 1rem;
-    border-radius: 100%;
-    align-self: center;
-}
+}*/
 
-.carousel.slide{
-    width: 95%;
-    height: 60vh;
-} */
-/* img{
-    width: 45vw;
-    height: 30vh;
-} */
-/* .carousel-unidad{
-    margin-bottom: 2vh;
-    width: 45vw;
-    height: 30vh;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-}
-.carousel-unidad p{
-    color: white;
-    font-size: 3rem;
-    text-align: center;
-}
-.carousel-inner{
-    width: 100%;
-    height: 100%;
-}
-.carousel-item.active{
-    display:flex;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
-    width: 100%;
-} */
-
-/* .shrek{
-    background-image: url('./pages/mayonesa.gif');
-    background-size: cover;
-    background-position: center;    
-} */
 
 .seMueve.derecha{
     transform: translateX(-150%);
@@ -365,4 +311,116 @@ header nav a.active, footer nav a.active{
 .noSeMueve{
     transform: translateX(0);
     transition: all 0.5s;
+}
+
+@media screen and (max-width: 1024px) {
+    html{
+        font-size: 1.2vw;
+    }
+    header nav{
+        width: 25%;
+    }
+    footer nav{
+        width: 15%;
+    }
+    header, footer, main{
+        width: 100%;
+    }
+    #callToActionHero{
+        background-color: rgba(0, 0, 0, 0.541);
+        border-radius: 2rem;
+        color:white;
+        padding: 1rem;
+        border: transparent;
+        font-size: 1.5rem;
+        transition: all 1s;
+        cursor: pointer;
+    }
+}
+@media screen and (max-width: 800px) {
+    html{
+        font-size: 1.4vw;
+    }
+    header nav{
+        width: 30%;
+    }
+    footer nav{
+        width: 15%;
+    }
+    header, footer, main{
+        width: 100%;
+    }
+    #callToActionHero{
+        background-color: rgba(0, 0, 0, 0.541);
+        border-radius: 2rem;
+        color:white;
+        padding: 1rem;
+        border: transparent;
+        font-size: 1.5rem;
+        transition: all 1s;
+        cursor: pointer;
+    }
+    .hero{
+        height: 60rem; 
+    }
+    .hero h2{
+        font-size: 1.6rem;
+    }
+    .ciudadesCarrusel p{
+        font-size: 2rem;
+    }
+}
+@media screen and (max-width: 400px) {
+    html{
+        font-size: 2vw;
+    }
+    header nav{
+        width: 50%;
+    }
+    footer nav{
+        width: 15%;
+    }
+    header, footer, main{
+        width: 100%;
+    }
+    #callToActionHero{
+        background-color: rgba(0, 0, 0, 0.541);
+        border-radius: 2rem;
+        color:white;
+        padding: 1rem;
+        border: transparent;
+        font-size: 1.5rem;
+        transition: all 1s;
+        cursor: pointer;
+    }
+    .carruselContainer{
+        height: 60rem;
+    }
+    .actual{
+        height: 100%;
+        width: 100%;
+        flex-direction: column;
+        align-items: center;
+        flex-wrap: nowrap;
+    }
+    .hero{
+        height: 60rem; 
+    }
+    .hero h2{
+        font-size: 2rem;
+        text-align: center;
+    }
+    .ciudadesCarrusel p{
+        font-size: 2rem;
+    }
+    .ciudadesCarrusel{
+        width: 100%;
+        margin: 1rem 1rem;
+    }
+    .fotosRedes{
+        display:none;
+    }
+    .foto.logo{
+        display:none;
+    }
 }

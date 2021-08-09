@@ -13,7 +13,7 @@ const Carrusel = () =>{
         [
             {id: 5, nombre: "Montevideo", pais:"Uruguay", imagen: "montevideo.jpg"}, 
             {id: 6, nombre: "Calafate", pais:"Argentina", imagen: "calafate.jpg"}, 
-            {id: 7, nombre: "Roma", pais:"Italy", imagen: "roma.jpg"},
+            {id: 7, nombre: "Rome", pais:"Italy", imagen: "roma.jpg"},
             {id: 8, nombre: "Lima", pais:"Peru", imagen: "lima.jpg"}
         ],
 
@@ -114,11 +114,11 @@ const Carrusel = () =>{
         <div className="carrusel" onMouseEnter={limpiarTiempo} onMouseLeave={reiniciarTiempo}>
             <h2>Popular myTineraries</h2>
             <div className="carruselHandler">
-                <button onClick={previousSlide} onMouseEnter={limpiarTiempo}>{'<'}</button>
+                <button onClick={previousSlide}>{'<'}</button>
                 <div className="carruselContainer">
                     {contenidoCarrusel.map((slideData, index) => <Slide key={index} datos={slideData} actual={slide.actual === index} anterior={slide.previous === index} siguiente={slide.next === index} moving={moving} direction={direction}/>)}
                 </div>
-                <button onClick={nextSlide} onMouseEnter={limpiarTiempo}>{'>'}</button>
+                <button onClick={nextSlide}>{'>'}</button>
             </div>
             <div className="botonesAbajoCarrusel">
                 {arrayBotonesCar.map((boton, index) => <BotonCarrusel key={index} actual={slide.actual === index} anterior={slide.previous === index} siguiente={slide.next === index} funcion={goToSlide}/>)}
