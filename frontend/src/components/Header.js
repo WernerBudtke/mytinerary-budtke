@@ -2,8 +2,8 @@ import {NavLink} from 'react-router-dom'
 const Header = () => {
     return(
         <header>
-            <div className="tituloNavBar">
-                <NavLink exact to="/"><div className="foto logo" style={{backgroundImage: "url('./assets/fotologo.png')"}}></div></NavLink>
+            <div className="titleNavBar">
+                <NavLink exact to="/"><div className="photo logo" style={{backgroundImage: "url('./assets/fotologo.png')"}}></div></NavLink>
                 <NavLink exact to="/"><h1>myTinerary</h1></NavLink>
             </div>
             <nav>
@@ -17,9 +17,9 @@ const Header = () => {
                     <p>Sign In</p>
                 </NavLink>
                 <NavLink to="signout">
-                    <p>Sign Out</p>
+                    <p>Sign Up</p>
                 </NavLink>
-                <div className="foto usuario" style={{backgroundImage: "url('./assets/fotologoff.png')"}}></div>
+                <div className="photo user" style={{backgroundImage: "url('./assets/fotologoff.png')"}}></div>
             </nav>
         </header>
     )

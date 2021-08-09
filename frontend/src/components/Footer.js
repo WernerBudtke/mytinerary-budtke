@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom"
 const Footer = () => {
-    const irAlCielo = () =>{
+    const goToHeaven = () =>{
         window.scrollTo({
             top: 0,
             left: 0,
@@ -10,7 +10,7 @@ const Footer = () => {
     return(
         <footer>
             <h4>FWB - 2021</h4>
-            <div className="fotosRedes">
+            <div className="socialMedia">
                 <p>Social media:</p>
                 <a href="https://facebook.com/" target="_blank" rel="noreferrer">
                     <div style={{backgroundImage: "url('./assets/logoface.png')"}}></div>
@@ -28,7 +28,7 @@ const Footer = () => {
             </div>
             <nav>
                 <NavLink exact to="/">
-                    <p onClick={irAlCielo}>Home</p>
+                    <p onClick={goToHeaven}>Home</p>
                 </NavLink>
                 <NavLink to="/cities">
                     <p>Cities</p>

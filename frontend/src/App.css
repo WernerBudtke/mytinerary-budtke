@@ -68,26 +68,26 @@ header nav a:hover, footer nav a:hover{
 header nav a.active, footer nav a.active{
     color: rgba(255, 136, 0, 0.541); 
 }
-.tituloNavBar{
+.titleNavBar{
     display:flex;
     align-items: center;
     justify-content: space-between;
 }
-.tituloNavBar a{
+.titleNavBar a{
     text-decoration: none;
 }
-.tituloNavBar a h1{
+.titleNavBar a h1{
     margin-left: 1rem;
     color: white;
     text-shadow: 0.05rem 0.05rem rgba(255, 136, 0, 0.541), -0.05rem -0.05rem rgba(255, 136, 0, 0.541);
     transition: all 2s;
 }
-.tituloNavBar a h1:hover{
+.titleNavBar a h1:hover{
     text-shadow: 0px 0px 1rem rgb(0, 255, 21);
     transition: all 2s;
 }
 /*FOTO LOGO Y FOTO USUARIO*/
-.foto.logo, .foto.usuario{
+.photo.logo, .photo.user{
     background-size: contain;
     background-position: center;
     width: 3rem;
@@ -95,7 +95,7 @@ header nav a.active, footer nav a.active{
     background-repeat: no-repeat;
     transition: all 5s;
 }
-.foto.logo:hover, .foto.usuario:hover{
+.photo.logo:hover, .photo.user:hover{
     transform: rotate(360deg);
     transition: all 5s;
 }
@@ -143,23 +143,23 @@ header nav a.active, footer nav a.active{
     color: black;
     transition: all 1s;
 }
-/* ESTILOS CARRUSEL */
-.carrusel{
+/* ESTILOS carousel */
+.carousel{
     background-color: rgba(0, 0, 0, 0.158);
     padding: 1rem 0;
 }
-.carrusel h2{
+.carousel h2{
     text-align: center;
     font-size: 2rem;
     color: white;
     text-shadow: 0.1rem 0.1rem rgba(255, 136, 0, 0.541), -0.1rem -0.1rem rgba(255, 136, 0, 0.541);
     transition: all 2s;
 }
-.carrusel h2:hover{
+.carousel h2:hover{
     text-shadow: 0.1rem 0.1rem 2rem rgba(233, 172, 6, 0.918);
     transition: all 2s;
 }
-.carruselContainer{
+.carouselContainer{
     display: flex;
     align-self: center;
     justify-content: center;
@@ -168,7 +168,7 @@ header nav a.active, footer nav a.active{
     width: 95%;
     height: 40rem;
 }
-.ciudadesCarrusel{
+.citiesCarousel{
     width: 45%;
     height: 45%;
     margin: 1rem 1rem;
@@ -183,31 +183,31 @@ header nav a.active, footer nav a.active{
     transition: all 1s;
     
 }
-.ciudadesCarrusel:hover{
+.citiesCarousel:hover{
     box-shadow: 0px 0px 1rem 0.5rem rgba(255, 255, 0, 0.50) ;
     -webkit-box-shadow: 0px 0px 1rem 0.5rem rgba(255, 255, 0, 0.50) ;
     -moz-box-shadow: 0px 0px 1rem 0.5rem rgba(255, 255, 0, 0.50) ;
 }
-.ciudadesCarrusel p{
+.citiesCarousel p{
     font-size: 2.5rem;
     color: white;
     /* background-color: rgba(238, 4, 4, 0.541); */
     text-shadow: 0.1rem 0.1rem rgba(238, 109, 4, 0.76);
 }
-.nombresCiudadesCarrusel{
+.infoCitiesCarousel{
     width: 100%;
     display: flex;
     justify-content: space-evenly;
     /* background-color: rgba(238, 109, 4, 0.76); */
     background-color: rgba(0, 0, 0, 0.75);
 }
-.carruselHandler{
+.carouselHandler{
     display:flex;
     justify-content: center;
     width: 100%;
     padding: 0 1rem;
 }
-.carruselHandler button{
+.carouselHandler button{
     visibility: hidden;
     width: 2.5rem;
     height: 2.5rem;
@@ -219,41 +219,41 @@ header nav a.active, footer nav a.active{
     cursor: pointer;
     transition: all 3s;
 }
-.carrusel:hover .carruselHandler button{
+.carousel:hover .carouselHandler button{
     visibility: visible;
 }
-.carrusel:hover .carruselHandler button:hover{
+.carousel:hover .carouselHandler button:hover{
     background-color: rgba(255, 255, 0, 0.87);
     color: black;
     transition: all 3s;
 }
-.ciudadesCarrusel:hover{
+.citiesCarousel:hover{
     background-position: bottom;
     transition: all 4s;
 }
-/* ESTILOS BOTONES CARRUSEL */
-.botonesAbajoCarrusel{
+/* ESTILOS BOTONES carousel */
+.btnsDownCarousel{
     display: flex;
     justify-content: center;
 }
-.botonesAbajoCarrusel p{
+.btnsDownCarousel p{
     font-size: 4rem;
     margin: 0 2rem;
 }
-.botonesAbajoCarrusel p.btnActual{
+.btnsDownCarousel p.btnActual{
     color: yellow;
     text-shadow: 0.1rem 0.1rem 1rem orange, -0.1rem -0.1rem 1rem orange;
     cursor: pointer;
     transition: all 0.5s;
 }
-.botonesAbajoCarrusel p.btnSiguiente, .botonesAbajoCarrusel p.btnAnterior{
+.btnsDownCarousel p.btnNext, .btnsDownCarousel p.btnPrevious{
     color: white;
     cursor: pointer;
     transition: all 0.5s;
 }
 
 /* FOTOS REDES */
-.fotosRedes{
+.socialMedia{
     width: 20%;
     height: 2.5rem;
     display: flex;
@@ -261,11 +261,11 @@ header nav a.active, footer nav a.active{
     align-items: center;
     /* background-color: tomato; */
 }
-.fotosRedes a{
+.socialMedia a{
     width: 2.5rem;
     height: 100%;
 }
-.fotosRedes a div{
+.socialMedia a div{
     height: 100%;
     width: 2.5rem;
     background-size: cover;
@@ -274,8 +274,8 @@ header nav a.active, footer nav a.active{
 }
 
 
-/* ESTILOS SLIDES CARRUSEL, DEPENDIENDO DE SU ESTADO */
-.actual{
+/* ESTILOS SLIDES carousel, DEPENDIENDO DE SU ESTADO */
+.actualSlide{
     display: flex;
     /* visibility: visible; */
     align-self: center;
@@ -285,11 +285,11 @@ header nav a.active, footer nav a.active{
     width: 100%;
     height: 40rem;
 }
-.siguiente{
+.nextSlide{
     display:none;
     /* visibility: hidden; */
 }
-.anterior{
+.previousSlide{
     /* visibility: hidden; */
     display:none;
 }
@@ -301,16 +301,16 @@ header nav a.active, footer nav a.active{
     transition: all 3s;
 }*/
 
-.seMueve.derecha{
+.slideIsMoving.rightMove{
     transform: translateX(-150%);
-    transition: all 0.5s;
+    transition: all 1s;
 }
-.seMueve.izquierda{
+.slideIsMoving.leftMove{
     visibility: hidden;
     transform: translateX(150%);
 
 }
-.noSeMueve{
+.slideIsNotMoving{
     transform: translateX(0);
     transition: all 0.5s;
 }
@@ -333,7 +333,7 @@ header nav a.active, footer nav a.active{
     .contactInfo{
         font-size: 1.2rem;
     }
-    .fotosRedes{
+    .socialMedia{
         font-size: 1.2rem;
         width: 20%;
     }
@@ -375,7 +375,7 @@ header nav a.active, footer nav a.active{
         font-size: 2.5rem;
         text-align: center;
     }
-    .ciudadesCarrusel p{
+    .citiesCarousel p{
         font-size: 2rem;
     }
     footer h4{
@@ -384,7 +384,7 @@ header nav a.active, footer nav a.active{
     .contactInfo{
         font-size: 1.2rem;
     }
-    .fotosRedes{
+    .socialMedia{
         font-size: 1.2rem;
         width: 30%;
     }
@@ -411,10 +411,10 @@ header nav a.active, footer nav a.active{
     #callToActionHero{
         font-size: 1.5rem;
     }
-    .carruselContainer{
+    .carouselContainer{
         height: 60rem;
     }
-    .actual{
+    .actualSlide{
         height: 100%;
         width: 100%;
         flex-direction: column;
@@ -428,16 +428,16 @@ header nav a.active, footer nav a.active{
         font-size: 2rem;
         text-align: center;
     }
-    .ciudadesCarrusel p{
+    .citiesCarousel p{
         font-size: 2rem;
     }
-    .ciudadesCarrusel{
+    .citiesCarousel{
         width: 100%;
     }
-    .fotosRedes{
+    .socialMedia{
         display:none;
     }
-    .foto.logo{
+    .photo.logo{
         display:none;
     }
     .contactInfo{

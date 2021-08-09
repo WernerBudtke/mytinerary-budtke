@@ -1,20 +1,20 @@
 const Slide = (props) =>{
-    const {datos, actual, anterior, siguiente, moving, direction} = props
-    // console.log(datos, actual, anterior, siguiente)
-    const esActual = actual && "actual"
-    const esAnterior = anterior && "anterior"
-    const esSiguiente = siguiente && "siguiente"
-    const seMueve = moving ? "seMueve" : "noSeMueve"
-    const direccion = direction ? "derecha" : "izquierda"
-    // const esOtro = !actual ? !anterior ? !siguiente ? "otro" : null : null : null
+    const {data, actual, previous, next, moving, direction} = props
+    // console.log(objects, actual, previous, next)
+    const isActual = actual && "actualSlide"
+    const isPrevious = previous && "previousSlide"
+    const isNext = next && "nextSlide"
+    const isMoving = moving ? "slideIsMoving" : "slideIsNotMoving"
+    const whatDirection = direction ? "rightMove" : "leftMove"
+    // const esOtro = !actual ? !previous ? !next ? "otro" : null : null : null
     return(
-        <div className={`${esActual || esAnterior || esSiguiente} ${seMueve} ${moving ? direccion : ""}`}>
-            {datos.map((dato)=>{
+        <div className={`${isActual || isPrevious || isNext} ${isMoving} ${moving ? whatDirection : ""}`}>
+            {data.map((object)=>{
                 return(
-                    <div key={dato.id} className="ciudadesCarrusel" style={{backgroundImage:`url('./assets/${dato.imagen}')`}}>
-                        <div className="nombresCiudadesCarrusel">
-                            <p>{dato.nombre}</p>
-                            <p>{dato.pais}</p>
+                    <div key={object.id} className="citiesCarousel" style={{backgroundImage:`url('./assets/${object.image}')`}}>
+                        <div className="infoCitiesCarousel">
+                            <p>{object.city}</p>
+                            <p>{object.country}</p>
                         </div>
                     </div>
                 )
