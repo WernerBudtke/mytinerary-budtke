@@ -33,32 +33,32 @@ const Carrusel = () =>{
         if (moving) {
             return false
         } 
-        let estadoSlide = slide.actual === contenidoCarrusel.length-1 ? 0 : slide.actual+1
-        let estadoSlide2 = slide.next === contenidoCarrusel.length-1 ? 0 : slide.next+1
-        let estadoSlide3 = slide.previous === contenidoCarrusel.length-1 ? 0 : slide.previous+1
-        setSlide({actual: estadoSlide, next: estadoSlide2, previous:estadoSlide3})
+        let estadoSlideActual = slide.actual === contenidoCarrusel.length-1 ? 0 : slide.actual+1
+        let estadoSlideSiguiente = slide.next === contenidoCarrusel.length-1 ? 0 : slide.next+1
+        let estadoSlidePrevia = slide.previous === contenidoCarrusel.length-1 ? 0 : slide.previous+1
+        setSlide({actual: estadoSlideActual, next: estadoSlideSiguiente, previous:estadoSlidePrevia})
         // console.log(slide)
     }
     const previousSlide =() => {
         if (moving) {
             return false
         } 
-        let estadoSlide = slide.actual === 0 ? contenidoCarrusel.length-1 : slide.actual-1
-        let estadoSlide2 = slide.next === 0 ? contenidoCarrusel.length-1 : slide.next-1
-        let estadoSlide3 = slide.previous === 0 ? contenidoCarrusel.length-1 : slide.previous-1
-        setSlide({actual: estadoSlide, next: estadoSlide2, previous:estadoSlide3})
+        let estadoSlideActual = slide.actual === 0 ? contenidoCarrusel.length-1 : slide.actual-1
+        let estadoSlideSiguiente = slide.next === 0 ? contenidoCarrusel.length-1 : slide.next-1
+        let estadoSlidePrevia = slide.previous === 0 ? contenidoCarrusel.length-1 : slide.previous-1
+        setSlide({actual: estadoSlideActual, next: estadoSlideSiguiente, previous:estadoSlidePrevia})
         // console.log(slide)
     }
-    const intervalIdSlideChange = useRef(0);
-    const intervalIdSlideMoving = useRef(1);
-    const intervalIdDirection = useRef(2);
-    // console.log("Valor de ref de timeout inicial " + intervalIdSlideChange.current)
+    const intervalId = useRef({slideChange: 0, slideMoving: 0, slideDirection: 0});
+    // const intervalId = useRe.slideMovingf(1);
+    // const intervalIdDirection = useRef(2);
+    // console.log("Valor de ref de timeout inicial " + intervalId.current.slideChange)
     const limpiarTiempo = () =>{   
         if (!moving && !direction){
-            clearInterval(intervalIdSlideChange.current)
-            clearInterval(intervalIdSlideMoving.current)
-            clearInterval(intervalIdDirection.current)
-            console.log("matado intervalos ")
+            clearInterval(intervalId.current.slideChange)
+            clearInterval(intervalId.current.slideMoving)
+            clearInterval(intervalId.current.slideDirection)
+            // console.log("matado intervalos ")
         }
     }
     const limpiarTiempo2 = (intervalo) =>{
@@ -68,35 +68,44 @@ const Carrusel = () =>{
     const reiniciarTiempo = () =>{
         setRender(!render)
     }
+    useEffect(() => {
+        return () => {
+            clearInterval(intervalId.current.slideChange)
+            clearInterval(intervalId.current.slideMoving)
+            clearInterval(intervalId.current.slideDirection)
+        }
+      }, [])
    // manejo el pasaje de una slide a otra de forma automatica.
     useEffect(() => {
-        if (moving) return
-        limpiarTiempo2(intervalIdSlideChange.current)
-        intervalIdSlideChange.current = setInterval(() =>{
+        if (moving){
+            return false
+        }
+        limpiarTiempo2(intervalId.current.slideChange)
+        intervalId.current.slideChange = setInterval(() =>{
             nextSlide()
-            console.log("cambio slide")
+            // console.log("cambio slide")
         }, 2000)
-        console.log("iniciado el intervalo de automatismo" + intervalIdSlideChange.current)
+        // console.log("iniciado el intervalo de automatismo" + intervalId.current.slideChange)
     },[slide, render])
 
     
     useEffect(() => {
-        limpiarTiempo2(intervalIdSlideMoving.current)
-        intervalIdSlideMoving.current = setInterval(() =>{
+        limpiarTiempo2(intervalId.current.slideMoving)
+        intervalId.current.slideMoving = setInterval(() =>{
             setMoving(!moving)
-            console.log("cambio movimiento")
+            // console.log("cambio movimiento")
         }, 1000)
-        console.log("iniciado el intervalo de animacion" + intervalIdSlideMoving.current)
+        // console.log("iniciado el intervalo de animacion" + intervalId.current.slideMoving)
     }, [slide, render])
     
     
     useEffect(() => {
-        limpiarTiempo2(intervalIdDirection.current)
-        intervalIdDirection.current = setInterval(() =>{
+        limpiarTiempo2(intervalId.current.slideDirection)
+        intervalId.current.slideDirection = setInterval(() =>{
             setDirection(!direction)
-            console.log("cambio dir")
+            // console.log("cambio dir")
         }, 500)
-        console.log("iniciado el intervalo de animacion direccion" + intervalIdDirection.current)
+        // console.log("iniciado el intervalo de animacion direccion" + intervalId.current.slideDirection)
     }, [slide, render])
     const goToSlide = (e) =>{
         if(e.target.className.includes("btnActual")){
@@ -111,14 +120,14 @@ const Carrusel = () =>{
     }
     const arrayBotonesCar = ["", "", ""]
     return( 
-        <div className="carrusel" onMouseEnter={limpiarTiempo} onMouseLeave={reiniciarTiempo}>
+        <div className="carrusel" onMouseEnter={limpiarTiempo} onMouseOver={limpiarTiempo} onMouseLeave={reiniciarTiempo}>
             <h2>Popular myTineraries</h2>
             <div className="carruselHandler">
-                <button onClick={previousSlide}>{'<'}</button>
+                <button onClick={previousSlide} onMouseEnter={limpiarTiempo} onMouseOver={limpiarTiempo} onMouseLeave={limpiarTiempo}>{'<'}</button>
                 <div className="carruselContainer">
                     {contenidoCarrusel.map((slideData, index) => <Slide key={index} datos={slideData} actual={slide.actual === index} anterior={slide.previous === index} siguiente={slide.next === index} moving={moving} direction={direction}/>)}
                 </div>
-                <button onClick={nextSlide}>{'>'}</button>
+                <button onClick={nextSlide} onMouseEnter={limpiarTiempo} onMouseOver={limpiarTiempo} onMouseLeave={limpiarTiempo}>{'>'}</button>
             </div>
             <div className="botonesAbajoCarrusel">
                 {arrayBotonesCar.map((boton, index) => <BotonCarrusel key={index} actual={slide.actual === index} anterior={slide.previous === index} siguiente={slide.next === index} funcion={goToSlide}/>)}

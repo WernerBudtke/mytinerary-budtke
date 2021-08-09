@@ -271,7 +271,7 @@ header nav a.active, footer nav a.active{
 }
 
 
-/* SEGUNDO CARRUSEL */
+/* ESTILOS SLIDES CARRUSEL, DEPENDIENDO DE SU ESTADO */
 .actual{
     display: flex;
     /* visibility: visible; */
@@ -298,7 +298,6 @@ header nav a.active, footer nav a.active{
     transition: all 3s;
 }*/
 
-
 .seMueve.derecha{
     transform: translateX(-150%);
     transition: all 0.5s;
@@ -312,6 +311,9 @@ header nav a.active, footer nav a.active{
     transform: translateX(0);
     transition: all 0.5s;
 }
+
+
+/* MEDIA QUERIES */
 
 @media screen and (max-width: 1024px) {
     html{
@@ -327,14 +329,7 @@ header nav a.active, footer nav a.active{
         width: 100%;
     }
     #callToActionHero{
-        background-color: rgba(0, 0, 0, 0.541);
-        border-radius: 2rem;
-        color:white;
-        padding: 1rem;
-        border: transparent;
         font-size: 1.5rem;
-        transition: all 1s;
-        cursor: pointer;
     }
 }
 @media screen and (max-width: 800px) {
@@ -351,14 +346,7 @@ header nav a.active, footer nav a.active{
         width: 100%;
     }
     #callToActionHero{
-        background-color: rgba(0, 0, 0, 0.541);
-        border-radius: 2rem;
-        color:white;
-        padding: 1rem;
-        border: transparent;
         font-size: 1.5rem;
-        transition: all 1s;
-        cursor: pointer;
     }
     .hero{
         height: 60rem; 
@@ -384,14 +372,7 @@ header nav a.active, footer nav a.active{
         width: 100%;
     }
     #callToActionHero{
-        background-color: rgba(0, 0, 0, 0.541);
-        border-radius: 2rem;
-        color:white;
-        padding: 1rem;
-        border: transparent;
         font-size: 1.5rem;
-        transition: all 1s;
-        cursor: pointer;
     }
     .carruselContainer{
         height: 60rem;
@@ -415,7 +396,6 @@ header nav a.active, footer nav a.active{
     }
     .ciudadesCarrusel{
         width: 100%;
-        margin: 1rem 1rem;
     }
     .fotosRedes{
         display:none;
