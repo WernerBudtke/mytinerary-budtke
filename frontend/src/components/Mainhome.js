@@ -1,10 +1,10 @@
 import Hero from './Hero'
-import Carousel from './Carousel'
+import CarouselSlick from './CarouselSlick'
 const Mainhome = () =>{
     return(
         <main>
             <Hero/>
-            <Carousel/>
+            <CarouselSlick/>
         </main>
     )
 }

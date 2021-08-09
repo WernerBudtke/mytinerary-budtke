@@ -38,6 +38,8 @@ header{
 /* MAGIA MAIN */
 main{
     width: 100%;
+    display:flex;
+    flex-direction: column;
     flex-grow: 1;
 }
 /* MAGIA FOOTER */
@@ -315,7 +317,64 @@ header nav a.active, footer nav a.active{
     transition: all 0.5s;
 }
 
-
+/* CAROUSEL SLICK POSICIONAMIENTO Y TAMAÑOS */
+.carouselSlickContainer{
+    align-self: center;
+    width: 95%;
+    text-align: center;
+    margin: 2rem 0;
+}
+.carouselSlickContainer h2{
+    color:white;
+    text-shadow: 0.1rem 0.1rem rgba(255, 136, 0, 0.541);
+    margin-bottom: 1rem;
+    font-size: 2rem;
+    
+}
+/* ESTILO CADA CIUDAD */
+.carouselSlideInfo{
+    width: 90%;
+    height: 20rem;
+    background-size: cover;
+    background-position: top;
+    display: flex;
+    flex-direction: column;
+    margin: 2rem auto;
+    transition: all 3s;
+    /* justify-content: flex-start; */
+}
+.carouselSlideInfo:hover{
+    background-position: bottom;
+    transition: all 3s;
+    box-shadow: 0px 0px 1rem 0.5rem rgba(255, 255, 0, 0.50) ;
+    -webkit-box-shadow: 0px 0px 1rem 0.5rem rgba(255, 255, 0, 0.50) ;
+    -moz-box-shadow: 0px 0px 1rem 0.5rem rgba(255, 255, 0, 0.50) ;
+}
+.carouselSlideInfo p{
+    background-color: rgba(0, 0, 0, 0.486);
+    font-size: 2rem;
+    color: white;
+    text-shadow: 0.1rem 0.1rem rgba(255, 136, 0, 0.541);
+}
+/* BOTONES SLICK */
+.slick-next{
+    right: -1rem;
+}
+.slick-prev{
+    left: -1rem;
+}
+.slick-dots{
+    margin-bottom: 1rem;
+}
+/* .slick-dots li{
+    color: blanchedalmond;
+    background-color: red;
+} */
+.slick-dots li button{
+    background-color: rgba(255, 255, 255, 0.801);
+    border: 1px solid rgba(255, 136, 0, 0.541);
+    border-radius: 100%;
+}
 /* MEDIA QUERIES */
 
 @media screen and (max-width: 1024px) {
@@ -348,6 +407,9 @@ header nav a.active, footer nav a.active{
     }
     .hero{
         height: 70rem;
+    }
+    .carouselSlickContainer h2{
+        font-size: 3rem;
     }
 }
 @media screen and (max-width: 800px) {
@@ -391,7 +453,22 @@ header nav a.active, footer nav a.active{
     .hero{
         height: 100vh;
     }
+    .carouselSlickContainer h2{
+        font-size: 3rem;
+    }
 
+}
+@media screen and (max-width: 600px){
+    /* BOTONES CARRUSEL */
+    .slick-next{
+        right: -0.8rem;
+    }
+    .slick-prev{
+        left: -1.6rem;
+    }
+    .carouselSlickContainer h2{
+        font-size: 3rem;
+    }
 }
 @media screen and (max-width: 400px) {
     html{
@@ -449,6 +526,9 @@ header nav a.active, footer nav a.active{
     .hero{
         height: 100vh;
     }
+    .carouselSlickContainer h2{
+        font-size: 3rem;
+    }
 }
 @media screen and (max-width: 300px) {
     header nav{
@@ -467,3 +547,4 @@ header nav a.active, footer nav a.active{
         width: 45%;
     }
 }
+
