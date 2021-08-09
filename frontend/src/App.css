@@ -26,17 +26,22 @@ header, footer{
     align-items: center;
     background-color: rgba(7, 1, 32, 0.76);
     border: 0.1rem solid black;
-    width: 95%;
+    width: 100%;
     /* margin-top: 1rem; */
-    padding: 0 1rem;
+    padding: 0 2rem;
     min-height: 5rem;
+    
 }
 header{
     border-top: transparent;
+    position: fixed;
+    top: 0;
+    width: 100vw;
+    z-index: 10;
 }
 /* MAGIA MAIN */
 main{
-    width: 95%;
+    width: 100%;
     flex-grow: 1;
 }
 /* MAGIA FOOTER */
@@ -51,10 +56,11 @@ header nav, footer nav{
     /* background-color: lightyellow; */
     justify-content: space-between;
     align-items: center;
-    width: 20%;
+    width: 30%;
+    font-size:1.4rem;
 }
 footer nav{
-    width: 8%;
+    width: 15%;
 }
 header nav a, footer nav a{
     color: white;
@@ -203,6 +209,7 @@ header nav a.active, footer nav a.active{
     display:flex;
     justify-content: center;
     width: 100%;
+    padding: 0 1rem;
 }
 .carruselHandler button{
     visibility: hidden;
@@ -320,10 +327,22 @@ header nav a.active, footer nav a.active{
         font-size: 1.2vw;
     }
     header nav{
-        width: 25%;
+        width: 55%;
+        font-size: 1.6rem;
     }
     footer nav{
         width: 15%;
+        font-size: 1.4rem;
+    }
+    .contactInfo{
+        font-size: 1.2rem;
+    }
+    .fotosRedes{
+        font-size: 1.2rem;
+        width: 20%;
+    }
+    footer h4{
+        font-size: 1.4rem;
     }
     header, footer, main{
         width: 100%;
@@ -337,10 +356,12 @@ header nav a.active, footer nav a.active{
         font-size: 1.4vw;
     }
     header nav{
-        width: 30%;
+        width: 60%;
+        font-size: 1.5rem;
     }
     footer nav{
         width: 15%;
+        font-size: 1.3rem;
     }
     header, footer, main{
         width: 100%;
@@ -357,16 +378,29 @@ header nav a.active, footer nav a.active{
     .ciudadesCarrusel p{
         font-size: 2rem;
     }
+    footer h4{
+        font-size: 1.4rem;
+    }
+    .contactInfo{
+        font-size: 1.2rem;
+    }
+    .fotosRedes{
+        font-size: 1.2rem;
+        width: 30%;
+    }
+
 }
 @media screen and (max-width: 400px) {
     html{
         font-size: 2vw;
     }
     header nav{
-        width: 50%;
+        width: 65%;
+        font-size: 1.3rem;
     }
     footer nav{
-        width: 15%;
+        width: 20%;
+        font-size: 1.4rem;
     }
     header, footer, main{
         width: 100%;
@@ -402,5 +436,28 @@ header nav a.active, footer nav a.active{
     }
     .foto.logo{
         display:none;
+    }
+    .contactInfo{
+        font-size: 1.3rem;
+    }
+    footer h4{
+        font-size: 1.3rem;
+    }
+}
+@media screen and (max-width: 300px) {
+    header nav{
+        font-size: 2rem;
+        width: 80%;
+    }
+    footer nav{
+        font-size: 2rem;
+        width: 45%;
+    }
+    .contactInfo{
+        display: none;
+    }
+    footer h4{
+        font-size: 2rem;
+        width: 45%;
     }
 }

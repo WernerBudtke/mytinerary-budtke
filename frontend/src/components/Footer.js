@@ -22,7 +22,7 @@ const Footer = () => {
                     <div style={{backgroundImage: "url('./assets/logotwitter.png')"}}></div>
                 </a>
             </div>
-            <div>
+            <div className="contactInfo">
                 <p>Address: Rio de Janeiro 284 9C, CABA</p>
                 <p>Telephone: +543412222222</p>
             </div>
