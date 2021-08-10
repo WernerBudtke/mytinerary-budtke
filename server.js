@@ -33,6 +33,7 @@ const dataApi = [
 // const contenidoRespuesta = [pruebaDotEnv, "blablabla"]
 app.get('/prueba/datos', (req, res) =>{
     res.json({response: dataApi})
+    console.log("recibi un pedido")
 })
 
 app.listen(4000, () => console.log("Server listening on port 4000")) // que comienze a escuchar en puerto 4000, una vez escuchado ejecutar función

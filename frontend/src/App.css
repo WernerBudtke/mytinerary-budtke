@@ -333,7 +333,7 @@ header nav a.active, footer nav a.active{
     width: 90%;
     height: 20rem;
     background-size: cover;
-    background-position: top;
+    background-position: center;
     display: flex;
     flex-direction: column;
     margin: 2rem auto;
@@ -393,9 +393,9 @@ header nav a.active, footer nav a.active{
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    backdrop-filter: blur(5rem);
-    -webkit-backdrop-filter: blur(5rem);
-    background-color: rgba(255, 255, 255, 0.3);
+    /* backdrop-filter: blur(5rem);
+    -webkit-backdrop-filter: blur(5rem); */
+    /* background-color: rgba(255, 255, 255, 0.3); */
 }
 .filterCitiesContainer h2{
     font-size: 3rem;
@@ -505,6 +505,33 @@ span.specialText{
     .carouselSlickContainer h2{
         font-size: 3rem;
     }
+    /* CITIES PAGE */
+    .filterCitiesContainer h2{
+        font-size: 2.5rem;
+        text-align: center;
+    }
+    .filterCitiesContainer p{
+        font-size: 1.5rem;
+    }
+    .filterCitiesContainer input{
+        font-size: 2rem;
+    }
+    /* ONE CITY PER CARD STYLES */
+    .cardCity{
+        width: 45%;
+    }
+    .cardCity div p{
+        text-align: center;
+        color: white;
+        font-size: 1.8rem;
+        background-color: rgba(0, 0, 0, 0.548);
+    }
+    .cardCity div p.title{
+        font-size:3rem;
+    }
+    .cityDescription{
+        margin-top: 3rem;
+    }
 }
 @media screen and (max-width: 800px) {
     html{
@@ -550,9 +577,44 @@ span.specialText{
     .carouselSlickContainer h2{
         font-size: 3rem;
     }
-
+    /* CITIES PAGE */
+    .filterCitiesContainer h2{
+        font-size: 2rem;
+        text-align: center;
+    }
+    .filterCitiesContainer p{
+        display:none;
+    }
+    .filterCitiesContainer input{
+        font-size: 2rem;
+    }
+    /* ONE CITY PER CARD STYLES */
+    .cardCity{
+        width: 45%;
+    }
+    .cardCity div p{
+        text-align: center;
+        color: white;
+        font-size: 1.5rem;
+        background-color: rgba(0, 0, 0, 0.548);
+    }
+    .cardCity div p.title{
+        font-size:2rem;
+    }
+    .cityDescription{
+        margin-top: 3rem;
+    }
 }
 @media screen and (max-width: 600px){
+    html{
+        font-size: 2vw;
+    }
+    .socialMedia{
+        display: none;
+    }
+    footer nav{
+        width: 20%;
+    }
     /* BOTONES CARRUSEL */
     .slick-next{
         right: -0.8rem;
@@ -562,6 +624,33 @@ span.specialText{
     }
     .carouselSlickContainer h2{
         font-size: 3rem;
+    }
+    /* CITIES PAGE */
+    .filterCitiesContainer h2{
+        font-size: 2rem;
+        text-align: center;
+    }
+    .filterCitiesContainer p{
+        display:none;
+    }
+    .filterCitiesContainer input{
+        font-size: 2rem;
+    }
+    /* ONE CITY PER CARD STYLES */
+    .cardCity{
+        width: 100%;
+    }
+    .cardCity div p{
+        text-align: center;
+        color: white;
+        font-size: 1.8rem;
+        background-color: rgba(0, 0, 0, 0.548);
+    }
+    .cardCity div p.title{
+        font-size:3rem;
+    }
+    .cityDescription{
+        margin-top: 3rem;
     }
 }
 @media screen and (max-width: 400px) {
@@ -623,6 +712,33 @@ span.specialText{
     .carouselSlickContainer h2{
         font-size: 3rem;
     }
+    /* CITIES PAGE */
+    .filterCitiesContainer h2{
+        font-size: 2rem;
+        text-align: center;
+    }
+    .filterCitiesContainer p{
+        display:none;
+    }
+    .filterCitiesContainer input{
+        font-size: 2rem;
+    }
+    /* ONE CITY PER CARD STYLES */
+    .cardCity{
+        width: 100%;
+    }
+    .cardCity div p{
+        text-align: center;
+        color: white;
+        font-size: 1.8rem;
+        background-color: rgba(0, 0, 0, 0.548);
+    }
+    .cardCity div p.title{
+        font-size:3rem;
+    }
+    .cityDescription{
+        margin-top: 3rem;
+    }
 }
 @media screen and (max-width: 300px) {
     header nav{
@@ -639,6 +755,33 @@ span.specialText{
     footer h4{
         font-size: 2rem;
         width: 45%;
+    }
+    /* CITIES PAGE */
+    .filterCitiesContainer h2{
+        font-size: 2rem;
+        text-align: center;
+    }
+    .filterCitiesContainer p{
+        display:none;
+    }
+    .filterCitiesContainer input{
+        font-size: 2rem;
+    }
+    /* ONE CITY PER CARD STYLES */
+    .cardCity{
+        width: 100%;
+    }
+    .cardCity div p{
+        text-align: center;
+        color: white;
+        font-size: 1.8rem;
+        background-color: rgba(0, 0, 0, 0.548);
+    }
+    .cardCity div p.title{
+        font-size:3rem;
+    }
+    .cityDescription{
+        margin-top: 3rem;
     }
 }
 

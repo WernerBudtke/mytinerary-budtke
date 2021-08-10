@@ -37,18 +37,18 @@ export default class CarouselSlick extends Component {
             ] 
         }
         const carouselContent = [
-            {id: 1, city: "Buenos Aires", country:"Argentina", image: "bsas.jpg"}, 
-            {id: 2, city: "Rosario", country:"Argentina", image: "rosario.jpg"}, 
-            {id: 3, city: "Ushuaia", country:"Argentina", image: "ushuaia.jpg"},
-            {id: 4, city: "Gdro. Baigorria", country:"Argentina", image: "baigorria.jpg"},
-            {id: 5, city: "Montevideo", country:"Uruguay", image: "montevideo.jpg"}, 
-            {id: 6, city: "Calafate", country:"Argentina", image: "calafate.jpg"}, 
-            {id: 7, city: "Rome", country:"Italy", image: "roma.jpg"},
-            {id: 8, city: "Lima", country:"Peru", image: "lima.jpg"},
-            {id: 9, city: "Paris",country:"France",  image: "paris.jpg"}, 
-            {id: 10, city: "Wittenberg",country:"Germany", image: "wittenberg.jpg"}, 
-            {id: 11, city: "Berlin",country:"Germany", image: "berlin.jpg"},
-            {id: 12, city: "Vienna",country:"Austria", image: "viena.jpg"}
+            {id: 0, city: "Granadero Baigorria", country:"Argentina", image: "baigorria.jpg", description:"Al norte de Rosario, donde viven los viejos"},
+            {id: 1, city: "Rosario", country:"Argentina", image: "rosario.jpg", description:"La capital no oficial de Argentina, ciudad Juarez Argentina"},
+            {id: 2, city: "Buenos Aires", country:"Argentina", image: "bsas.jpg", description:"La capital de Argentina, donde Larreta pone y saca pisos"},
+            {id: 3, city: "Ushuaia", country:"Argentina", image: "ushuaia.jpg", description:"El pais de las maravillas naturales y electrodomesticos"},
+            {id: 4, city: "Calafate", country:"Argentina", image: "calafate.jpg", description:"Donde vive la Presidente de la Nación"},
+            {id: 5, city: "Bariloche", country:"Argentina", image: "bariloche.jpg", description:"Donde los pibes se van de joda, igual lindo paisaje"},
+            {id: 6, city: "Pergamino", country:"Argentina", image: "pergamino.jpg", description:"Entre Rosario y Buenos Aires"},
+            {id: 7, city: "Mar del Plata", country:"Argentina", image: "mardelplata.jpg", description:"Donde vas a tomar sol"},
+            {id: 8, city: "Mar de Ajó", country:"Argentina", image: "mardeajo.jpg", description:"El mar huele bastante bien, pese a su nombre"},
+            {id: 9, city: "Puerto Madryn", country:"Argentina", image: "madryn.jpg", description:"Donde se puede avistar ballenas"},
+            {id: 10, city: "Villa Gesell", country:"Argentina", image: "gesell.jpg", description:"Donde van los pibes en verano"},
+            {id: 11, city: "Santa Fe", country:"Argentina", image: "santafe.jpg", description:"La capital oficial de la provincia de Santa Fe"}
         ]
         return (
             <div className="carouselSlickContainer">
