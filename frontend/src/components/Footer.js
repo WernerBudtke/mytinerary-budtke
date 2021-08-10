@@ -31,7 +31,7 @@ const Footer = () => {
                     <p onClick={goToHeaven}>Home</p>
                 </NavLink>
                 <NavLink to="/cities">
-                    <p>Cities</p>
+                    <p onClick={goToHeaven}>Cities</p>
                 </NavLink>
             </nav>
         </footer>

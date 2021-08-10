@@ -1,11 +1,21 @@
 import Header from "../components/Header"
 import Footer from "../components/Footer"
-import Main from "../components/Main"
+import Maincities from "../components/Maincities"
+import axios from "axios"
+import { useEffect, useState } from "react"
 const Cities = () =>{
+    // ESTO VA PARA EL COMPONENTE CITIES, para que con la respuesta, mapee las ciudades.
+    const [data, setData] = useState([])
+    useEffect(() => {
+        axios.get('http://localhost:4000/prueba/datos')
+        .then(res => setData(res.data.response))
+        window.scrollTo(0, 0)
+    },[])
+    // CON LA DATA QUE RECIBO, EL FILTRO DEBE UTILIZAR ESA DATA PARA MOSTRAR!
     return(
         <>
             <Header/>
-            <Main/>
+            <Maincities dataApi={data}/>
             <Footer/>
         </>
     )

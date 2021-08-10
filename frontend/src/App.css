@@ -24,8 +24,9 @@ header, footer{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: rgba(7, 1, 32, 0.76);
-    border: 0.1rem solid black;
+    /* background-color: rgba(7, 1, 32, 0.76); */
+    background-color: black; /*CAMBIAR O TOCAR COLORES*/
+    /* border: 0.1rem solid black; */
     width: 100%;
     /* margin-top: 1rem; */
     padding: 0 2rem;
@@ -68,7 +69,7 @@ header nav a:hover, footer nav a:hover{
     text-decoration: underline;
 }
 header nav a.active, footer nav a.active{
-    color: rgba(255, 136, 0, 0.541); 
+    color: goldenrod; 
 }
 .titleNavBar{
     display:flex;
@@ -81,12 +82,8 @@ header nav a.active, footer nav a.active{
 .titleNavBar a h1{
     margin-left: 1rem;
     color: white;
-    text-shadow: 0.05rem 0.05rem rgba(255, 136, 0, 0.541), -0.05rem -0.05rem rgba(255, 136, 0, 0.541);
-    transition: all 2s;
-}
-.titleNavBar a h1:hover{
-    text-shadow: 0px 0px 1rem rgb(0, 255, 21);
-    transition: all 2s;
+    /* text-shadow: 0.05rem 0.05rem orange; */
+    /* transition: all 2s; */
 }
 /*FOTO LOGO Y FOTO USUARIO*/
 .photo.logo, .photo.user{
@@ -342,13 +339,16 @@ header nav a.active, footer nav a.active{
     margin: 2rem auto;
     transition: all 3s;
     /* justify-content: flex-start; */
+    box-shadow: 0.1rem 0.1rem 0.5rem 0.1rem black;
+    -webkit-box-shadow: 0.1rem 0.1rem 0.5rem 0.1rem black;
+    -moz-box-shadow: 0.1rem 0.1rem 0.5rem 0.1rem black;
 }
 .carouselSlideInfo:hover{
     background-position: bottom;
     transition: all 3s;
-    box-shadow: 0px 0px 1rem 0.5rem rgba(255, 255, 0, 0.50) ;
-    -webkit-box-shadow: 0px 0px 1rem 0.5rem rgba(255, 255, 0, 0.50) ;
-    -moz-box-shadow: 0px 0px 1rem 0.5rem rgba(255, 255, 0, 0.50) ;
+    box-shadow: 0px 0px 0.5rem 0.2rem rgb(255, 255, 0);
+    -webkit-box-shadow: 0px 0px 0.5rem 0.2rem rgb(255, 255, 0);
+    -moz-box-shadow: 0px 0px 0.5rem 0.2rem rgb(255, 255, 0);
 }
 .carouselSlideInfo p{
     background-color: rgba(0, 0, 0, 0.486);
@@ -370,11 +370,105 @@ header nav a.active, footer nav a.active{
     color: blanchedalmond;
     background-color: red;
 } */
+/* ARREGLO PROBLEMA DE DOBLE BOTON CON OPACIDAD 1 */
+.slick-dots li button:focus:before { opacity: 0.25; }
+.slick-dots li.slick-active button:focus:before,  .slick-dots li button:hover:before { opacity: 1; }
 .slick-dots li button{
     background-color: rgba(255, 255, 255, 0.801);
     border: 1px solid rgba(255, 136, 0, 0.541);
     border-radius: 100%;
 }
+
+/* CITIES PAGE */
+
+/* CONTAINER WELCOME CITIES PAGE */
+.filterCitiesImage{
+    background-position: bottom;
+    background-size: cover;
+}
+.filterCitiesContainer{
+    width: 100%;
+    height: 23rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(5rem);
+    -webkit-backdrop-filter: blur(5rem);
+    background-color: rgba(255, 255, 255, 0.3);
+}
+.filterCitiesContainer h2{
+    font-size: 3rem;
+    color: white;
+    text-shadow: 0.1rem 0.1rem rgba(255, 136, 0, 0.541);
+    background-color: rgba(99, 99, 99, 0.281);
+    margin-bottom: 1rem;
+}
+.filterCitiesContainer p{
+    margin-bottom: 0.5rem;
+    font-size: 1.3rem;
+    color: white;
+    background-color: rgba(99, 99, 99, 0.281);
+}
+span.specialText{
+    color: darkred;
+}
+.filterCitiesContainer input{
+    text-align: center;
+    font-size: 1.2rem;
+    border-radius: 1rem;
+    padding: 0.5rem 0;
+    margin-top: 1rem;
+    border: transparent;
+    background-color: rgba(255, 255, 255, 0.479);
+}
+/* CITIES CARD CONTAINER */
+.cardCitiesContainer{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.cardCitiesContainer a{
+    text-decoration: none;
+}
+/* ONE CITY PER CARD STYLES */
+.cardCity{
+    width: 30rem;
+    height: 20rem;
+    background-size: cover;
+    background-position: center;
+    margin: 1rem 1rem;
+    box-shadow: 0.1rem 0.1rem 0.5rem 0.1rem black;
+    -webkit-box-shadow: 0.1rem 0.1rem 0.5rem 0.1rem black;
+    -moz-box-shadow: 0.1rem 0.1rem 0.5rem 0.1rem black;
+    transition: all 1s;
+}
+.cardCity:hover{
+    transition: all 1s;
+    box-shadow: 0px 0px 0.5rem 0.2rem rgb(255, 255, 0);
+    -webkit-box-shadow: 0px 0px 0.5rem 0.2rem rgb(255, 255, 0);
+    -moz-box-shadow: 0px 0px 0.5rem 0.2rem rgb(255, 255, 0);
+}
+.cardCity div p{
+    text-align: center;
+    color: white;
+    font-size: 1.2rem;
+    background-color: rgba(0, 0, 0, 0.548);
+}
+.cardCity div p.title{
+    font-size:2rem;
+}
+.cityDescription{
+    margin-top: 3rem;
+}
+/* CARTEL DE NO HAY CIUDAD */
+.noCitiesContainer{
+    text-align: center;
+    color: white;
+    font-size: 2rem;
+    margin-top: 2rem;
+}
+
 /* MEDIA QUERIES */
 
 @media screen and (max-width: 1024px) {
