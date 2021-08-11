@@ -28,9 +28,24 @@ const citiesControllers = {
     },
     postACity:(req, res) =>{
         req.body.id = dataApi.length === 0 ? 0 : dataApi[dataApi.length - 1].id + 1  // asigno nuevo ID
+        // FILTRAR QUE SEA NUMERO
         dataApi.push(req.body)
         console.log(dataApi)
         res.json({success: true}) // LO QUE LE RESPONDO A QUIEN ME HACE EL POST, UN OBJETO DONDE SU PROPIEDAD SUCESS QUE ES LO QUE ESTOY ESPERANDO, VALOR TRUE
+    },
+    removeACity:(req, res) =>{
+        let whatWillIremove = dataApi.find(city => city.id === parseInt(req.body.id))
+        // FILTRAR UNDEFINED ACA
+        dataApi.splice(whatWillIremove.id, 1)
+        console.log(dataApi)
+        res.json({success: true, whatDidIRemove: whatWillIremove})
+    },
+    modifyACity:(req, res)=>{
+        let whatWillIModify = dataApi.find(city => city.id === parseInt(req.body.id))
+        // FILTRAR QUE SEA NUMERO LA ID
+        dataApi.splice(whatWillIModify.id, 1, req.body)
+        console.log(dataApi)
+        res.json({success: true, whatDidIModify: whatWillIModify})
     }
 }
 

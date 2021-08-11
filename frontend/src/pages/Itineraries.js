@@ -41,7 +41,7 @@ const Itineraries = (props) =>{
                 <div className="shortCityDescription">
                     <p><span className="specialText">Sneak peek:</span> {data.description}</p>
                 </div>
-                <div className="itinerariesContainer"><h1>ITINERARIES PLACEHOLDER</h1></div>
+                <div className="itinerariesContainer"><h1>Under construction</h1></div>
                 <Link to="/cities"><button>Back to cities</button></Link>
             </main>
             <Footer/>
