@@ -7,7 +7,7 @@ const Cities = () =>{
     // ESTO VA PARA EL COMPONENTE CITIES, para que con la respuesta, mapee las ciudades.
     const [data, setData] = useState([])
     useEffect(() => {
-        axios.get('http://192.168.1.2:4000/prueba/datos')
+        axios.get('http://192.168.1.2:4000/api/cities')
         .then(res => setData(res.data.response))
         window.scrollTo(0, 0)
         document.title = "myTinerary - Cities"

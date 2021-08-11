@@ -9,6 +9,7 @@ const app = express()  // creo una instancia de Express (createApplication())
 
 // FILTRO MIDDLEWARE, antes de usar mi aplicación, uso el filtro. Para que pueda responder de origen cruzado
 app.use(cors())
+app.use(express.json())
 const pruebaDotEnv = {
     username: process.env.MAILUSER,
     password: process.env.MAILPASS
@@ -31,9 +32,20 @@ const dataApi = [
     {id: 14, city: "Capitán Bermúdez", country:"Argentina", image:"bermudez.jpg", description:"La fábrica de Verbano, muy buena porcelana"}
 ]
 // const contenidoRespuesta = [pruebaDotEnv, "blablabla"]
-app.get('/prueba/datos', (req, res) =>{
+// ENDPOINT PARA TODAS LAS CIUDADES
+app.get('/api/cities', (req, res) =>{
     res.json({response: dataApi})
-    console.log("recibi un pedido")
+    console.log("recibi un pedido a las: " + new Date())
 })
-
+// ENDPOINT DINAMICO PARA CADA CIUDAD, me llega el dato en req.params.id porque yo le paso en barra de dirección un id dinamico :id
+app.get(`/api/city/:id`, (req, res) =>{
+    res.json({response: dataApi.find(city => city.id === parseInt(req.params.id))})
+    console.log("Recibi pedido de invitado")
+})
+app.post('/api/addcityofcities', (req, res) =>{
+    req.body.id = dataApi.length === 0 ? 0 : dataApi[dataApi.length - 1].id + 1  // asigno nuevo ID
+    dataApi.push(req.body)
+    console.log(dataApi)
+    res.json({success: true}) // LO QUE LE RESPONDO A QUIEN ME HACE EL POST, UN OBJETO DONDE SU PROPIEDAD SUCESS QUE ES LO QUE ESTOY ESPERANDO, VALOR TRUE
+})
 app.listen(4000, () => console.log("Server listening on port 4000")) // que comienze a escuchar en puerto 4000, una vez escuchado ejecutar función
