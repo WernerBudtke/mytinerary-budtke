@@ -15,7 +15,7 @@ const Maincities = ({dataApi}) => {
         return <main className="mainCities"><div className="noCitiesContainer"><p>Loading...</p></div></main>
     }
     const handleFilter = (e) =>{
-        console.log(dataApi)
+        // console.log(dataApi)
         // setData(dataApi.filter(object => object.city.toLowerCase().split(' ').join('').includes(e.target.value.toLowerCase().split(' ').join('')))) // el mejor filtro
         setData(dataApi.filter(object => object.city.toLowerCase().startsWith(e.target.value.toLowerCase().trim())))
     }
@@ -26,7 +26,7 @@ const Maincities = ({dataApi}) => {
                 {data.map(city => <Link key={city.id} to={`/itineraries/${city.id}`}><City key={city.id} cityName={city.city} country={city.country} image={city.image} description={city.description}/></Link>)}
             </div>
             <div className="noCitiesContainer" style={data.length === 0 ? {display:"block"} : {display:"none"}}>
-                <p>{"UNABLE TO FIND THAT ONE, TRY AGAIN!"}</p>
+                <p>UNABLE TO FIND THAT ONE, TRY AGAIN!</p>
             </div>
         </main>
     )

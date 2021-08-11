@@ -9,27 +9,40 @@ const Itineraries = (props) =>{
     const [fetching, setFetching] = useState(true)
     useEffect(() => {
         axios.get(`http://192.168.1.2:4000/api/city/${props.match.params.id}`)
-        .then(res => setData(res.data.response))
+        .then(res => {
+            setData(res.data.response)
+            setFetching(false)
+        })
+        .catch(err => props.history.push('/error'))
         window.scrollTo(0, 0)
-        setFetching(false)
         return () => document.title = "myTinerary"
-    },[props.match.params.id])
+    },[props.match.params.id, props.history])
     if(fetching){
-        return <h1>Loading...</h1>
+        return (
+            <>  
+                <Header/>
+                <main className="mainCities">
+                    <div className="noCitiesContainer"><p>Loading...</p></div>
+                </main>
+                <Footer/>
+            </>
+        )
     }
     document.title = `myTinerary - ${data.city}`
     // console.log(data)
     return(
         <>
             <Header/>
-            <main>
-                <div style={{backgroundImage:`url('/assets/${data.image}')`}}>
-                    <h1>Itineraries de id: {data.id}</h1>
-                    <p>City: {data.city}</p>
-                    <p>Country: {data.country}</p>
-                    <p>Descripcion: {data.description}</p>
-                    <Link to="/cities">Back to cities</Link>
+            <main className="mainItinerary">
+                <div className="photoItinerary" style={{backgroundImage:`url('/assets/${data.image}')`}}>
+                    <h3>In: {data.country} you can...</h3>
+                    <h2>{Math.random() > 0.5 ? "Discover" : "Unfold"} the {Math.random() > 0.5 ? "beauty" : "charm"} of: {data.city}</h2>
                 </div>
+                <div className="shortCityDescription">
+                    <p><span className="specialText">Sneak peek:</span> {data.description}</p>
+                </div>
+                <div className="itinerariesContainer"><h1>ITINERARIES PLACEHOLDER</h1></div>
+                <Link to="/cities"><button>Back to cities</button></Link>
             </main>
             <Footer/>
         </>

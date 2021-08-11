@@ -246,7 +246,8 @@ header nav a.active, footer nav a.active{
     background-color: rgba(99, 99, 99, 0.281);
 }
 span.specialText{
-    color: darkred;
+    color: goldenrod;
+    font-style: italic;
 }
 .filterCitiesContainer input{
     text-align: center;
@@ -273,15 +274,17 @@ span.specialText{
     justify-content: center;
 }
 .cardCitiesContainer a{
+    width: 30rem;
+    height: 20rem;
+    margin: 1rem 1rem;
     text-decoration: none;
 }
 /* ONE CITY PER CARD STYLES */
 .cardCity{
-    width: 30rem;
-    height: 20rem;
+    width: 100%;
+    height: 100%;
     background-size: cover;
     background-position: center;
-    margin: 1rem 1rem;
     box-shadow: 0.1rem 0.1rem 0.5rem 0.1rem black;
     -webkit-box-shadow: 0.1rem 0.1rem 0.5rem 0.1rem black;
     -moz-box-shadow: 0.1rem 0.1rem 0.5rem 0.1rem black;
@@ -313,6 +316,68 @@ span.specialText{
     font-size: 2rem;
     margin-top: 2rem;
 }
+
+/* ITINERARIES PAGE STYLES */
+.mainItinerary{
+    display: flex;
+}
+.photoItinerary{
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 20rem;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding: 1rem 2rem;
+}
+.photoItinerary h2, .photoItinerary h3{
+    text-shadow: 0.1rem 0.1rem rgba(255, 136, 0, 0.541);
+    color:white;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+.photoItinerary h3{
+    font-style: italic;
+    font-size: 1.8rem;
+}
+.photoItinerary h2{
+    font-size: 2rem;
+}
+.shortCityDescription{
+    color:rgba(255, 255, 255, 0.678);
+    display: flex;
+    align-items:center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.5);
+    height: 4rem;
+}
+.shortCityDescription p{
+    font-size: 1.3rem;
+}
+.shortCityDescription p span{
+    font-size: 1.5rem;
+    margin-right: 1rem;
+    text-shadow: 0.05rem 0.05rem white;
+}
+.mainItinerary a{
+    align-self: center;
+}
+.mainItinerary button{
+    background-color: goldenrod;
+    border: none;
+    border-radius: 2rem;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color:white;
+    text-shadow: 0.05rem 0.05rem black;
+    padding: 0.5rem 1rem;
+}
+.itinerariesContainer{
+    align-self: center;
+    color: white;
+}
+
 /* MEDIA QUERIES */
 
 @media screen and (max-width: 1024px) {
@@ -361,8 +426,11 @@ span.specialText{
         font-size: 2rem;
     }
     /* ONE CITY PER CARD STYLES */
-    .cardCity{
+    .cardCitiesContainer a{
         width: 45%;
+    }
+    .cardCity{
+        width: 100%;
     }
     .cardCity div p{
         text-align: center;
@@ -433,8 +501,11 @@ span.specialText{
         font-size: 2rem;
     }
     /* ONE CITY PER CARD STYLES */
-    .cardCity{
+    .cardCitiesContainer a{
         width: 45%;
+    }
+    .cardCity{
+        width: 100%;
     }
     .cardCity div p{
         font-size: 1.5rem;
@@ -475,6 +546,9 @@ span.specialText{
         font-size: 2rem;
     }
     /* ONE CITY PER CARD STYLES */
+    .cardCitiesContainer a{
+        width: 100%;
+    }
     .cardCity{
         width: 100%;
     }
