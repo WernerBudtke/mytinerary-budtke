@@ -15,25 +15,23 @@ export default class CarouselSlick extends Component {
             pauseOnHover: true,
             responsive: [
                 {
-                    breakpoint: 480,
+                    breakpoint: 600,
                     settings: {
-                        slidesToShow: 1,
-                        slidesToScroll: 1,
                         rows: 1,
                         slidesPerRow: 1,
-                        dots: false
+                        dots: false,
+                        arrows: false
                     }
                 },
                 {
-                    breakpoint: 600,
+                    breakpoint: 480,
                     settings: {
-                        slidesToShow: 1,
-                        slidesToScroll: 1,
                         rows: 1,
                         slidesPerRow: 1,
-                        dots: false
+                        dots: false,
+                        arrows:false
                     }
-                }
+                }     
             ] 
         }
         const carouselContent = [

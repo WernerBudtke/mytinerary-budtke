@@ -10,6 +10,8 @@ const Cities = () =>{
         axios.get('http://192.168.1.2:4000/prueba/datos')
         .then(res => setData(res.data.response))
         window.scrollTo(0, 0)
+        document.title = "myTinerary - Cities"
+        return () => document.title = "myTinerary"
     },[])
     // CON LA DATA QUE RECIBO, EL FILTRO DEBE UTILIZAR ESA DATA PARA MOSTRAR!
     return(

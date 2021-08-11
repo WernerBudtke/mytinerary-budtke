@@ -82,8 +82,6 @@ header nav a.active, footer nav a.active{
 .titleNavBar a h1{
     margin-left: 1rem;
     color: white;
-    /* text-shadow: 0.05rem 0.05rem orange; */
-    /* transition: all 2s; */
 }
 /*FOTO LOGO Y FOTO USUARIO*/
 .photo.logo, .photo.user{
@@ -136,121 +134,9 @@ header nav a.active, footer nav a.active{
 }
 #callToActionHero:hover{
     background-color: rgba(255, 136, 0, 0.541);
-    /* background-image: url('./pages/shrek.gif');
-    background-size: cover;
-    background-position: center; */
     color: black;
     transition: all 1s;
 }
-/* ESTILOS carousel */
-.carousel{
-    background-color: rgba(0, 0, 0, 0.158);
-    padding: 1rem 0;
-}
-.carousel h2{
-    text-align: center;
-    font-size: 2rem;
-    color: white;
-    text-shadow: 0.1rem 0.1rem rgba(255, 136, 0, 0.541), -0.1rem -0.1rem rgba(255, 136, 0, 0.541);
-    transition: all 2s;
-}
-.carousel h2:hover{
-    text-shadow: 0.1rem 0.1rem 2rem rgba(233, 172, 6, 0.918);
-    transition: all 2s;
-}
-.carouselContainer{
-    display: flex;
-    align-self: center;
-    justify-content: center;
-    flex-wrap: wrap;
-    overflow-x: hidden;
-    width: 95%;
-    height: 40rem;
-}
-.citiesCarousel{
-    width: 45%;
-    height: 45%;
-    margin: 1rem 1rem;
-    text-align: center;
-    /* display:flex; */
-    /* flex-direction: column; */
-    justify-content: space-evenly;
-    align-items: flex-start;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    transition: all 1s;
-    
-}
-.citiesCarousel:hover{
-    box-shadow: 0px 0px 1rem 0.5rem rgba(255, 255, 0, 0.50) ;
-    -webkit-box-shadow: 0px 0px 1rem 0.5rem rgba(255, 255, 0, 0.50) ;
-    -moz-box-shadow: 0px 0px 1rem 0.5rem rgba(255, 255, 0, 0.50) ;
-}
-.citiesCarousel p{
-    font-size: 2.5rem;
-    color: white;
-    /* background-color: rgba(238, 4, 4, 0.541); */
-    text-shadow: 0.1rem 0.1rem rgba(238, 109, 4, 0.76);
-}
-.infoCitiesCarousel{
-    width: 100%;
-    display: flex;
-    justify-content: space-evenly;
-    /* background-color: rgba(238, 109, 4, 0.76); */
-    background-color: rgba(0, 0, 0, 0.75);
-}
-.carouselHandler{
-    display:flex;
-    justify-content: center;
-    width: 100%;
-    padding: 0 1rem;
-}
-.carouselHandler button{
-    visibility: hidden;
-    width: 2.5rem;
-    height: 2.5rem;
-    margin: 0 1rem;
-    background-color: rgba(255, 255, 255, 0.493);
-    font-size: 1rem;
-    border-radius: 100%;
-    align-self: center;
-    cursor: pointer;
-    transition: all 3s;
-}
-.carousel:hover .carouselHandler button{
-    visibility: visible;
-}
-.carousel:hover .carouselHandler button:hover{
-    background-color: rgba(255, 255, 0, 0.87);
-    color: black;
-    transition: all 3s;
-}
-.citiesCarousel:hover{
-    background-position: bottom;
-    transition: all 4s;
-}
-/* ESTILOS BOTONES carousel */
-.btnsDownCarousel{
-    display: flex;
-    justify-content: center;
-}
-.btnsDownCarousel p{
-    font-size: 4rem;
-    margin: 0 2rem;
-}
-.btnsDownCarousel p.btnActual{
-    color: yellow;
-    text-shadow: 0.1rem 0.1rem 1rem orange, -0.1rem -0.1rem 1rem orange;
-    cursor: pointer;
-    transition: all 0.5s;
-}
-.btnsDownCarousel p.btnNext, .btnsDownCarousel p.btnPrevious{
-    color: white;
-    cursor: pointer;
-    transition: all 0.5s;
-}
-
 /* FOTOS REDES */
 .socialMedia{
     width: 20%;
@@ -258,7 +144,6 @@ header nav a.active, footer nav a.active{
     display: flex;
     justify-content: space-evenly;
     align-items: center;
-    /* background-color: tomato; */
 }
 .socialMedia a{
     width: 2.5rem;
@@ -270,48 +155,6 @@ header nav a.active, footer nav a.active{
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-}
-
-
-/* ESTILOS SLIDES carousel, DEPENDIENDO DE SU ESTADO */
-.actualSlide{
-    display: flex;
-    /* visibility: visible; */
-    align-self: center;
-    justify-content: center;
-    /* flex-direction: column; */
-    flex-wrap: wrap;
-    width: 100%;
-    height: 40rem;
-}
-.nextSlide{
-    display:none;
-    /* visibility: hidden; */
-}
-.previousSlide{
-    /* visibility: hidden; */
-    display:none;
-}
-/* .otro{
-    display:none;
-    transform: translateX(300%);
-    z-index: -20;
-    opacity: 0;
-    transition: all 3s;
-}*/
-
-.slideIsMoving.rightMove{
-    transform: translateX(-150%);
-    transition: all 1s;
-}
-.slideIsMoving.leftMove{
-    visibility: hidden;
-    transform: translateX(150%);
-
-}
-.slideIsNotMoving{
-    transform: translateX(0);
-    transition: all 0.5s;
 }
 
 /* CAROUSEL SLICK POSICIONAMIENTO Y TAMAÑOS */
@@ -338,7 +181,6 @@ header nav a.active, footer nav a.active{
     flex-direction: column;
     margin: 2rem auto;
     transition: all 3s;
-    /* justify-content: flex-start; */
     box-shadow: 0.1rem 0.1rem 0.5rem 0.1rem black;
     -webkit-box-shadow: 0.1rem 0.1rem 0.5rem 0.1rem black;
     -moz-box-shadow: 0.1rem 0.1rem 0.5rem 0.1rem black;
@@ -366,10 +208,6 @@ header nav a.active, footer nav a.active{
 .slick-dots{
     margin-bottom: 1rem;
 }
-/* .slick-dots li{
-    color: blanchedalmond;
-    background-color: red;
-} */
 /* ARREGLO PROBLEMA DE DOBLE BOTON CON OPACIDAD 1 */
 .slick-dots li button:focus:before { opacity: 0.25; }
 .slick-dots li.slick-active button:focus:before,  .slick-dots li button:hover:before { opacity: 1; }
@@ -393,9 +231,6 @@ header nav a.active, footer nav a.active{
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    /* backdrop-filter: blur(5rem);
-    -webkit-backdrop-filter: blur(5rem); */
-    /* background-color: rgba(255, 255, 255, 0.3); */
 }
 .filterCitiesContainer h2{
     font-size: 3rem;
@@ -421,6 +256,15 @@ span.specialText{
     margin-top: 1rem;
     border: transparent;
     background-color: rgba(255, 255, 255, 0.479);
+    transition: all 1s;
+}
+.filterCitiesContainer input:focus{
+    outline: none;
+    background-color: rgba(255, 255, 255, 0.75);
+    box-shadow: 0.1rem 0.1rem 0.5rem 0.1rem black;
+    -webkit-box-shadow: 0.1rem 0.1rem 0.5rem 0.1rem black;
+    -moz-box-shadow: 0.1rem 0.1rem 0.5rem 0.1rem black;
+    transition: all 2s;
 }
 /* CITIES CARD CONTAINER */
 .cardCitiesContainer{
@@ -441,6 +285,7 @@ span.specialText{
     box-shadow: 0.1rem 0.1rem 0.5rem 0.1rem black;
     -webkit-box-shadow: 0.1rem 0.1rem 0.5rem 0.1rem black;
     -moz-box-shadow: 0.1rem 0.1rem 0.5rem 0.1rem black;
+    cursor: pointer;
     transition: all 1s;
 }
 .cardCity:hover{
@@ -468,7 +313,6 @@ span.specialText{
     font-size: 2rem;
     margin-top: 2rem;
 }
-
 /* MEDIA QUERIES */
 
 @media screen and (max-width: 1024px) {
@@ -593,16 +437,10 @@ span.specialText{
         width: 45%;
     }
     .cardCity div p{
-        text-align: center;
-        color: white;
         font-size: 1.5rem;
-        background-color: rgba(0, 0, 0, 0.548);
     }
     .cardCity div p.title{
         font-size:2rem;
-    }
-    .cityDescription{
-        margin-top: 3rem;
     }
 }
 @media screen and (max-width: 600px){
@@ -641,16 +479,10 @@ span.specialText{
         width: 100%;
     }
     .cardCity div p{
-        text-align: center;
-        color: white;
         font-size: 1.8rem;
-        background-color: rgba(0, 0, 0, 0.548);
     }
     .cardCity div p.title{
         font-size:3rem;
-    }
-    .cityDescription{
-        margin-top: 3rem;
     }
 }
 @media screen and (max-width: 400px) {
@@ -715,7 +547,6 @@ span.specialText{
     /* CITIES PAGE */
     .filterCitiesContainer h2{
         font-size: 2rem;
-        text-align: center;
     }
     .filterCitiesContainer p{
         display:none;
@@ -728,10 +559,7 @@ span.specialText{
         width: 100%;
     }
     .cardCity div p{
-        text-align: center;
-        color: white;
         font-size: 1.8rem;
-        background-color: rgba(0, 0, 0, 0.548);
     }
     .cardCity div p.title{
         font-size:3rem;
@@ -759,7 +587,6 @@ span.specialText{
     /* CITIES PAGE */
     .filterCitiesContainer h2{
         font-size: 2rem;
-        text-align: center;
     }
     .filterCitiesContainer p{
         display:none;
@@ -772,10 +599,7 @@ span.specialText{
         width: 100%;
     }
     .cardCity div p{
-        text-align: center;
-        color: white;
         font-size: 1.8rem;
-        background-color: rgba(0, 0, 0, 0.548);
     }
     .cardCity div p.title{
         font-size:3rem;

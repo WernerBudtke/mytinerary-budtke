@@ -5,6 +5,8 @@ import { useEffect } from 'react'
 const Home = () =>{
     useEffect(() =>{
         window.scrollTo(0,0)
+        document.title = "myTinerary - Home"
+        return () => document.title = "myTinerary"
     },[])
     return (
         <>
