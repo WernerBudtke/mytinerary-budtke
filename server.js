@@ -2,6 +2,8 @@ const express = require('express') // uso require para importar express
 const cors = require('cors') // USO CORS PARA PERMITIR ORIGEN CRUZADO
 require('dotenv').config() // USO DOTENV PARA TENER VARIABLES DE ENTORNO
 const router = require('./routes/index')// IMPORTO MIS RUTAS
+require('./config/database')
+
 const app = express()  // creo una instancia de Express (createApplication())
 // dentro de app, vive el resultado de ejecutar el createApplication de express, me da un servidor listo para levantar
 // FILTRO MIDDLEWARE, antes de usar mi aplicación, uso el filtro. Para que pueda responder de origen cruzado

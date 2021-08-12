@@ -7,7 +7,7 @@ const Maincities = ({dataApi}) => {
     const [fetching, setFetching] = useState(true)
     useEffect(() =>{
         setData(dataApi)
-        if(dataApi.length > 1){
+        if(dataApi.length >= 1){
             setFetching(false)
         }
     },[dataApi])
@@ -23,7 +23,7 @@ const Maincities = ({dataApi}) => {
         <main className="mainCities" >
             <CitiesInput myFunction={handleFilter}/>
             <div className="cardCitiesContainer" style={data.length > 0 ? {display:"flex"} : {display:"none"}}>
-                {data.map(city => <Link key={city.id} to={`/itineraries/${city.id}`}><City key={city.id} cityName={city.city} country={city.country} image={city.image} description={city.description}/></Link>)}
+                {data.map(city => <Link key={city._id} to={`/itineraries/${city._id}`}><City key={city._id} cityName={city.city} country={city.country} image={city.image} description={city.description}/></Link>)}
             </div>
             <div className="noCitiesContainer" style={data.length === 0 ? {display:"block"} : {display:"none"}}>
                 <p>UNABLE TO FIND THAT ONE, TRY AGAIN!</p>
