@@ -4,6 +4,31 @@ const handleError = (res,err) =>{
     res.json({success: false, response: err.message})
 }
 const handleCapitalize = (string) => string.split(' ').map(word => word.charAt(0).toUpperCase()+word.slice(1,word.length)).join(' ')
+const handleBodyData = (req) => {
+    if(typeof req.body  !=  typeof undefined){
+        if(Object.keys(req.body).length >= 4){
+            let myValues = Object.values(req.body) // guardo valores del objeto en un array
+            let badValues = myValues.filter(value => typeof value !== "string")
+            if(badValues.length > 0){ 
+                res.json({success: false, response: "values of keys are not string type"})
+            }else{
+                const newCity = new City({
+                    city: req.body.city,
+                    country: req.body.country,
+                    description: req.body.description,
+                    image: req.body.image
+                })
+                newCity.save()
+                .then(city => res.json({success: true, response: city}))
+                .catch(err => res.json({success: false, response: err}))
+            }       
+        }else{
+            res.json({success: false, response: "check that you have all needed properties"})
+        }       
+    }else{
+        res.json({success: false, response: "undefined"})
+    }
+}
 const citiesControllers = {
     getAllCities:(req, res) =>{
         City.find() // devuelve array vacio si no tiene nada
@@ -18,8 +43,8 @@ const citiesControllers = {
     },
     postACity:(req, res) =>{ /// CHEQUEAR BIEN QUE MIERDA LLEGA ACA
         const newCity = new City({
-            city: typeof req.body.city === "string" && handleCapitalize(req.body.city),
-            country: typeof req.body.country === "string" && handleCapitalize(req.body.country),
+            city: req.body.city,
+            country: req.body.country,
             description: req.body.description,
             image: req.body.image
         })
@@ -41,36 +66,3 @@ const citiesControllers = {
 }
 
 module.exports = citiesControllers
-
-
-// if(req.get("API-KEY") === '1337'){
-        //     if(typeof req.body  !=  typeof undefined){
-        //         // console.log("funciono filtro de obj indefinido")
-        //         // console.log(typeof req.body)
-        //         // console.log(Object.keys(req.body).length) // filtro a ver cuantas props me mandan
-        //         if(Object.keys(req.body).length >= 4){
-        //             let myValues = Object.values(req.body) // guardo valores del objeto en un array
-        //             let badValues = myValues.filter(value => typeof value !== "string")
-        //             if(badValues.length > 0){ 
-        //                 res.json({success: false, reason: "values of keys are not string type"})
-        //             }else{
-        //                 const newCity = new City({
-        //                     city: req.body.city,
-        //                     country: req.body.country,
-        //                     description: req.body.description,
-        //                     image: req.body.image
-        //                 })
-        //                 newCity.save()
-        //                 .then(city => res.json({success: true, posted: city}))
-        //                 .catch(err => res.json({success: false, reason: err}))
-        //             }       
-        //         }else{
-        //             res.json({success: false, reason: "check that you have all needed properties"})
-        //         }       
-        //     }else{
-        //         res.json({success: false, reason: "undefined"})
-        //     }
-        // }else{
-        //     res.json({success: false, reason: "bad api token"})
-        // }
-
