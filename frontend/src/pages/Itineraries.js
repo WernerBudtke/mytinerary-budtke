@@ -10,10 +10,14 @@ const Itineraries = (props) =>{
         axios.get(`http://192.168.1.2:4000/api/city/${props.match.params.id}`)
         .then(res => {
             if(res.data.success){
-                setData(res.data.response)
-                setFetching(false)
+                if(res.data.response){
+                    setData(res.data.response)
+                    setFetching(!fetching)
+                }else{
+                    throw new Error("Didn't find that city ID in DB")
+                }
             }else{
-                throw new Error("didn't found that city")
+                throw new Error(res.data.response)
             }
         })
         .catch(err => { // catch para el error comunicacion con backend

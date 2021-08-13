@@ -9,11 +9,14 @@ const Cities = (props) =>{
     useEffect(() => {
         axios.get('http://192.168.1.2:4000/api/cities')
         .then(res => {
-            if(res.data.response.length > 0){
-                setData(res.data.response) 
-            } 
-            else{
-                throw new Error("no cities found in db")
+            if(res.data.success){
+                if(res.data.response.length > 0){
+                    setData(res.data.response)
+                }else{
+                    throw new Error("No cities found in db")
+                }
+            }else{
+                throw new Error(res.data.response)
             }
         })
         .catch(err => {
