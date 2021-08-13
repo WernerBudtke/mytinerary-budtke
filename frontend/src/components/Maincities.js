@@ -10,6 +10,7 @@ const Maincities = ({dataApi}) => {
         if(dataApi.length >= 1){
             setFetching(false)
         }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     },[dataApi])
     if(fetching){
         return <main className="mainCities"><div className="noCitiesContainer"><p>Loading...</p></div></main>

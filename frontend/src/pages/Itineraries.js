@@ -4,19 +4,26 @@ import axios from "axios"
 import Header from "../components/Header"
 import Footer from "../components/Footer"
 const Itineraries = (props) =>{
-    // console.log(props.match.params.id)
-    const [data, setData] = useState({})
+    const [data, setData] = useState({city: " ", country:" ", image:" ", description:" "})
     const [fetching, setFetching] = useState(true)
     useEffect(() => {
         axios.get(`http://192.168.1.2:4000/api/city/${props.match.params.id}`)
         .then(res => {
-            setData(res.data.response)
-            setFetching(false)
+            if(res.data.success){
+                setData(res.data.response)
+                setFetching(false)
+            }else{
+                throw new Error("didn't found that city")
+            }
         })
-        .catch(err => props.history.push('/error'))
+        .catch(err => { // catch para el error comunicacion con backend
+            console.error(err)
+            props.history.push('/error')
+        })
         window.scrollTo(0, 0)
         return () => document.title = "myTinerary"
-    },[props.match.params.id, props.history])
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    },[])
     if(fetching){
         return (
             <>  
@@ -27,9 +34,9 @@ const Itineraries = (props) =>{
                 <Footer/>
             </>
         )
+    }else{
+        document.title = `myTinerary - ${data.city}`
     }
-    document.title = `myTinerary - ${data.city}`
-    // console.log(data)
     return(
         <>
             <Header/>

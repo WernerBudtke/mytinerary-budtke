@@ -1,19 +1,22 @@
-import { useEffect } from "react"
+import { useEffect, useRef, useState } from "react"
 import Footer from "../components/Footer"
 import Header from "../components/Header"
 
 const Error = (props) =>{
+    const [render, setRender] = useState(false)
+    var timeLeft = useRef(3)
     useEffect(()=>{
-        let timeOut = 0
-        timeOut = setTimeout(()=>{
-            props.history.push('/')
-        },3000)
+        let timeOut = setTimeout(()=>{
+            timeLeft.current--
+            timeLeft.current === 0 ? props.history.push('/') : setRender(!render)  
+        },1000)
         return () => clearTimeout(timeOut)
-    },[props.history])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    },[render])
     return(
         <>
             <Header/>
-            <main className="mainCities"><div className="noCitiesContainer"><p>Something went wrong! you'll be redirected in 3s</p></div></main>
+            <main className="mainCities"><div className="noCitiesContainer"><p>Something went wrong! you'll be redirected in {timeLeft.current}s</p></div></main>
             <Footer/>
         </>
     )

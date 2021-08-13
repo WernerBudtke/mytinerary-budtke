@@ -8,12 +8,24 @@ const Cities = (props) =>{
     const [data, setData] = useState([])
     useEffect(() => {
         axios.get('http://192.168.1.2:4000/api/cities')
-        .then(res => setData(res.data.response))
-        .catch(err => props.history.push('/error'))
+        .then(res => {
+            if(res.data.response.length > 0){
+                setData(res.data.response) 
+            } 
+            else{
+                throw new Error("no cities found in db")
+            }
+        })
+        .catch(err => {
+            console.error(err)
+            props.history.push('/error')
+        })
         window.scrollTo(0, 0)
         document.title = "myTinerary - Cities"
         return () => document.title = "myTinerary"
-    },[props.history])
+        
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    },[])
     // CON LA DATA QUE RECIBO, EL FILTRO DEBE UTILIZAR ESA DATA PARA MOSTRAR!
     return(
         <>
