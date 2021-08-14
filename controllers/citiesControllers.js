@@ -3,32 +3,7 @@ const handleError = (res,err) =>{
     console.log(err.message)
     res.json({success: false, response: err.message})
 }
-const handleCapitalize = (string) => string.split(' ').map(word => word.charAt(0).toUpperCase()+word.slice(1,word.length)).join(' ')
-const handleBodyData = (req) => {
-    if(typeof req.body  !=  typeof undefined){
-        if(Object.keys(req.body).length >= 4){
-            let myValues = Object.values(req.body) // guardo valores del objeto en un array
-            let badValues = myValues.filter(value => typeof value !== "string")
-            if(badValues.length > 0){ 
-                res.json({success: false, response: "values of keys are not string type"})
-            }else{
-                const newCity = new City({
-                    city: req.body.city,
-                    country: req.body.country,
-                    description: req.body.description,
-                    image: req.body.image
-                })
-                newCity.save()
-                .then(city => res.json({success: true, response: city}))
-                .catch(err => res.json({success: false, response: err}))
-            }       
-        }else{
-            res.json({success: false, response: "check that you have all needed properties"})
-        }       
-    }else{
-        res.json({success: false, response: "undefined"})
-    }
-}
+
 const citiesControllers = {
     getAllCities:(req, res) =>{
         City.find() // devuelve array vacio si no tiene nada
