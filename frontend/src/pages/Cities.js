@@ -7,7 +7,7 @@ const Cities = (props) =>{
     // ESTO VA PARA EL COMPONENTE CITIES, para que con la respuesta, mapee las ciudades.
     const [data, setData] = useState([])
     useEffect(() => {
-        axios.get('http://192.168.1.2:4000/api/cities')
+        axios.get('http://192.168.1.4:4000/api/cities')
         .then(res => {
             if(res.data.success){
                 if(res.data.response.length > 0){

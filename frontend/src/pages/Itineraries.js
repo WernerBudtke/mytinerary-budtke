@@ -7,7 +7,7 @@ const Itineraries = (props) =>{
     const [data, setData] = useState({city: " ", country:" ", image:" ", description:" "})
     const [fetching, setFetching] = useState(true)
     useEffect(() => {
-        axios.get(`http://192.168.1.2:4000/api/city/${props.match.params.id}`)
+        axios.get(`http://192.168.1.4:4000/api/city/${props.match.params.id}`)
         .then(res => {
             if(res.data.success){
                 if(res.data.response){

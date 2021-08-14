@@ -3,7 +3,7 @@ import { useState } from "react"
 const PostCity = () =>{
     const [data, setData] = useState({})
     function addNewCity(){
-        axios.post('http://192.168.1.2:4000/api/addcityofcities', data).then(res => {
+        axios.post('http://192.168.1.4:4000/api/addcityofcities', data).then(res => {
         if(res.data.success){
             console.log("fue un exito")
         }
