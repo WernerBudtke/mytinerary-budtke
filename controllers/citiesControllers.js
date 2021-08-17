@@ -16,7 +16,7 @@ const citiesControllers = {
         .then(city => res.json({success: true, response: city}))
         .catch(err => handleError(res,err))
     },
-    postACity:(req, res) =>{ /// CHEQUEAR BIEN QUE MIERDA LLEGA ACA
+    postACity:(req, res) =>{ // a posteriori hay que validar ésto si tiene opcion un usuario de postear.
         const newCity = new City({
             city: req.body.city,
             country: req.body.country,
@@ -27,15 +27,19 @@ const citiesControllers = {
         .then(city => res.json({success: true, response: city}))
         .catch(err => handleError(res,err))
     },
-    removeACity:(req, res) =>{
+    removeACity:(req, res) =>{ // busca la ciudad, si la borra devuelve lo que borró, sino null.
         City.findOneAndDelete({_id: req.body._id})
-        .then(city => res.json({success: true, response: city}))
+        .then(city => {
+            city ? res.json({success: true, response: city}) : res.json({success: false, response: "no city found"})
+        })
         .catch(err => handleError(res,err))
         // pedir al modelo que elimine la ciudad que requeri.
     },
-    modifyACity:(req, res)=>{
-        City.findOneAndUpdate({_id: req.body._id}, {...req.body})
-        .then(city => res.json({success: true, response: city}))
+    modifyACity:(req, res)=>{ 
+        City.findOneAndUpdate({_id: req.body._id}, {...req.body}) // busca por el obj parametro, luego obj lo que voy a actualizar. si encuentra devuelve lo que encontró, si no null
+        .then(city => {
+            city ? res.json({success: true, response: city}) : res.json({success: false, response: "no city found"})
+        })
         .catch(err => handleError(res,err))
     }
 }
