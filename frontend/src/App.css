@@ -558,6 +558,26 @@ span.specialText{
     .cardCity div p.title{
         font-size:3rem;
     }
+    /* ITINERARIES PAGE STYLES */
+    .photoItinerary{
+        height: 25rem;
+        width: 100%;
+        padding: 1rem 2rem;
+    }
+    .photoItinerary h3{
+        font-style: italic;
+        font-size: 1.5rem;
+    }
+    .photoItinerary h2{
+        font-size: 1.5rem;
+    }
+    .shortCityDescription p{
+        font-size: 1.1rem;
+    }
+    .shortCityDescription p span{
+        font-size: 1.2rem;
+        margin-right: 1rem;
+    }
 }
 @media screen and (max-width: 400px) {
     html{
@@ -641,6 +661,26 @@ span.specialText{
     .cityDescription{
         margin-top: 3rem;
     }
+    /* ITINERARIES PAGE STYLES */
+    .photoItinerary{
+        height: 25rem;
+        width: 100%;
+        padding: 1rem 2rem;
+    }
+    .photoItinerary h3{
+        font-style: italic;
+        font-size: 1.5rem;
+    }
+    .photoItinerary h2{
+        font-size: 1.5rem;
+    }
+    .shortCityDescription p{
+        font-size: 1.2rem;
+    }
+    .shortCityDescription p span{
+        font-size: 1.2rem;
+        margin-right: 1rem;
+    }
 }
 @media screen and (max-width: 300px) {
     header nav{
@@ -680,6 +720,25 @@ span.specialText{
     }
     .cityDescription{
         margin-top: 3rem;
+    }
+    /* ITINERARIES PAGE STYLES */
+    .photoItinerary{
+        height: 25rem;
+        width: 100%;
+        padding: 1rem 2rem;
+    }
+    .photoItinerary h3{
+        font-style: italic;
+        font-size: 1.6rem;
+    }
+    .photoItinerary h2{
+        font-size: 1.6rem;
+    }
+    .shortCityDescription p{
+        font-size: 1.5rem;
+    }
+    .shortCityDescription p span{
+        font-size: 1.5rem;
     }
 }
 
