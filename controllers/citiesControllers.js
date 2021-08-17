@@ -17,12 +17,7 @@ const citiesControllers = {
         .catch(err => handleError(res,err))
     },
     postACity:(req, res) =>{ // a posteriori hay que validar ésto si tiene opcion un usuario de postear.
-        const newCity = new City({
-            city: req.body.city,
-            country: req.body.country,
-            description: req.body.description,
-            image: req.body.image
-        })
+        const newCity = new City({...req.body}) // spredeo todas las props que me traen en la petición
         newCity.save()
         .then(city => res.json({success: true, response: city}))
         .catch(err => handleError(res,err))
@@ -36,7 +31,7 @@ const citiesControllers = {
         // pedir al modelo que elimine la ciudad que requeri.
     },
     modifyACity:(req, res)=>{ 
-        City.findOneAndUpdate({_id: req.body._id}, {...req.body}) // busca por el obj parametro, luego obj lo que voy a actualizar. si encuentra devuelve lo que encontró, si no null
+        City.findOneAndUpdate({_id: req.body._id}, {...req.body}, {new:true}) // busca por el obj parametro, luego obj lo que voy a actualizar. si encuentra devuelve lo que encontró y por param new, el nuevo documento, si no null
         .then(city => {
             city ? res.json({success: true, response: city}) : res.json({success: false, response: "no city found"})
         })
