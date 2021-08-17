@@ -10,7 +10,7 @@ const Error = (props) =>{
             timeLeft.current--
             timeLeft.current === 0 ? props.history.push('/') : setRender(!render)  
         },1000)
-        return () => clearTimeout(timeOut)
+        // return () => clearTimeout(timeOut)
     // eslint-disable-next-line react-hooks/exhaustive-deps
     },[render])
     return(
