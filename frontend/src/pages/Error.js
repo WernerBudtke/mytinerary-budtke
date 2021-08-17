@@ -6,7 +6,7 @@ const Error = (props) =>{
     const [render, setRender] = useState(false)
     var timeLeft = useRef(3)
     useEffect(()=>{
-        let timeOut = setTimeout(()=>{
+        setTimeout(()=>{
             timeLeft.current--
             timeLeft.current === 0 ? props.history.push('/') : setRender(!render)  
         },1000)
