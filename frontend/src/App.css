@@ -358,7 +358,7 @@ span.specialText{
 .shortCityDescription p span{
     font-size: 1.5rem;
     margin-right: 1rem;
-    text-shadow: 0.05rem 0.05rem white;
+    /* text-shadow: 0.05rem 0.05rem white; */
 }
 .mainItinerary a{
     align-self: center;
@@ -431,6 +431,7 @@ span.specialText{
 .itineraryDescriptionContainer h4{
     text-align: center;
     color: goldenrod;
+    /* color: rgba(255, 255, 255, 0.678); */
     font-size: 1.5rem;
     /* background-color: rgba(0, 0, 0, 0.5); */
     /* background-color: rgba(0, 128, 128, 0.5); */
@@ -451,11 +452,18 @@ span.specialText{
     font-size: 1.2rem;
 }
 .itineraryAuthorPhoto{
-    background-size: contain;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     width: 8rem;
     height:8rem;
     border-radius: 100%;
     margin-right: 1rem;
+    transition: all 3s;
+}
+.itineraryAuthorPhoto:hover{
+    transform: rotate(360deg);
+    transition: all 3s;
 }
 .itineraryPriceDurationContainer{
     display:flex;
@@ -472,14 +480,17 @@ span.specialText{
 }
 .hashtagsContainer a{
     margin: 0 1rem;
-    color:goldenrod;
+    /* color:goldenrod; */
+    /* color: crimson; */
+    color:teal;
     text-decoration: none;
 }
 .hashtagsContainer a:hover{
     text-decoration: underline;
 }
 .hashtagsContainer a:visited{
-    color:goldenrod;
+    /* color:goldenrod; */
+    color:teal;
 }
 .heartEmoji:hover{
     cursor: pointer;

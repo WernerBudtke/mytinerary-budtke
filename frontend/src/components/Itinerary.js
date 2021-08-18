@@ -3,6 +3,7 @@ const Itinerary = (props) =>{
     console.log(props.itinerary)
     const {author, description, hashtags, price, duration, likes, title} = props.itinerary
     const [render, setRender] = useState(false)
+    const [heart, setHeart] = useState(false)
     const clickHandler = (e) =>{
         e.target.innerText = e.target.innerText === "View more" ? 'View less' : 'View more'
         setRender(!render)
@@ -14,6 +15,10 @@ const Itinerary = (props) =>{
         }
         return arrayPrice.map((dollar, index) => <p key={index}>💵</p>)
     }
+    const heartHandler = (e) =>{
+        e.target.innerText = e.target.innerText === '❤️' ? '🤍' : '❤️'
+        setHeart(!heart)
+    }
     return(
         <div className="itineraryCard">
             <div className="itineraryVisibleInfo">
@@ -23,7 +28,7 @@ const Itinerary = (props) =>{
                         <p>Author: {author.name}</p>
                     </div>
                     <h2>{title}</h2>
-                    <p>Likes: <span className="heartEmoji">{likes > 0 ? '❤️' : '🤍'}</span>{likes}</p>
+                    <p>Likes: <span onClick={heartHandler} className="heartEmoji">{likes > 0 ? '❤️' : '🤍'}</span>{likes}</p>
                 </div>
                 <div className="itineraryDescriptionContainer">
                     <h4>{description}</h4>
