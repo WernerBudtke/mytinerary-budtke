@@ -38,5 +38,4 @@ const citiesControllers = {
         .catch(err => handleError(res,err))
     }
 }
-
 module.exports = citiesControllers
