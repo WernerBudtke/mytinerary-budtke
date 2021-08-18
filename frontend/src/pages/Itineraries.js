@@ -3,8 +3,10 @@ import { Link } from "react-router-dom"
 import axios from "axios"
 import Header from "../components/Header"
 import Footer from "../components/Footer"
+import Itinerary from "../components/Itinerary"
 const Itineraries = (props) =>{
     const [data, setData] = useState({city: " ", country:" ", image:" ", description:" "})
+    const [itineraries, setItineraries] = useState([])
     const [fetching, setFetching] = useState(true)
     useEffect(() => {
         axios.get(`http://192.168.1.4:4000/api/city/${props.match.params.id}`)
@@ -21,6 +23,14 @@ const Itineraries = (props) =>{
             }
         })
         .catch(err => { // catch para el error comunicacion con backend
+            console.error(err)
+            props.history.push('/error')
+        })
+        axios.get('http://192.168.1.4:4000/api/itineraries')
+        .then(res => {
+            setItineraries(res.data.response)
+        })
+        .catch(err => {
             console.error(err)
             props.history.push('/error')
         })
@@ -52,7 +62,7 @@ const Itineraries = (props) =>{
                 <div className="shortCityDescription">
                     <p><span className="specialText">Sneak peek:</span> {data.description}</p>
                 </div>
-                <div className="itinerariesContainer"><h1>Under construction</h1></div>
+                <div className="itinerariesContainer">{itineraries.map((itinerary, index) => <Itinerary key={index} itinerary={itinerary}/>)}</div>
                 <Link to="/cities"><button>Back to cities</button></Link>
             </main>
             <Footer/>
