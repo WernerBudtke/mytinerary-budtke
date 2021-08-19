@@ -1,18 +1,18 @@
-import {useEffect, useState} from "react"
+import {useEffect} from "react"
 import { Link } from "react-router-dom"
 import CitiesInput from "./CitiesInput"
 import City from "./City"
 import {connect} from 'react-redux'
-import { PromiseProvider } from "mongoose"
-const Maincities = ({dataApi, filteredCities}) => {
-    const [fetching, setFetching] = useState(true)
-    
+const Maincities = (props) => {
+    const {dataApi, filteredCities, fetching, error, errorMsg} = props
+    // const [fetching, setFetching] = useState(true)
     useEffect(() =>{
-        if(dataApi.length >= 1){
-            setFetching(false)
+        if(error){
+            console.log(errorMsg)
+            props.history.push('/error')
         }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    },[dataApi])
+    },[error])
     if(fetching){
         return <main className="mainCities"><div className="noCitiesContainer"><p>Loading...</p></div></main>
     }
@@ -34,7 +34,10 @@ const Maincities = ({dataApi, filteredCities}) => {
 const mapStateToProps = (state) =>{
     return {
         dataApi : state.citiesRed.cities,
-        filteredCities : state.citiesRed.filteredCities
+        filteredCities : state.citiesRed.filteredCities,
+        fetching: state.citiesRed.fetching,
+        error: state.citiesRed.error,
+        errorMsg: state.citiesRed.errorMsg
     }
 }
 

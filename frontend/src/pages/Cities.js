@@ -1,8 +1,7 @@
 import Header from "../components/Header"
 import Footer from "../components/Footer"
 import Maincities from "../components/Maincities"
-import axios from "axios"
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 import {connect} from 'react-redux'
 import citiesActions from "../redux/actions/citiesActions"
 const Cities = (props) =>{
@@ -18,7 +17,7 @@ const Cities = (props) =>{
     return(
         <>
             <Header/>
-            <Maincities/>
+            <Maincities {...props}/>
             <Footer/>
         </>
     )

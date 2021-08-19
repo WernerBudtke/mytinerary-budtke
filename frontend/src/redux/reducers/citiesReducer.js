@@ -1,15 +1,30 @@
-const citiesReducer = (state = {cities:[], filteredCities:[]}, action) =>{
+const initState = {
+    cities: [],
+    filteredCities:[],
+    fetching: true,
+    error: false,
+    errorMsg: ''
+}
+const citiesReducer = (state = initState, action) =>{
     switch(action.type){
         case "GET_ALL_CITIES":
             return {
                 ...state,
+                error: false,
                 cities:action.payload,
-                filteredCities:action.payload
+                filteredCities:action.payload,
+                fetching: false,    
             }
-        case "GET_A_CITY":
-            return{
+        case "GET_FILTERED_CITIES":
+            return {
                 ...state,
-                filteredCities:state.cities.filter(object => object.city.toLowerCase().startsWith(action.payload.toLowerCase().trim()))
+                filteredCities:state.cities.filter(object => object.city.toLowerCase().startsWith(action.payload.toLowerCase().trim())),
+            }
+        case "ERROR":
+            return {
+                ...state,
+                error: action.payload.error,
+                errorMsg: action.payload.errorMsg
             }
         default:
             return state

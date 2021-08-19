@@ -1,43 +1,23 @@
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 import { Link } from "react-router-dom"
-import axios from "axios"
 import Header from "../components/Header"
 import Footer from "../components/Footer"
 import Itinerary from "../components/Itinerary"
+import { connect } from "react-redux"
+import itinerariesActions from "../redux/actions/itinerariesActions"
 const Itineraries = (props) =>{
-    const [data, setData] = useState({city: " ", country:" ", image:" ", description:" "})
-    const [itineraries, setItineraries] = useState([])
-    const [fetching, setFetching] = useState(true)
+    const {cities, itineraries, error, errorMsg, fetching} = props
+    var data = cities.find(city => city._id === props.match.params.id)
     useEffect(() => {
-        axios.get(`http://192.168.1.4:4000/api/city/${props.match.params.id}`)
-        .then(res => {
-            if(res.data.success){
-                if(res.data.response){
-                    setData(res.data.response)
-                    setFetching(!fetching)
-                }else{
-                    throw new Error("Didn't find that city ID in DB")
-                }
-            }else{
-                throw new Error(res.data.response)
-            }
-        })
-        .catch(err => { // catch para el error comunicacion con backend
-            console.error(err)
-            props.history.push('/error')
-        })
-        axios.get('http://192.168.1.4:4000/api/itineraries')
-        .then(res => {
-            setItineraries(res.data.response)
-        })
-        .catch(err => {
-            console.error(err)
-            props.history.push('/error')
-        })
+        props.getAllItineraries(props.match.params.id) // si esto esta ok, la idea seria quitarle el fetching.
         window.scrollTo(0, 0)
+        if(error){
+            console.error(errorMsg)
+            props.history.push('/error')
+        }
         return () => document.title = "myTinerary"
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    },[])
+    },[error])
     if(fetching){
         return (
             <>  
@@ -69,4 +49,16 @@ const Itineraries = (props) =>{
         </>
     )
 }
-export default Itineraries
+const mapStateToProps = (state) =>{
+    return{
+        cities : state.citiesRed.cities,
+        itineraries : state.itinerariesRed.itineraries,
+        error: state.itinerariesRed.error,
+        errorMsg: state.itinerariesRed.errorMsg,
+        fetching: state.itinerariesRed.fetching
+    }
+}
+const mapDispatchToProps = {
+    getAllItineraries : itinerariesActions.getAllItinerariesFromCity
+}
+export default connect(mapStateToProps, mapDispatchToProps)(Itineraries)

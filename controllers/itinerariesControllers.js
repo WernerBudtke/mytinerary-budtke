@@ -11,7 +11,9 @@ const itinerariesControllers = {
         .catch(err => handleError(res,err))
     },
     getAllItinerariesFromCity: (req, res) =>{
-        // traer itinerarios de ciudad en particular
+        Itinerary.find({city:req.params.id})
+        .then(itineraries => res.json({success: true, response: itineraries}))
+        .catch(err => handleError(res, err))
     },
     getAnItinerary:(req, res) =>{
         Itinerary.findOne({_id: req.params.id}) // me devuelve null si no hay nada

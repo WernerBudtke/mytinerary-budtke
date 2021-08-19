@@ -1,6 +1,6 @@
 import { useState } from "react"
 const Itinerary = (props) =>{
-    console.log(props.itinerary)
+    // console.log(props.itinerary)
     const {author, description, hashtags, price, duration, likes, title} = props.itinerary
     const [render, setRender] = useState(false)
     const [heart, setHeart] = useState(false)

@@ -14,15 +14,14 @@ const citiesActions = {
                 throw new Error(res.data.response)
             }
             })
-            // .catch(err => {
-            // console.error(err)
-            // props.history.push('/error')
-            // })
+            .catch(err => {
+                dispatch({type: 'ERROR', payload: {error: true, errorMsg:err}})
+            })
         }
     },
     filterCities: (inputValue) =>{
         return (dispatch) =>{
-            dispatch({type: 'GET_A_CITY', payload:inputValue})
+            dispatch({type: 'GET_FILTERED_CITIES', payload:inputValue})
         }
     }
 }
