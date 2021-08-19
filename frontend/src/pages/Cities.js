@@ -3,39 +3,30 @@ import Footer from "../components/Footer"
 import Maincities from "../components/Maincities"
 import axios from "axios"
 import { useEffect, useState } from "react"
+import {connect} from 'react-redux'
+import citiesActions from "../redux/actions/citiesActions"
 const Cities = (props) =>{
     // ESTO VA PARA EL COMPONENTE CITIES, para que con la respuesta, mapee las ciudades.
-    const [data, setData] = useState([])
     useEffect(() => {
-        axios.get('http://192.168.1.4:4000/api/cities')
-        .then(res => {
-            if(res.data.success){
-                if(res.data.response.length > 0){
-                    setData(res.data.response)
-                }else{
-                    throw new Error("No cities found in db")
-                }
-            }else{
-                throw new Error(res.data.response)
-            }
-        })
-        .catch(err => {
-            console.error(err)
-            props.history.push('/error')
-        })
+        props.getCities()
         window.scrollTo(0, 0)
         document.title = "myTinerary - Cities"
         return () => document.title = "myTinerary"
-        
         // eslint-disable-next-line react-hooks/exhaustive-deps
     },[])
     // CON LA DATA QUE RECIBO, EL FILTRO DEBE UTILIZAR ESA DATA PARA MOSTRAR!
     return(
         <>
             <Header/>
-            <Maincities dataApi={data}/>
+            <Maincities/>
             <Footer/>
         </>
     )
 }
-export default Cities
+const mapDispatchToProps = {
+    // propiedadProps : queFuncionMeTrae
+    getCities:citiesActions.getAllCities
+}
+
+export default connect(null,mapDispatchToProps)(Cities)
+

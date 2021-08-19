@@ -2,11 +2,12 @@ import {useEffect, useState} from "react"
 import { Link } from "react-router-dom"
 import CitiesInput from "./CitiesInput"
 import City from "./City"
-const Maincities = ({dataApi}) => {
-    const [data, setData] = useState(dataApi)
+import {connect} from 'react-redux'
+import { PromiseProvider } from "mongoose"
+const Maincities = ({dataApi, filteredCities}) => {
     const [fetching, setFetching] = useState(true)
+    
     useEffect(() =>{
-        setData(dataApi)
         if(dataApi.length >= 1){
             setFetching(false)
         }
@@ -15,21 +16,27 @@ const Maincities = ({dataApi}) => {
     if(fetching){
         return <main className="mainCities"><div className="noCitiesContainer"><p>Loading...</p></div></main>
     }
-    const handleFilter = (e) =>{
-        // console.log(dataApi)
-        // setData(dataApi.filter(object => object.city.toLowerCase().split(' ').join('').includes(e.target.value.toLowerCase().split(' ').join('')))) // el mejor filtro
-        setData(dataApi.filter(object => object.city.toLowerCase().startsWith(e.target.value.toLowerCase().trim())))
-    }
+    let dataToShow = []
+    dataToShow = filteredCities.length > 0 ? filteredCities : dataApi
     return (
         <main className="mainCities" >
-            <CitiesInput myFunction={handleFilter}/>
-            <div className="cardCitiesContainer" style={data.length > 0 ? {display:"flex"} : {display:"none"}}>
-                {data.map(city => <Link key={city._id} to={`/itineraries/${city._id}`}><City key={city._id} cityName={city.city} country={city.country} image={city.image} description={city.description}/></Link>)}
+            <CitiesInput/>
+            <div className="cardCitiesContainer" style={filteredCities.length > 0 ? {display:"flex"} : {display:"none"}}>
+                {dataToShow.map(city => <Link key={city._id} to={`/itineraries/${city._id}`}><City key={city._id} cityName={city.city} country={city.country} image={city.image} description={city.description}/></Link>)}
             </div>
-            <div className="noCitiesContainer" style={data.length === 0 ? {display:"block"} : {display:"none"}}>
+            <div className="noCitiesContainer" style={filteredCities.length === 0 ? {display:"block"} : {display:"none"}}>
                 <p>UNABLE TO FIND THAT ONE, TRY AGAIN!</p>
             </div>
         </main>
     )
 }
-export default Maincities
+
+const mapStateToProps = (state) =>{
+    return {
+        dataApi : state.citiesRed.cities,
+        filteredCities : state.citiesRed.filteredCities
+    }
+}
+
+export default connect(mapStateToProps)(Maincities)
+// componente de orden superior, funcion recibe param otra func.
