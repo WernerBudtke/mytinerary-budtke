@@ -5,13 +5,16 @@ import { useEffect } from "react"
 import {connect} from 'react-redux'
 import citiesActions from "../redux/actions/citiesActions"
 const Cities = (props) =>{
+    const {allCities} = props
     useEffect(() => {
-        props.getCities().then(res => {
-            if(!res.success){
-                console.error(res.error)
-                props.history.push('/error')
-            }
-        })
+        if(allCities.length === 0){
+            props.getCities().then(res => {
+                if(!res.success){
+                    console.error(res.error)
+                    props.history.push('/error')
+                }
+            })
+        }
         window.scrollTo(0, 0)
         document.title = "myTinerary - Cities"
         return () => document.title = "myTinerary"
@@ -25,10 +28,15 @@ const Cities = (props) =>{
         </>
     )
 }
+const mapStateToProps = (state) =>{
+    return{
+        allCities : state.citiesRed.cities
+    } 
+}
 const mapDispatchToProps = {
     // propiedadProps : queFuncionMeTrae
     getCities:citiesActions.getAllCities
 }
 
-export default connect(null,mapDispatchToProps)(Cities)
+export default connect(mapStateToProps,mapDispatchToProps)(Cities)
 

@@ -3,12 +3,12 @@ import CitiesInput from "./CitiesInput"
 import City from "./City"
 import {connect} from 'react-redux'
 const Maincities = (props) => {
-    const {dataApi, filteredCities, fetching} = props
+    const {allCities, filteredCities, fetching} = props
     if(fetching){
         return <main className="mainCities"><div className="noCitiesContainer"><p>Loading...</p></div></main>
     }
     let dataToShow = []
-    dataToShow = filteredCities.length > 0 ? filteredCities : dataApi
+    dataToShow = filteredCities.length > 0 ? filteredCities : allCities
     return (
         <main className="mainCities" >
             <CitiesInput/>
@@ -24,7 +24,6 @@ const Maincities = (props) => {
 
 const mapStateToProps = (state) =>{
     return {
-        dataApi : state.citiesRed.cities,
         filteredCities : state.citiesRed.filteredCities,
         fetching: state.citiesRed.fetching,
     }

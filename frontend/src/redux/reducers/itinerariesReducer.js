@@ -7,7 +7,6 @@ const itinerariesReducer = (state = initState, action) =>{
         case "GET_AN_ITINERARY":
             return{
                 ...state,
-                error: false,
                 itineraries:action.payload,
                 fetching: false
             }

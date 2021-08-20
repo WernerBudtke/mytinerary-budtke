@@ -57,7 +57,7 @@ const Itineraries = (props) =>{
                 <div className="shortCityDescription">
                     <p><span className="specialText">Sneak peek:</span> {dataHandler("description")}</p>
                 </div>
-                <div className="itinerariesContainer">{itineraries.length === 0 ? <p className="noItineraries">OOPS, NO ITINERARIES YET IN THIS CITY!</p> : itineraries.map((itinerary, index) => <Itinerary key={index} itinerary={itinerary}/>)}</div>
+                <div className="itinerariesContainer">{itineraries && itineraries.length === 0 ? <p className="noItineraries">OOPS, NO ITINERARIES YET IN THIS CITY!</p> : itineraries.map((itinerary, index) => <Itinerary key={index} itinerary={itinerary}/>)}</div>
                 <Link to="/cities"><button>Back to cities</button></Link>
             </main>
             <Footer/>
