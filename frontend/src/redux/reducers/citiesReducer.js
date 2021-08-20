@@ -3,15 +3,13 @@ const initState = {
     filteredCities:[],
     city:{},
     fetching: true,
-    error: false,
-    errorMsg: ''
+    fetchingCity: true,
 }
 const citiesReducer = (state = initState, action) =>{
     switch(action.type){
         case "GET_ALL_CITIES":
             return {
                 ...state,
-                error: false,
                 cities:action.payload,
                 filteredCities:action.payload,
                 fetching: false,    
@@ -21,12 +19,19 @@ const citiesReducer = (state = initState, action) =>{
                 ...state,
                 filteredCities:state.cities.filter(object => object.city.toLowerCase().startsWith(action.payload.toLowerCase().trim())),
             }
-        case "ERROR":
-            return {
+        case "GET_A_CITY":
+            return{
                 ...state,
-                error: action.payload.error,
-                errorMsg: action.payload.errorMsg
+                city:action.payload,
+                fetchingCity: false,
             }
+        case "RESET":{
+            return{
+                ...state,
+                fetchingCity: true,
+                city:{}
+            }
+        }
         default:
             return state
     }

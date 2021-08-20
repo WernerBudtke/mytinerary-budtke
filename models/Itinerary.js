@@ -1,5 +1,4 @@
 const mongoose = require('mongoose')
-const Schema = mongoose.Schema;
 const authorSchema = new mongoose.Schema({
     name: {type:String, required:true},
     image: {type:String, required:true}
@@ -13,7 +12,8 @@ const itinerarySchema = new mongoose.Schema({
     likes: {type: Number, required: true, default: 0},
     hashtags: {type: Array, required: true},
     comments: {type: Array},
-    city: {type: Schema.Types.ObjectId, ref:'city', required: true}
+    city: {type: mongoose.Types.ObjectId, ref:'city', required: true}
+    // deberia haber usado cityId, si tuvier  q poner muchas es [{type: mongoose.Types.ObjectId}] de esa manera tengo un arreglo con muchas "activies" por ej
 })
 const Itinerary = mongoose.model('itinerary', itinerarySchema)
 module.exports = Itinerary

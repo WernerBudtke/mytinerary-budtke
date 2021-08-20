@@ -413,9 +413,9 @@ span.specialText{
     background-color: rgba(0, 128, 128, 0.5);
     /* background-color: rgba(0, 0, 0, 0.5); */
     display:flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
     align-items: center;
-    padding: 1rem 0;
+    padding: 1rem 3rem;
 }
 .itineraryHeader h2{
     font-size: 2.5rem;

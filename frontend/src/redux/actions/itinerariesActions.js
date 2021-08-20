@@ -1,15 +1,14 @@
 import axios from 'axios'
 const itinerariesActions = {
     getAllItinerariesFromCity: (id) =>{
-        return (dispatch) =>{
-            axios.get(`http://192.168.1.4:4000/api/itinerary/${id}`)
-            .then(res =>{
-                dispatch({type: 'GET_AN_ITINERARY', payload: res.data.response})    
-            })
-            .catch(err => {
-                console.log(err)
-                dispatch({type: 'ERROR', payload: {error: true, errorMsg:err}})
-            })
+        return async (dispatch) =>{
+            try{
+                let res = await axios.get(`http://192.168.1.4:4000/api/itinerary/${id}`)
+                dispatch({type: 'GET_AN_ITINERARY', payload: res.data.response})
+                return {success:true}
+            }catch(err){
+                return {success:false, error: err}
+            }
         }
     },
     resetItineraries: () =>{

@@ -1,18 +1,9 @@
-import {useEffect} from "react"
 import { Link } from "react-router-dom"
 import CitiesInput from "./CitiesInput"
 import City from "./City"
 import {connect} from 'react-redux'
 const Maincities = (props) => {
-    const {dataApi, filteredCities, fetching, error, errorMsg} = props
-    // const [fetching, setFetching] = useState(true)
-    useEffect(() =>{
-        if(error){
-            console.log(errorMsg)
-            props.history.push('/error')
-        }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    },[error])
+    const {dataApi, filteredCities, fetching} = props
     if(fetching){
         return <main className="mainCities"><div className="noCitiesContainer"><p>Loading...</p></div></main>
     }
@@ -36,8 +27,6 @@ const mapStateToProps = (state) =>{
         dataApi : state.citiesRed.cities,
         filteredCities : state.citiesRed.filteredCities,
         fetching: state.citiesRed.fetching,
-        error: state.citiesRed.error,
-        errorMsg: state.citiesRed.errorMsg
     }
 }
 

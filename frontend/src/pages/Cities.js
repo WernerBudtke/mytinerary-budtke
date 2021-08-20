@@ -6,7 +6,12 @@ import {connect} from 'react-redux'
 import citiesActions from "../redux/actions/citiesActions"
 const Cities = (props) =>{
     useEffect(() => {
-        props.getCities()
+        props.getCities().then(res => {
+            if(!res.success){
+                console.error(res.error)
+                props.history.push('/error')
+            }
+        })
         window.scrollTo(0, 0)
         document.title = "myTinerary - Cities"
         return () => document.title = "myTinerary"
