@@ -15,13 +15,18 @@ const itinerariesActions = {
         return (dispatch) =>{
             axios.get(`http://192.168.1.4:4000/api/itinerary/${id}`)
             .then(res =>{
-                console.log(res.data.response)
+                // console.log(res.data.response)
                 dispatch({type: 'GET_AN_ITINERARY', payload: res.data.response})
             })
             .catch(err => {
                 console.log(err)
                 dispatch({type: 'ERROR', payload: {error: true, errorMsg:err}})
             })
+        }
+    },
+    resetItineraries: () =>{
+        return(dispatch)=>{
+            dispatch({type: 'RESET'})
         }
     }
 }

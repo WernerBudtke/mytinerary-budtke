@@ -26,6 +26,13 @@ const itinerariesReducer = (state = initState, action) =>{
                 error: action.payload.error,
                 errorMsg: action.payload.errorMsg
             }
+        case "RESET":
+            return {
+                itineraries:[],
+                fetching: true,
+                error: false,
+                errorMsg: ''
+            }
         default:
             return state
     }

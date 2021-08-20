@@ -28,7 +28,7 @@ const Itinerary = (props) =>{
                         <p>Author: {author.name}</p>
                     </div>
                     <h2>{title}</h2>
-                    <p>Likes: <span onClick={heartHandler} className="heartEmoji">{likes > 0 ? '❤️' : '🤍'}</span>{likes}</p>
+                    <p>Likes: <span onClick={heartHandler} className="heartEmoji">🤍</span>{likes}</p>
                 </div>
                 <div className="itineraryDescriptionContainer">
                     <h4>{description}</h4>

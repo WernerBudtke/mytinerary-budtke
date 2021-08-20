@@ -9,13 +9,17 @@ const Itineraries = (props) =>{
     const {cities, itineraries, error, errorMsg, fetching} = props
     var data = cities.find(city => city._id === props.match.params.id)
     useEffect(() => {
+        props.resetItineraries()
         props.getAllItineraries(props.match.params.id) // si esto esta ok, la idea seria quitarle el fetching.
         window.scrollTo(0, 0)
         if(error){
             console.error(errorMsg)
             props.history.push('/error')
         }
-        return () => document.title = "myTinerary"
+        return () => {
+            props.resetItineraries()
+            document.title = "myTinerary"
+        }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     },[error])
     if(fetching){
@@ -42,7 +46,7 @@ const Itineraries = (props) =>{
                 <div className="shortCityDescription">
                     <p><span className="specialText">Sneak peek:</span> {data.description}</p>
                 </div>
-                <div className="itinerariesContainer">{itineraries.map((itinerary, index) => <Itinerary key={index} itinerary={itinerary}/>)}</div>
+                <div className="itinerariesContainer">{itineraries.length === 0 ? <p className="noItineraries">OOPS, NO ITINERARIES YET IN THIS CITY!</p> : itineraries.map((itinerary, index) => <Itinerary key={index} itinerary={itinerary}/>)}</div>
                 <Link to="/cities"><button>Back to cities</button></Link>
             </main>
             <Footer/>
@@ -59,6 +63,7 @@ const mapStateToProps = (state) =>{
     }
 }
 const mapDispatchToProps = {
-    getAllItineraries : itinerariesActions.getAllItinerariesFromCity
+    getAllItineraries : itinerariesActions.getAllItinerariesFromCity,
+    resetItineraries : itinerariesActions.resetItineraries
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Itineraries)
