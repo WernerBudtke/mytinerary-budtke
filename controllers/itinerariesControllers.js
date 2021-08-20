@@ -11,7 +11,7 @@ const itinerariesControllers = {
         .catch(err => handleError(res,err))
     },
     getAllItinerariesFromCity: (req, res) =>{
-        Itinerary.find({city:req.params.id})
+        Itinerary.find({city:req.params.id}).populate('city')
         .then(itineraries => res.json({success: true, response: itineraries}))
         .catch(err => handleError(res, err))
     },

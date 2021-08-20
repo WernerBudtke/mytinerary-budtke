@@ -5,7 +5,6 @@ import { useEffect } from "react"
 import {connect} from 'react-redux'
 import citiesActions from "../redux/actions/citiesActions"
 const Cities = (props) =>{
-    // ESTO VA PARA EL COMPONENTE CITIES, para que con la respuesta, mapee las ciudades.
     useEffect(() => {
         props.getCities()
         window.scrollTo(0, 0)
@@ -13,7 +12,6 @@ const Cities = (props) =>{
         return () => document.title = "myTinerary"
         // eslint-disable-next-line react-hooks/exhaustive-deps
     },[])
-    // CON LA DATA QUE RECIBO, EL FILTRO DEBE UTILIZAR ESA DATA PARA MOSTRAR!
     return(
         <>
             <Header/>

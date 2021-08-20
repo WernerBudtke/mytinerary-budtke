@@ -7,10 +7,10 @@ import { connect } from "react-redux"
 import itinerariesActions from "../redux/actions/itinerariesActions"
 const Itineraries = (props) =>{
     const {cities, itineraries, error, errorMsg, fetching} = props
-    var data = cities.find(city => city._id === props.match.params.id)
+    let data
+    cities.length > 0 ? data = cities.find(city => city._id === props.match.params.id) : props.history.push('/cities')
     useEffect(() => {
-        props.resetItineraries()
-        props.getAllItineraries(props.match.params.id) // si esto esta ok, la idea seria quitarle el fetching.
+        props.getAllItineraries(props.match.params.id)
         window.scrollTo(0, 0)
         if(error){
             console.error(errorMsg)

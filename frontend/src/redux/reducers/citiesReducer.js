@@ -1,6 +1,7 @@
 const initState = {
     cities: [],
     filteredCities:[],
+    city:{},
     fetching: true,
     error: false,
     errorMsg: ''
