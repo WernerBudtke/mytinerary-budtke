@@ -16,12 +16,10 @@ const Itineraries = (props) =>{
         }
     }
     useEffect(() => {
-        if(data){
-            props.getAllItineraries(props.match.params.id).then(res => errorHandler(res))
-        }else{
+        if(!data){
             props.getACity(props.match.params.id).then(res => errorHandler(res))
-            props.getAllItineraries(props.match.params.id).then(res => errorHandler(res))
-        } 
+        }
+        props.getAllItineraries(props.match.params.id).then(res => errorHandler(res)) 
         window.scrollTo(0, 0)
         return () => {
             props.resetItineraries()
