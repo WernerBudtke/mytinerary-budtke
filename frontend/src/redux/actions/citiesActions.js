@@ -3,7 +3,7 @@ const citiesActions = {
     getAllCities: () =>{
         return async (dispatch) =>{ // se puede utilizar param getState para traerme el store actual.
             try{
-                let res = await axios.get('http://192.168.1.4:4000/api/cities')
+                let res = await axios.get('http://localhost:4000/api/cities')
                 if(res.data.success){
                     if(res.data.response.length > 0){
                         dispatch({type:"GET_ALL_CITIES", payload:res.data.response})
@@ -27,7 +27,7 @@ const citiesActions = {
     getACity: (id) =>{
         return async (dispatch)=>{        
             try{
-                let res = await axios.get(`http://192.168.1.4:4000/api/city/${id}`)
+                let res = await axios.get(`http://localhost:4000/api/city/${id}`)
                     if(res.data.success){
                         if(res.data.response){
                             dispatch({type:"GET_A_CITY", payload: res.data.response})

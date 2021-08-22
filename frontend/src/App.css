@@ -699,6 +699,47 @@ span.specialText{
         font-size: 1.2rem;
         margin-right: 1rem;
     }
+    /* ITINERARIES PAGE STYLES */
+    .photoItinerary{
+        height: 15rem;
+    }
+    .photoItinerary h3{
+        font-size: 1.3rem;
+    }
+    .photoItinerary h2{
+        font-size: 1.3rem;
+    }
+    .shortCityDescription{
+        height: 4rem;
+    }
+    .shortCityDescription p{
+        font-size: 1.2rem;
+    }
+    .shortCityDescription p span{
+        font-size: 1.2rem;
+    }
+    .itineraryCard{
+        width: 95%; 
+    }
+    .itineraryHeader{
+        padding: 1rem 1rem;
+    }
+    .itineraryHeader h2{
+        font-size: 1.6rem;
+    }
+    .itineraryHeader p{
+        font-size: 1.3rem;
+        white-space: nowrap;
+    }
+    .itineraryAuthorContainer p{
+        font-size: 1rem;
+        margin-right: 0.5rem;
+    }
+    .itineraryAuthorPhoto{
+        width: 4rem;
+        height:4rem;
+        margin-right: 0.5rem;
+    }
 }
 @media screen and (max-width: 400px) {
     html{
