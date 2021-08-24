@@ -4,7 +4,7 @@ const initState = {
 }
 const itinerariesReducer = (state = initState, action) =>{
     switch(action.type){
-        case "GET_A_ITINERARY":
+        case "GET_AN_ITINERARY":
             return{
                 ...state,
                 itineraries:action.payload,

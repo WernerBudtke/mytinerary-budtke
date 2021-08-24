@@ -17,6 +17,7 @@ const Mainsignin = (props) =>{
         })
         props.loginUser(dataUser)
         .then(res =>{
+            console.log(res)
             !res.success ? setRenderError({error: res.error}) : props.history.push('/user/logged')
         })
     }
@@ -28,7 +29,7 @@ const Mainsignin = (props) =>{
                 <label htmlFor="password">Password:</label>
                 <input type="password" placeholder="password" id="password" required/>
                 <button type="button" onClick={(e) => inputHandler(e)}>SIGN IN</button>
-                {renderError.error !== "" && <p>Invalid username or password!</p>}
+                {renderError.error !== "" && <p>Invalid email or password!</p>}
             </form>
             <Link to="/signup">Don't have an account yet? SIGN UP NOW!</Link>
         </main>

@@ -1,5 +1,6 @@
 import {NavLink} from 'react-router-dom'
-const Header = () => {
+import { connect } from 'react-redux'
+const Header = (props) => {
     return(
         <header>
             <div className="titleNavBar">
@@ -19,9 +20,14 @@ const Header = () => {
                 <NavLink to="/signup">
                     <p>Sign Up</p>
                 </NavLink>
-                <div className="photo user" style={{backgroundImage: "url('/assets/fotologoff.png')"}}></div>
+                <div className="photo user" style={{backgroundImage: `url(${props.userPhoto !== "" ? props.userPhoto : '/assets/fotologoff.png'})`}}></div>
             </nav>
         </header>
     )
 }
-export default Header
+const mapStateToProps = (state)=>{
+    return {
+        userPhoto: state.usersRed.photoURL
+    }
+}
+export default connect(mapStateToProps)(Header)

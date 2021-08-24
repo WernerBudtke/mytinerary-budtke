@@ -39,7 +39,7 @@ const userControllers = {
                 User.findOne({eMail: eMail})
                 .then(userFound => {
                     if(!bcryptjs.compareSync(password, userFound.password))throw new Error(errMessage)
-                    res.json({success: true})
+                    res.json({success: true, response: userFound})  // checkear el tema de devolver el usuario completo, OJO
                 })
                 .catch(err => handleError(res, err))
             }else{
