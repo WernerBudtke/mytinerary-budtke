@@ -13,7 +13,7 @@ const Itinerary = (props) =>{
         for(let i = 0; i < price; i++){
             arrayPrice.push('💵')
         }
-        return arrayPrice.map((dollar, index) => <p key={index}>💵</p>)
+        return arrayPrice.map((dollar, index) => <p key={index}>{dollar}</p>)
     }
     const heartHandler = (e) =>{
         e.target.innerText = e.target.innerText === '❤️' ? '🤍' : '❤️'

@@ -499,6 +499,62 @@ span.specialText{
     font-size: 2rem;
     margin-bottom: 1rem;
 }
+/* SIGN UP FORM */
+.signUpMain{
+    display: flex;
+    align-items: center;
+}
+.signUpMain a{
+    text-align: center;
+    color:goldenrod;
+    margin: 1rem 0rem;
+    font-size: 2rem;
+    text-decoration: none;
+}
+.signUpForm{
+    margin-top: 1rem;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    color: white;
+    background-color: black;
+    width: 50%;
+    box-shadow: 0.1rem 0.1rem 0.5rem 0.1rem black;
+    -webkit-box-shadow: 0.1rem 0.1rem 0.5rem 0.1rem black;
+    -moz-box-shadow: 0.1rem 0.1rem 0.5rem 0.1rem black;
+    
+}
+.signUpForm * {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+.signUpInputs{
+    display:flex;
+}
+.signUpInputs p{
+    margin-left: 1rem;
+}
+.signUpForm button{
+    background-color: goldenrod;
+    border: none;
+    border-radius: 2rem;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color:white;
+    text-shadow: 0.05rem 0.05rem black;
+    padding: 0.5rem 1rem;
+    margin-bottom: 1rem;
+}
+
+/* ERROR INPUTS */
+.fieldError{
+    background-color: red;
+}
+/* USER PAGE REGISTERED SUCCESSFULLY */
+.userSuccess{
+    color:greenyellow;
+}
 /* MEDIA QUERIES */
 
 @media screen and (max-width: 1024px) {

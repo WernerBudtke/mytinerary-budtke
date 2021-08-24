@@ -16,7 +16,7 @@ const Header = () => {
                 <NavLink to="/signin">
                     <p>Sign In</p>
                 </NavLink>
-                <NavLink to="signout">
+                <NavLink to="/signup">
                     <p>Sign Up</p>
                 </NavLink>
                 <div className="photo user" style={{backgroundImage: "url('/assets/fotologoff.png')"}}></div>
