@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { connect } from "react-redux"
 import { Link } from "react-router-dom"
 import userActions from "../redux/actions/userActions"
@@ -19,15 +19,33 @@ const Mainsignup = (props) =>{   // hacerlo con on changes al salir de los input
             [e.target.name] : e.target.value
         })
     }
+    const missingFields = () =>{
+        const {firstName, lastName, eMail, password, photoURL} = newUser
+        let namesOfFields = ["firstName", "lastName", "eMail", "password", "photoURL"]
+        let bodyFields = [firstName, lastName, eMail, password, photoURL]
+        return namesOfFields.filter((field, index) => bodyFields[index] === "").join(' ')
+    }
     const submitNewUser = (e) =>{
         e.preventDefault()
-        props.registerUser(newUser)
-        .then(res => !res.success ? setRenderError({error: res.error}) : console.log(res.response))
+        let badFields = missingFields()
+        badFields === '' 
+        ? 
+        props.registerUser(newUser).then(res => !res.success && setRenderError({error: res.error}))
+        :
+        setRenderError({error: badFields})
     }
+    
     const handleError = (string) =>{
         // console.log(renderError.error)
         return renderError.error.includes(string)
     }
+    useEffect(()=>{
+        if(renderError.error.includes('Network')){
+            console.error(renderError.error)
+            props.history.push('/error')
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    },[renderError.error])
     // console.log(renderError)
     // console.log(newUser)
     return(
@@ -37,7 +55,7 @@ const Mainsignup = (props) =>{   // hacerlo con on changes al salir de los input
                 <input type="text" className={handleError('firstName') ? 'fieldError' : ''} placeholder="First Name" id="firstName" name="firstName" required value={newUser.firstName} onChange={inputHandler}/>
                 <label htmlFor="lastName">Last Name: {handleError('lastName') && 'Invalid Field'}</label>
                 <input type="text" className={handleError('lastName') ? 'fieldError' : ''} placeholder="Last Name" id="lastName" name="lastName" required value={newUser.lastName} onChange={inputHandler}/>
-                <label htmlFor="eMail">Email: {handleError('eMail') ? renderError.error.includes('eMail already in use') ? 'Email already in Use' : 'Invalid Field' : ''}</label>
+                <label htmlFor="eMail">Email: {handleError('eMail') ? handleError('eMail already in use') ? 'Email already in Use' : 'Invalid Field' : ''}</label>
                 <input type="email" className={handleError('eMail') ? 'fieldError' : ''} placeholder="placeholder@mail.com" id="eMail" name="eMail" required value={newUser.eMail} onChange={inputHandler}/>
                 <label htmlFor="password">Password: {handleError('password') && 'Invalid Field'}</label>
                 <input type="password" className={handleError('password') ? 'fieldError' : ''} placeholder="Password" id="password" name="password" required value={newUser.password} onChange={inputHandler}/>

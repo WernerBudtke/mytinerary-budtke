@@ -23,7 +23,7 @@ const Footer = () => {
                 </a>
             </div>
             <div className="contactInfo">
-                <p>Address: Rio de Janeiro 284 9C, CABA</p>
+                <p>Address: <a href="https://www.google.com/maps/place/Sta+Fe+4333,+S2002KVG+Rosario,+Santa+Fe/@-32.9372963,-60.6830364,18z/data=!4m5!3m4!1s0x95b7acac682a3773:0x43efc8dd15945813!8m2!3d-32.9373436!4d-60.6819635" target="_blank" rel="noreferrer">Santa Fe 4333, Rosario</a></p>
                 <p>Telephone: +543412222222</p>
             </div>
             <nav>
