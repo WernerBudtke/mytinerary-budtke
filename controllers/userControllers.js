@@ -9,7 +9,7 @@ const userControllers = {
         const {lastName, firstName, password, eMail, photoURL, country, admin} = req.body
         const name = {lastName, firstName}
         if(password){
-            if(password.length > 0){
+            if(password.length > 0){ // aca volar al choto con Joi o como sea el middleware
                 let hashedPass = bcryptjs.hashSync(password)
                 const newUser = new User({
                     name,
@@ -39,7 +39,7 @@ const userControllers = {
                 User.findOne({eMail: eMail})
                 .then(userFound => {
                     if(!bcryptjs.compareSync(password, userFound.password))throw new Error(errMessage)
-                    res.json({success: true, response: userFound})  // checkear el tema de devolver el usuario completo, OJO
+                    res.json({success: true, response: userFound.photoURL})
                 })
                 .catch(err => handleError(res, err))
             }else{

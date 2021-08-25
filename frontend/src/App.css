@@ -92,6 +92,10 @@ header nav a.active, footer nav a.active{
     background-repeat: no-repeat;
     transition: all 5s;
 }
+.photo.user{
+    border-radius: 100%;
+    background-size: cover;
+}
 .photo.logo:hover, .photo.user:hover{
     transform: rotate(360deg);
     transition: all 5s;
