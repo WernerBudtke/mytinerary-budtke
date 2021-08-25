@@ -61,15 +61,20 @@ header nav, footer nav{
 footer nav{
     width: 15%;
 }
-header nav a, footer nav a{
+header nav a, footer nav a, p.linkBehave{
     color: white;
     text-decoration: none;
+    cursor:pointer;
 }
-header nav a:hover, footer nav a:hover{
+header nav a:hover, footer nav a:hover, p.linkBehave:hover{
     text-decoration: underline;
 }
 header nav a.active, footer nav a.active{
     color: goldenrod; 
+}
+.personalWelcome{
+    color: white;
+    font-size: 2rem;
 }
 .titleNavBar{
     display:flex;

@@ -17,7 +17,7 @@ const Mainsignin = (props) =>{
         })
         props.loginUser(dataUser)
         .then(res =>{
-            !res.success ? setRenderError({error: res.error}) : props.history.push('/user/logged')
+            !res.success ? setRenderError({error: res.error}) : console.log(res.response)
         })
     }
     return(

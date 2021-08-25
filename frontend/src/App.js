@@ -11,37 +11,29 @@ import Signin from "./pages/Signin";
 import User from "./pages/User";
 // import { useEffect } from "react";
 import {connect} from 'react-redux'
+import { useEffect } from "react";
+import userActions from "./redux/actions/userActions";
 
 function App(props) {
-  // useEffect(()=>{
-  //   let myLocalStorage = window.localStorage
-  //   let actualDate = new Date()
-  //   console.log(actualDate)
-  //   let day = actualDate.getDay().toString()
-  //   let month = actualDate.getMonth().toString()
-  //   console.log(day)
-  //   console.log(month)
-  //   myLocalStorage.getItem("userPhoto") === null && myLocalStorage.setItem("userPhoto", props.userPhoto)
-  //   myLocalStorage.getItem("userPhoto") === "" && myLocalStorage.setItem("userPhoto", props.userPhoto)
-  //   myLocalStorage.getItem("actualDay") === null && myLocalStorage.setItem("actualDay", day)
-  //   myLocalStorage.getItem("actualMonth") === null && myLocalStorage.setItem("actualMonth", month)
-  //   if((myLocalStorage.getItem("actualDay") !== day) || (myLocalStorage.getItem("actualMonth") !== month)){
-  //     console.log("entro aca")
-  //     myLocalStorage.removeItem('userPhoto')
-  //     myLocalStorage.removeItem('actualDay')
-  //     myLocalStorage.removeItem('actualMonth')
-  //   }
-  //   console.log(myLocalStorage.getItem("userPhoto"))
-  //   console.log(myLocalStorage.getItem("actualDay"))
-  //   console.log(myLocalStorage.getItem("actualMonth"))
-  // },[props.userPhoto])
+  const {token} = props
+  useEffect(()=>{
+    if(localStorage.getItem('token')){
+      const savedUser = {
+          photoURL: localStorage.getItem('photoURL'),
+          token: localStorage.getItem('token'),
+          firstName: localStorage.getItem('firstName')
+      }
+      props.logLs(savedUser)
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[])
   return (
     <BrowserRouter>
       <Switch>
         <Route exact path="/" component={Home} />
         {/* <Route path="/" render={(props) => {...props} <Home invitados={invitados}/>}/> */}
-        <Route path="/signup" component={Signup}/>
-        <Route path="/signin" component={Signin}/>
+        {!token && <Route path="/signup" component={Signup}/>}
+        {!token && <Route path="/signin" component={Signin}/>}
         <Route path="/cities" component={Cities}/>
         <Route path="/itineraries/:id" component={Itineraries}/>
         <Route path="/error/" component={Error}/>
@@ -53,9 +45,14 @@ function App(props) {
 }
 const mapStateToProps = (state) =>{
   return {
-    userPhoto: state.usersRed.photoURL
+    userPhoto: state.usersRed.photoURL,
+    token: state.usersRed.token,
+    firstName: state.usersRed.firstName
   }
 }
+const mapDispatchToProps = {
+  logLs: userActions.logInLS
+}
 // los /itineraries/:id lo que venga luego de :, lo guarda dentro de match param prop ID si pongo culo va culo
-export default connect(mapStateToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);
 // componente sign in, sign up. con sus formularios. enviar a backend, pedido login sign up, backend debe devolver si cuenta fue creada con exito o no. o si contraseña estaba bien o no.

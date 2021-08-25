@@ -38,5 +38,6 @@ router.route('/user/login')
 router.route('/users/')
 .get(userControllers.getUsers)
 .delete(userControllers.removeUser)
-
+router.route('/user/valid')
+.get(userControllers.isValidUser)
 module.exports = router

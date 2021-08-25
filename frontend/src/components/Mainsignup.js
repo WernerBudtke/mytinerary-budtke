@@ -2,62 +2,60 @@ import { useState } from "react"
 import { connect } from "react-redux"
 import { Link } from "react-router-dom"
 import userActions from "../redux/actions/userActions"
-const Mainsignup = (props) =>{
-    const [renderError, setRenderError] = useState({error: ''})
-    const inputHandler = (e) =>{
-        let childrens = Array.from(e.target.parentNode.children).filter(element => element.tagName === "INPUT" || element.tagName === "SELECT")
-        let namesOfFields = ["firstName", "lastName", "eMail", "password", "photoURL", "country"]
-        let dataUser = {}
-        let voidFields = []
-        // let dataVoids = 0
-        namesOfFields.forEach(property => {
-            if(childrens.find(element => element.id === property).value === ""){
-                // dataVoids++
-                voidFields.push(property)
-            }
-            dataUser = {
-                ...dataUser,
-                [property]:childrens.find(element => element.id === property).value
-            }
-        })
-        voidFields.length === 0 ? props.registerUser(dataUser).then(res =>{!res.success ? setRenderError({error: res.error}) : props.history.push('/user/registered')}) : setRenderError({error: voidFields.join(' ')})    
-    }
+const Mainsignup = (props) =>{   // hacerlo con on changes al salir de los inputs? copada la idea
+    const [renderError, setRenderError] = useState({error: ' '})
     const countries = ["Argentina", "Chile", "Brazil", "Uruguay", "Perú", "Bolivia", "Paraguay", "Rest of the World"]
-    const handleErrors = (string) =>{
-        return renderError.error.includes(string) ? 'fieldError' : ''
+    const [newUser, setNewUser] = useState({
+        firstName: '',
+        lastName: '',
+        eMail: '',
+        password: '',
+        photoURL: '',
+        country: countries[0]
+    })
+    const inputHandler = (e) =>{
+        setNewUser({
+            ...newUser,
+            [e.target.name] : e.target.value
+        })
     }
-    const emailInUse = renderError.error.includes('eMail already in use')
+    const submitNewUser = (e) =>{
+        e.preventDefault()
+        props.registerUser(newUser)
+        .then(res => !res.success ? setRenderError({error: res.error}) : console.log(res.response))
+    }
+    const handleError = (string) =>{
+        // console.log(renderError.error)
+        return renderError.error.includes(string)
+    }
+    // console.log(renderError)
+    // console.log(newUser)
     return(
         <main className='signUpMain'>
             <form className='signUpForm'>
-                <label htmlFor="firstName">{handleErrors('firstName') === 'fieldError' ? 'First name: (REQUIRED)' : 'First Name:'}</label>
-                <input className={handleErrors('firstName')} type="text" placeholder="First Name" id="firstName" name="firstName" required/>
-                <label htmlFor="lastName">{handleErrors('lastName') === 'fieldError' ? 'Last name: (REQUIRED)' : 'Last name:'}</label>
-                <input className={handleErrors('lastName')} type="text" placeholder="Last Name" id="lastName" name="lastName" required/>
-                <label htmlFor="eMail">{handleErrors('eMail') === 'fieldError' ? `Email: ${emailInUse ? 'already in use' : '(REQUIRED)'}` : 'Email:'}</label>
-                <input className={handleErrors('eMail')} type="email" placeholder="placeholder@mail.com" id="eMail" name="eMail" required/>
-                <label htmlFor="password">{handleErrors('password') === 'fieldError' ? 'Password: (REQUIRED)' : 'Password:'}</label>
-                <input className={handleErrors('password')} type="password" placeholder="Password" id="password" name="password" required/>
-                <label htmlFor="photoURL">{handleErrors('photoURL') === 'fieldError' ? 'Photo URL: (REQUIRED)' : 'Photo URL:'}</label>
-                <input className={handleErrors('photoURL')} type="url" placeholder="URL of your photo" id="photoURL" name="photoURL" required/>
-                <label htmlFor="country">Country:</label>
-                <select name="country" id="country">
+                <label htmlFor="firstName">First Name: {handleError('firstName') && 'Invalid Field'}</label>
+                <input type="text" className={handleError('firstName') ? 'fieldError' : ''} placeholder="First Name" id="firstName" name="firstName" required value={newUser.firstName} onChange={inputHandler}/>
+                <label htmlFor="lastName">Last Name: {handleError('lastName') && 'Invalid Field'}</label>
+                <input type="text" className={handleError('lastName') ? 'fieldError' : ''} placeholder="Last Name" id="lastName" name="lastName" required value={newUser.lastName} onChange={inputHandler}/>
+                <label htmlFor="eMail">Email: {handleError('eMail') ? renderError.error.includes('eMail already in use') ? 'Email already in Use' : 'Invalid Field' : ''}</label>
+                <input type="email" className={handleError('eMail') ? 'fieldError' : ''} placeholder="placeholder@mail.com" id="eMail" name="eMail" required value={newUser.eMail} onChange={inputHandler}/>
+                <label htmlFor="password">Password: {handleError('password') && 'Invalid Field'}</label>
+                <input type="password" className={handleError('password') ? 'fieldError' : ''} placeholder="Password" id="password" name="password" required value={newUser.password} onChange={inputHandler}/>
+                <label htmlFor="photoURL">Photo URL: {handleError('photoURL') && 'Invalid Field'}</label>
+                <input type="url" className={handleError('photoURL') ? 'fieldError' : ''} placeholder="URL of your photo" id="photoURL" name="photoURL" required value={newUser.photoURL} onChange={inputHandler}/>
+                <label htmlFor="country">Country: {handleError('country') && 'Invalid Field'}</label>
+                <select name="country" id="country" value={newUser.country} onChange={inputHandler}>
                 {countries.map(country => {
                     return <option key={country} value={country}>{country}</option>
                 })}
                 </select>
-                <button type="button" onClick={(e) => inputHandler(e)}>SIGN UP</button>
-                {renderError.error === "Complete all" && <p>Please complete all the fields!</p>}
+                <button type="button" onClick={submitNewUser}>SIGN UP</button>
             </form>
             <Link to="/signin">Already registered? SIGN IN!</Link>
         </main>
     )
 }
-const mapStateToProps = (state) =>{
-    return{
-    }
-}
 const mapDispatchToProps = {
     registerUser : userActions.registerUser 
 }
-export default connect(mapStateToProps, mapDispatchToProps) (Mainsignup)
+export default connect(null, mapDispatchToProps) (Mainsignup)
