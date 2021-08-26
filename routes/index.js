@@ -1,4 +1,6 @@
 const express = require('express')
+const passport = require('passport')
+const validatorControllers = require('../controllers/validatorControllers')
 // Tengo que generar un enrutador, recibirá todos los pedidos a la API.
 // Depende la ruta y el pedido, llama diferente controlador.
 const router = express.Router()
@@ -32,15 +34,23 @@ router.route('/deleteanitinerary')
 
 const userControllers = require('../controllers/userControllers')
 router.route('/user/register')
-.post(userControllers.registerUser)
+.post(
+    validatorControllers.validatorSignUp,
+    userControllers.registerUser
+)
 router.route('/user/login')
 .post(userControllers.logUser)
 router.route('/users/')
-.get(userControllers.getUsers)
 .delete(userControllers.removeUser)
 router.route('/user/valid')
-.get(userControllers.isValidUser)
+.get(
+    passport.authenticate('jwt', {session: false}),
+    userControllers.isValidUser
+)
 router.route('/user/like/:id')
-.put(userControllers.likeAnItinerary)
+.put(
+    passport.authenticate('jwt', {session: false}), 
+    itinerariesControllers.likeAnItinerary
+)
 
 module.exports = router

@@ -3,7 +3,7 @@ import { connect } from "react-redux"
 import { Link } from "react-router-dom"
 import userActions from "../redux/actions/userActions"
 const Mainsignup = (props) =>{   // hacerlo con on changes al salir de los inputs? copada la idea
-    const [renderError, setRenderError] = useState({error: ' '})
+    const [renderError, setRenderError] = useState({error: ''})
     const countries = ["Argentina", "Chile", "Brazil", "Uruguay", "Perú", "Bolivia", "Paraguay", "Rest of the World"]
     const [newUser, setNewUser] = useState({
         firstName: '',
@@ -13,6 +13,13 @@ const Mainsignup = (props) =>{   // hacerlo con on changes al salir de los input
         photoURL: '',
         country: countries[0]
     })
+    useEffect(()=>{
+        if(renderError.error.includes('Network')){
+            console.error(renderError.error)
+            props.history.push('/error')
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    },[renderError.error])
     const inputHandler = (e) =>{
         setNewUser({
             ...newUser,
@@ -20,9 +27,8 @@ const Mainsignup = (props) =>{   // hacerlo con on changes al salir de los input
         })
     }
     const missingFields = () =>{
-        const {firstName, lastName, eMail, password, photoURL} = newUser
-        let namesOfFields = ["firstName", "lastName", "eMail", "password", "photoURL"]
-        let bodyFields = [firstName, lastName, eMail, password, photoURL]
+        let namesOfFields = [...Object.keys(newUser)]
+        let bodyFields = [...Object.values(newUser)]
         return namesOfFields.filter((field, index) => bodyFields[index] === "").join(' ')
     }
     const submitNewUser = (e) =>{
@@ -34,34 +40,32 @@ const Mainsignup = (props) =>{   // hacerlo con on changes al salir de los input
         :
         setRenderError({error: badFields})
     }
-    
-    const handleError = (string) =>{
-        // console.log(renderError.error)
-        return renderError.error.includes(string)
+    let myErrors = {
+        firstName: "First name must have 2 chars atleast, max 35",
+        lastName: "First name must have 2 chars atleast, max 35",
+        eMail: renderError.error.includes('eMail already in use') ? "Email already in use!" : "Email must be a valid one, for example jwb@gmail.com",
+        password: "Password must have atleast 4 chars or numbers!",
+        photoURL: "The URL of the photo should be atleast 6 characters long",
+        country: "Country should be a valid one!"
     }
-    useEffect(()=>{
-        if(renderError.error.includes('Network')){
-            console.error(renderError.error)
-            props.history.push('/error')
-        }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    },[renderError.error])
-    // console.log(renderError)
-    // console.log(newUser)
+    let myErrorsKeys = Object.keys(myErrors).filter(key => renderError.error.includes(key)) 
+    const handleError = (string) =>{
+        return renderError.error.includes(string) ? 'fieldError' : ''
+    }
     return(
         <main className='signUpMain'>
             <form className='signUpForm'>
-                <label htmlFor="firstName">First Name: {handleError('firstName') && 'Invalid Field'}</label>
-                <input type="text" className={handleError('firstName') ? 'fieldError' : ''} placeholder="First Name" id="firstName" name="firstName" required value={newUser.firstName} onChange={inputHandler}/>
-                <label htmlFor="lastName">Last Name: {handleError('lastName') && 'Invalid Field'}</label>
-                <input type="text" className={handleError('lastName') ? 'fieldError' : ''} placeholder="Last Name" id="lastName" name="lastName" required value={newUser.lastName} onChange={inputHandler}/>
-                <label htmlFor="eMail">Email: {handleError('eMail') ? handleError('eMail already in use') ? 'Email already in Use' : 'Invalid Field' : ''}</label>
-                <input type="email" className={handleError('eMail') ? 'fieldError' : ''} placeholder="placeholder@mail.com" id="eMail" name="eMail" required value={newUser.eMail} onChange={inputHandler}/>
-                <label htmlFor="password">Password: {handleError('password') && 'Invalid Field'}</label>
-                <input type="password" className={handleError('password') ? 'fieldError' : ''} placeholder="Password" id="password" name="password" required value={newUser.password} onChange={inputHandler}/>
-                <label htmlFor="photoURL">Photo URL: {handleError('photoURL') && 'Invalid Field'}</label>
-                <input type="url" className={handleError('photoURL') ? 'fieldError' : ''} placeholder="URL of your photo" id="photoURL" name="photoURL" required value={newUser.photoURL} onChange={inputHandler}/>
-                <label htmlFor="country">Country: {handleError('country') && 'Invalid Field'}</label>
+                <label htmlFor="firstName">First Name:</label>
+                <input type="text" className={handleError('firstName')} placeholder="First Name" id="firstName" name="firstName" required value={newUser.firstName} onChange={inputHandler}/>
+                <label htmlFor="lastName">Last Name:</label>
+                <input type="text" className={handleError('lastName')} placeholder="Last Name" id="lastName" name="lastName" required value={newUser.lastName} onChange={inputHandler}/>
+                <label htmlFor="eMail">Email:</label>
+                <input type="email" className={handleError('eMail')} placeholder="placeholder@mail.com" id="eMail" name="eMail" required value={newUser.eMail} onChange={inputHandler}/>
+                <label htmlFor="password">Password:</label>
+                <input type="password" className={handleError('password')} placeholder="Password" id="password" name="password" required value={newUser.password} onChange={inputHandler}/>
+                <label htmlFor="photoURL">Photo URL:</label>
+                <input type="url" className={handleError('photoURL')} placeholder="URL of your photo" id="photoURL" name="photoURL" required value={newUser.photoURL} onChange={inputHandler}/>
+                <label htmlFor="country">Country:</label>
                 <select name="country" id="country" value={newUser.country} onChange={inputHandler}>
                 {countries.map(country => {
                     return <option key={country} value={country}>{country}</option>
@@ -69,6 +73,10 @@ const Mainsignup = (props) =>{   // hacerlo con on changes al salir de los input
                 </select>
                 <button type="button" onClick={submitNewUser}>SIGN UP</button>
             </form>
+            <div className="errorContainer" style={renderError.error === "" ? {display:"none"} : {display:"block"}}>
+                <h4>ERRORS!: Please read carefully</h4>
+                {myErrorsKeys.map((errorKey, index) => <p key={index}>{myErrors[errorKey]}</p>)}
+            </div>
             <Link to="/signin">Already registered? SIGN IN!</Link>
         </main>
     )

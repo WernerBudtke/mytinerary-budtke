@@ -81,7 +81,7 @@ footer a:hover{
 }
 .personalWelcome{
     color: white;
-    font-size: 2rem;
+    font-size: 1.5rem;
 }
 .titleNavBar{
     display:flex;
@@ -440,6 +440,9 @@ span.specialText{
 .itineraryHeader p{
     font-size: 1.5rem;
 }
+.likesHeader{
+    width: 10%;
+}
 .itineraryDescriptionContainer{
     padding-top: 1rem;
 }
@@ -530,7 +533,7 @@ span.specialText{
 .signUpMain a:hover{
     text-decoration: underline;
 }
-.signUpForm{
+.signUpForm, .errorContainer{
     margin-top: 1rem;
     display:flex;
     flex-direction: column;
@@ -583,6 +586,20 @@ span.specialText{
 .errorEffectSecond{
     color: red;
     transition: all 2s;
+}
+.errorContainer{
+    background-color: black;
+}
+.errorContainer h4{
+    background-color: red;
+    text-align: center;
+    font-size: 2rem;
+}
+.errorContainer p{
+    font-size: 1.5rem;
+    margin: 1rem 0;
+    margin-left: 0.5rem;
+    text-align: center;
 }
 /* USER PAGE REGISTERED SUCCESSFULLY */
 .userSuccess{
@@ -654,6 +671,9 @@ span.specialText{
     .cityDescription{
         margin-top: 3rem;
     }
+    .likesHeader{
+        white-space: nowrap;
+    }
 }
 @media screen and (max-width: 800px) {
     html{
@@ -722,6 +742,73 @@ span.specialText{
     }
     .cardCity div p.title{
         font-size:2rem;
+    }
+    /* ITINERARIES PAGE STYLES */
+    .photoItinerary{
+        height: 25rem;
+        width: 100%;
+        padding: 1rem 2rem;
+    }
+    .photoItinerary h3{
+        font-style: italic;
+        font-size: 1.5rem;
+    }
+    .photoItinerary h2{
+        font-size: 1.5rem;
+    }
+    .shortCityDescription p{
+        font-size: 1.1rem;
+    }
+    .shortCityDescription p span{
+        font-size: 1.2rem;
+        margin-right: 1rem;
+    }
+    /* ITINERARIES PAGE STYLES */
+    .photoItinerary{
+        height: 15rem;
+    }
+    .photoItinerary h3{
+        font-size: 1.3rem;
+    }
+    .photoItinerary h2{
+        font-size: 1.3rem;
+    }
+    .shortCityDescription{
+        height: 4rem;
+    }
+    .shortCityDescription p{
+        font-size: 1.2rem;
+    }
+    .shortCityDescription p span{
+        font-size: 1.2rem;
+    }
+    .itineraryCard{
+        width: 95%; 
+    }
+    .itineraryHeader{
+        padding: 1rem 1rem;
+    }
+    .itineraryHeader h2{
+        font-size: 2rem;
+    }
+    .itineraryHeader p{
+        font-size: 1.3rem;
+        white-space: nowrap;
+    }
+    .itineraryAuthorContainer p{
+        font-size: 1.3rem;
+        margin-right: 0.5rem;
+    }
+    .itineraryAuthorPhoto{
+        width: 7rem;
+        height:7rem;
+        margin-right: 0.5rem;
+    }
+    p.likesHeader{
+        font-size: 1.3rem;
+    }
+    .personalWelcome{
+        display:none;
     }
 }
 @media screen and (max-width: 600px){
@@ -817,8 +904,11 @@ span.specialText{
         font-size: 1.6rem;
     }
     .itineraryHeader p{
-        font-size: 1.3rem;
+        font-size: 1.1rem;
         white-space: nowrap;
+    }
+    .likesHeader{
+        width: 12%;
     }
     .itineraryAuthorContainer p{
         font-size: 1rem;
@@ -828,6 +918,119 @@ span.specialText{
         width: 4rem;
         height:4rem;
         margin-right: 0.5rem;
+    }
+}
+@media screen and (max-width: 500px){
+    html{
+        font-size: 2vw;
+    }
+    .socialMedia{
+        display: none;
+    }
+    footer nav{
+        width: 20%;
+    }
+    /* BOTONES CARRUSEL */
+    .slick-next{
+        right: -0.8rem;
+    }
+    .slick-prev{
+        left: -1.6rem;
+    }
+    .carouselSlickContainer h2{
+        font-size: 3rem;
+    }
+    /* CITIES PAGE */
+    .filterCitiesContainer h2{
+        font-size: 2rem;
+        text-align: center;
+    }
+    .filterCitiesContainer p{
+        display:none;
+    }
+    .filterCitiesContainer input{
+        font-size: 2rem;
+    }
+    /* ONE CITY PER CARD STYLES */
+    .cardCitiesContainer a{
+        width: 100%;
+    }
+    .cardCity{
+        width: 100%;
+    }
+    .cardCity div p{
+        font-size: 1.8rem;
+    }
+    .cardCity div p.title{
+        font-size:3rem;
+    }
+    /* ITINERARIES PAGE STYLES */
+    .photoItinerary{
+        height: 25rem;
+        width: 100%;
+        padding: 1rem 2rem;
+    }
+    .photoItinerary h3{
+        font-style: italic;
+        font-size: 1.5rem;
+    }
+    .photoItinerary h2{
+        font-size: 1.5rem;
+    }
+    .shortCityDescription p{
+        font-size: 1.1rem;
+    }
+    .shortCityDescription p span{
+        font-size: 1.2rem;
+        margin-right: 1rem;
+    }
+    /* ITINERARIES PAGE STYLES */
+    .photoItinerary{
+        height: 15rem;
+    }
+    .photoItinerary h3{
+        font-size: 1.3rem;
+    }
+    .photoItinerary h2{
+        font-size: 1.3rem;
+    }
+    .shortCityDescription{
+        height: 4rem;
+    }
+    .shortCityDescription p{
+        font-size: 1.2rem;
+    }
+    .shortCityDescription p span{
+        font-size: 1.2rem;
+    }
+    .itineraryCard{
+        width: 95%; 
+    }
+    .itineraryHeader{
+        padding: 1rem 1rem;
+    }
+    .itineraryHeader h2{
+        font-size: 1.6rem;
+    }
+    .itineraryHeader p{
+        font-size: 1.1rem;
+        white-space: nowrap;
+    }
+    p.likesHeader{
+        width: 12%;
+        font-size: 1.2rem;
+    }
+    .itineraryAuthorContainer p{
+        font-size: 1.2rem;
+        margin-right: 0.2rem;
+    }
+    .itineraryAuthorPhoto{
+        width: 4rem;
+        height:4rem;
+        margin-right: 0.5rem;
+    }
+    .personalWelcome{
+        display:none;
     }
 }
 @media screen and (max-width: 400px) {

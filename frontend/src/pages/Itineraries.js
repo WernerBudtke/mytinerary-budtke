@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 import { Link } from "react-router-dom"
 import Header from "../components/Header"
 import Footer from "../components/Footer"
@@ -7,7 +7,6 @@ import { connect } from "react-redux"
 import itinerariesActions from "../redux/actions/itinerariesActions"
 import citiesActions from "../redux/actions/citiesActions"
 const Itineraries = (props) =>{
-    const [render, setRender] = useState(false)
     const {cities, itineraries, fetchingItineraries, city, fetchingCity} = props
     let data = cities.length > 0 ? cities.find(city => city._id === props.match.params.id) : null
     const errorHandler = (res) =>{
@@ -28,7 +27,7 @@ const Itineraries = (props) =>{
             document.title = "myTinerary"
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    },[render])
+    },[])
     const fetchAgain = () =>{
         props.getAllItineraries(props.match.params.id).then(res => errorHandler(res))
     }

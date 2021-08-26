@@ -26,8 +26,21 @@ function App(props) {
       }
       props.logLs(savedUser)
     }
+    // let objetito = {
+    //   prop1: "pepe",
+    //   prop2: 3,
+    //   prop3: ["pp", 1, {pepe: "pupi"}],
+    //   prop4: {kaka:"kuki"}
+    // }
+    // console.log(objetito)
+    // localStorage.setItem("objetote", JSON.stringify(objetito))
+    // let objetitoparsed = JSON.parse(localStorage.getItem("objetote"))
+    // console.log(objetitoparsed)
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[])
+  // if (!token){
+  //   var notRegisteredRoutes = [<Route path="/signup" component={Signup}/>, <Route path="/signin" component={Signin}/>]
+  // }
   return (
     <BrowserRouter>
       <Switch>
@@ -35,6 +48,7 @@ function App(props) {
         {/* <Route path="/" render={(props) => {...props} <Home invitados={invitados}/>}/> */}
         {!token && <Route path="/signup" component={Signup}/>}
         {!token && <Route path="/signin" component={Signin}/>}
+        {/* {!token && notRegisteredRoutes.map(route => route)} */}
         <Route path="/cities" component={Cities}/>
         <Route path="/itineraries/:id" component={Itineraries}/>
         <Route path="/error/" component={Error}/>

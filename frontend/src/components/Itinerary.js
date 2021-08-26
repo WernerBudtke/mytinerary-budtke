@@ -7,7 +7,6 @@ const Itinerary = (props) =>{
     // console.log(_id)
     const [render, setRender] = useState(false)
     const [disabled, setDisabled] = useState(false)
-    // const [heart, setHeart] = useState(false)
     const clickHandler = (e) =>{
         e.target.innerText = e.target.innerText === "View more" ? 'View less' : 'View more'
         setRender(!render)
@@ -23,15 +22,17 @@ const Itinerary = (props) =>{
         if(disabled){
             return
         }
-        if(!props.token){
+        if(!props.token){ // comunicar que debe estar logueado
             return
         }
-        setDisabled(true)
+        setDisabled(true) // desabilito el input handler
         props.likeAnItinerary(_id, props.token)
         .then((res) => {
             if(res.success){
-                setDisabled(false)
-                props.myFunction()
+                setDisabled(false) // habilito el input handler de nuevo
+                props.myFunction() // mando a fetchear los itinerarios
+            }else{
+                console.error(res.response)
             }
         })
     }
@@ -45,7 +46,7 @@ const Itinerary = (props) =>{
                         <p>Author: {author.name}</p>
                     </div>
                     <h2>{title}</h2>
-                    <p>Likes: <span onClick={heartHandler} className="heartEmoji">{props.likedItineraries.indexOf(_id) === -1 ? '🤍' : '❤️'}</span>{likes}</p>
+                    <p className="likesHeader">Likes: <span onClick={heartHandler} className="heartEmoji">{props.likedItineraries.indexOf(_id) === -1 ? '🤍' : '❤️'}</span>{likes}</p>
                 </div>
                 <div className="itineraryDescriptionContainer">
                     <h4>{description}</h4>

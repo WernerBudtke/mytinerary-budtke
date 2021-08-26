@@ -23,9 +23,11 @@ const userActions = {
                     dispatch({type:'USER_LOGGED', payload: res.data.response})
                     return {success:true , response:res.data.response}
                 }else{
+                    console.log(res.data.response)
                     throw new Error(res.data.response)
                 }
             }catch(err){
+                console.log(err)
                 return {success:false, error: err.message}
             }
         }
@@ -40,7 +42,7 @@ const userActions = {
             try{
                 let res = await axios.get('http://localhost:4000/api/user/valid',{
                     headers:{
-                        'Authorization': savedUser.token
+                        Authorization: 'Bearer ' + savedUser.token
                     }
                 })
                 if(res.data.success){
@@ -50,6 +52,7 @@ const userActions = {
                     throw new Error('Invalid user')
                 }
             }catch(err){
+                dispatch({type: 'LOGOUT'})
                 return {success: false, error: err.message}
             }
         }
@@ -58,18 +61,23 @@ const userActions = {
         // console.log(token)
         return async (dispatch) =>{
             try{
-                let res = await axios.put(`http://localhost:4000/api/user/like/${idItinerary}`, {token: token})
+                let res = await axios.put(`http://localhost:4000/api/user/like/${idItinerary}`,{},{
+                    headers:{
+                        Authorization: 'Bearer ' + token
+                    }
+                })
                 if (res.data.success){
                     dispatch({type:'LIKED_ITINERARY', payload: res.data.response})
-                    console.log(res.data.response)
+                    // console.log(res.data.response)
                     return {success:true}
                 }else{
                     throw new Error(res.data.response)
                 }
             }catch(err){
-                return {success: false}
+                return {success: false, response: err}
             }
         }
-    }
+    },
+    // colocarle return al axios.get, si luego lo voy a usar con then y catch. que tengan return dentro
 }
 export default userActions

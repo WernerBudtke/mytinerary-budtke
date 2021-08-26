@@ -20,7 +20,7 @@ const userReducer = (state = initState, action) =>{
             localStorage.clear()
             return initState
         case 'LIKED_ITINERARY':
-            console.log(action.payload)
+            // console.log(action.payload)
             localStorage.setItem('likedItineraries', JSON.stringify(action.payload))
             return{
                 ...state,
