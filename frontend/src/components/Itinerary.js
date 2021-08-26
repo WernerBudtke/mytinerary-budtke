@@ -1,9 +1,13 @@
 import { useState } from "react"
+import { connect } from "react-redux"
+import userActions from "../redux/actions/userActions"
 const Itinerary = (props) =>{
     // console.log(props.itinerary)
-    const {author, description, hashtags, price, duration, likes, title} = props.itinerary
+    const {author, description, hashtags, price, duration, likes, title, _id} = props.itinerary
+    // console.log(_id)
     const [render, setRender] = useState(false)
-    const [heart, setHeart] = useState(false)
+    const [disabled, setDisabled] = useState(false)
+    // const [heart, setHeart] = useState(false)
     const clickHandler = (e) =>{
         e.target.innerText = e.target.innerText === "View more" ? 'View less' : 'View more'
         setRender(!render)
@@ -16,9 +20,22 @@ const Itinerary = (props) =>{
         return arrayPrice.map((dollar, index) => <p key={index}>{dollar}</p>)
     }
     const heartHandler = (e) =>{
-        e.target.innerText = e.target.innerText === '❤️' ? '🤍' : '❤️'
-        setHeart(!heart)
+        if(disabled){
+            return
+        }
+        if(!props.token){
+            return
+        }
+        setDisabled(true)
+        props.likeAnItinerary(_id, props.token)
+        .then((res) => {
+            if(res.success){
+                setDisabled(false)
+                props.myFunction()
+            }
+        })
     }
+    
     return(
         <div className="itineraryCard">
             <div className="itineraryVisibleInfo">
@@ -28,7 +45,7 @@ const Itinerary = (props) =>{
                         <p>Author: {author.name}</p>
                     </div>
                     <h2>{title}</h2>
-                    <p>Likes: <span onClick={heartHandler} className="heartEmoji">🤍</span>{likes}</p>
+                    <p>Likes: <span onClick={heartHandler} className="heartEmoji">{props.likedItineraries.indexOf(_id) === -1 ? '🤍' : '❤️'}</span>{likes}</p>
                 </div>
                 <div className="itineraryDescriptionContainer">
                     <h4>{description}</h4>
@@ -52,4 +69,13 @@ const Itinerary = (props) =>{
         </div>
     )
 }
-export default Itinerary
+const mapStateToProps = (state) =>{
+    return{
+        token: state.usersRed.token,
+        likedItineraries: state.usersRed.likedItineraries
+    }
+}
+const mapDispatchToProps = {
+    likeAnItinerary : userActions.likeAnItinerary
+}
+export default connect(mapStateToProps, mapDispatchToProps)(Itinerary)

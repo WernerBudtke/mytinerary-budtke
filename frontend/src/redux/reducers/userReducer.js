@@ -1,7 +1,8 @@
 const initState = {
     photoURL:"",
     token: "",
-    firstName: ""
+    firstName: "",
+    likedItineraries:[]
 }
 const userReducer = (state = initState, action) =>{
     switch(action.type){
@@ -10,13 +11,21 @@ const userReducer = (state = initState, action) =>{
             localStorage.setItem('token', action.payload.token)
             localStorage.setItem('firstName', action.payload.firstName)
             localStorage.setItem('photoURL', action.payload.photoURL)
+            localStorage.setItem('likedItineraries', JSON.stringify(action.payload.likedItineraries))
             // localStorage.setItem('_id', action.payload._id)
             return{
                ...action.payload,
             }
         case 'LOGOUT':
             localStorage.clear()
-            return initState  
+            return initState
+        case 'LIKED_ITINERARY':
+            console.log(action.payload)
+            localStorage.setItem('likedItineraries', JSON.stringify(action.payload))
+            return{
+                ...state,
+                likedItineraries:action.payload
+            }  
         default:
             return state
     }

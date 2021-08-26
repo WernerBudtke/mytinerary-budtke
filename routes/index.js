@@ -40,4 +40,7 @@ router.route('/users/')
 .delete(userControllers.removeUser)
 router.route('/user/valid')
 .get(userControllers.isValidUser)
+router.route('/user/like/:id')
+.put(userControllers.likeAnItinerary)
+
 module.exports = router

@@ -1,4 +1,5 @@
 const User = require('../models/User')
+const Itinerary = require('../models/Itinerary')
 const bcryptjs = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const handleError = (res,err) =>{
@@ -27,8 +28,8 @@ const userControllers = {
                 })
                 newUser.save() // encrypta los datos que grabo en la base de datos, con la frase secreta.
                 .then(user => {
-                    const token = jwt.sign({...newUser}, process.env.SECRETORKEY)
-                    res.json({success: true, response: {photoURL: user.photoURL, token, firstName: user.name.firstName}})})
+                    const token = jwt.sign({...newUser}, process.env.SECRETORKEY, {expiresIn: '1h'})
+                    res.json({success: true, response: {photoURL: user.photoURL, token, firstName: user.name.firstName, likedItineraries: user.likedItineraries}})})
                 .catch(err => {
                     res.json({success: false, response: err.message.includes('duplicate key') ? 'eMail already in use' : err.message})
                 })
@@ -47,8 +48,8 @@ const userControllers = {
                 User.findOne({eMail: eMail})
                 .then(userFound => {
                     if(!bcryptjs.compareSync(password, userFound.password))throw new Error(errMessage)
-                    const token = jwt.sign({...userFound}, process.env.SECRETORKEY) 
-                    res.json({success: true, response: {photoURL: userFound.photoURL, token, firstName: userFound.name.firstName}})
+                    const token = jwt.sign({...userFound}, process.env.SECRETORKEY, {expiresIn: '1h'}) 
+                    res.json({success: true, response: {photoURL: userFound.photoURL, token, firstName: userFound.name.firstName, likedItineraries: userFound.likedItineraries}})
                 })
                 .catch(err => handleError(res, err))
             }else{
@@ -78,6 +79,48 @@ const userControllers = {
             return
         }
         res.json({success: true}) // response: {photoURL: verifiedToken._doc.photoURL}
+    },
+    likeAnItinerary: (req, res) =>{
+        // console.log(req.params.id)
+        // console.log(req.body.token)
+        let token = jwt.verify(req.body.token, process.env.SECRETORKEY)
+        let user = token._doc
+        // console.log(user._id)
+        User.findOne({_id: user._id})
+        .then(response =>{
+            // console.log(req.params.id)
+            let test =  response.likedItineraries.indexOf(req.params.id)
+            console.log(test)
+            if(test !== -1){
+                // User.findOneAndUpdate({_id: user._id}, { $pull: { likedItineraries: req.params.id } }, {new:true})
+                // .then(response => res.json({success: true, response: response.likedItineraries}))
+                // Itinerary.findOneAndUpdate({_id: req.params.id}, { $inc: {'likes' : -1}}, {new: true})
+                // .then(response => console.log('modifiedAnItineraryPull'))
+
+                User.findOneAndUpdate({_id: user._id}, { $pull: { likedItineraries: req.params.id } }, {new:true})
+                .then(responseOne => {
+                    Itinerary.findOneAndUpdate({_id: req.params.id}, { $inc: {'likes' : -1}}, {new: true})
+                    .then(responseTwo => {
+                        res.json({success: true, response: responseOne.likedItineraries})
+                    })
+                })
+
+                // User.findOne({_id: user._id})
+                // .then(foundUser => res.json({success: true, response: foundUser.likedItineraries}))
+                // res.json({success: true, response : modifiedUser.likedItineraries})
+            }else{
+                User.findOneAndUpdate({_id: user._id}, { $push: { likedItineraries: req.params.id } }, {new:true})
+                .then(responseOne => {
+                    Itinerary.findOneAndUpdate({_id: req.params.id}, { $inc: {'likes' : 1}}, {new: true})
+                    .then(responseTwo => {
+                        res.json({success: true, response: responseOne.likedItineraries})
+                    })
+                })
+                // User.findOne({_id: user._id})
+                // .then(foundUser => res.json({success: true, response: foundUser.likedItineraries}))
+                // res.json({success: true, response : modifiedUser.likedItineraries})
+            }
+        }).catch(err => res.json({success: false}))
     }
 }
 module.exports = userControllers

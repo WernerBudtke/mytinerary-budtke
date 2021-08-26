@@ -21,7 +21,8 @@ function App(props) {
       const savedUser = {
           photoURL: localStorage.getItem('photoURL'),
           token: localStorage.getItem('token'),
-          firstName: localStorage.getItem('firstName')
+          firstName: localStorage.getItem('firstName'),
+          likedItineraries: JSON.parse(localStorage.getItem('likedItineraries'))
       }
       props.logLs(savedUser)
     }

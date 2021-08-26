@@ -22,7 +22,7 @@ const Header = (props) => {
                 </NavLink>
                 {!token && <NavLink to="/signin"><p>Sign In</p></NavLink>}
                 {!token && <NavLink to="/signup"><p>Sign Up</p></NavLink>}
-                {token && <p className="linkBehave" onClick={logOut}>Log Out</p>}
+                {token && <p className="linkBehave" onClick={logOut}>Sign Out</p>}
                 <div className="photo user" style={{backgroundImage: `url(${props.userPhoto !== "" ? props.userPhoto : '/assets/fotologoff.png'})`}}></div>
             </nav>
         </header>

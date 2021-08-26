@@ -53,6 +53,23 @@ const userActions = {
                 return {success: false, error: err.message}
             }
         }
+    },
+    likeAnItinerary: (idItinerary, token) =>{
+        // console.log(token)
+        return async (dispatch) =>{
+            try{
+                let res = await axios.put(`http://localhost:4000/api/user/like/${idItinerary}`, {token: token})
+                if (res.data.success){
+                    dispatch({type:'LIKED_ITINERARY', payload: res.data.response})
+                    console.log(res.data.response)
+                    return {success:true}
+                }else{
+                    throw new Error(res.data.response)
+                }
+            }catch(err){
+                return {success: false}
+            }
+        }
     }
 }
 export default userActions

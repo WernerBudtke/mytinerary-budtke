@@ -17,7 +17,9 @@ const itinerariesControllers = {
     },
     getAnItinerary:(req, res) =>{
         Itinerary.findOne({_id: req.params.id}) // me devuelve null si no hay nada
-        .then(itinerary => res.json({success: true, response: itinerary}))
+        .then(itinerary => {
+            itinerary ? res.json({success: true, response: itinerary}) : res.json({success: false, response: "no itinerary found"})
+        })
         .catch(err => handleError(res,err))
     },
     postAnItinerary:(req, res) =>{ // a posteriori hay que validar ésto si tiene opcion un usuario de postear.

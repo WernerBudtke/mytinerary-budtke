@@ -15,6 +15,6 @@ const itinerariesActions = {
         return(dispatch)=>{
             dispatch({type: 'RESET'})
         }
-    }
+    },
 }
 export default itinerariesActions
