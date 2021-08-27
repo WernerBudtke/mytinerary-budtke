@@ -78,6 +78,25 @@ const userActions = {
             }
         }
     },
+    populateItineraries: (token) =>{
+        return async (dispatch)=>{
+            try{
+                let res = await axios.get('http://localhost:4000/api/user/favourites',{
+                    headers:{
+                        Authorization: 'Bearer ' + token
+                    }
+                })
+                if(res.data.success){
+                    dispatch({type:'FAVOURITE_ITINERARIES', payload: res.data.response})
+                    return {success: true, response: res.data.response}
+                }else{
+                    throw new Error(res.data.response)
+                }
+            }catch(err){
+                return {success: false, response: err}
+            }
+        }
+    }
     // colocarle return al axios.get, si luego lo voy a usar con then y catch. que tengan return dentro
 }
 export default userActions

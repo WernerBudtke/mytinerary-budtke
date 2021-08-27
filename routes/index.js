@@ -52,5 +52,10 @@ router.route('/user/like/:id')
     passport.authenticate('jwt', {session: false}), 
     itinerariesControllers.likeAnItinerary
 )
+router.route('/user/favourites')
+.get(
+    passport.authenticate('jwt', {session: false}),
+    userControllers.populateItineraries
+)
 
 module.exports = router

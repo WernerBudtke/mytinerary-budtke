@@ -13,6 +13,7 @@ import User from "./pages/User";
 import {connect} from 'react-redux'
 import { useEffect } from "react";
 import userActions from "./redux/actions/userActions";
+import Favourites from "./pages/Favourites";
 
 function App(props) {
   const {token} = props
@@ -51,6 +52,7 @@ function App(props) {
         {/* {!token && notRegisteredRoutes.map(route => route)} */}
         <Route path="/cities" component={Cities}/>
         <Route path="/itineraries/:id" component={Itineraries}/>
+        {token && <Route path="/favourites" component={Favourites}/>}
         <Route path="/error/" component={Error}/>
         <Route path="/user/:action" component={User}/>
         <Redirect to="/"/>

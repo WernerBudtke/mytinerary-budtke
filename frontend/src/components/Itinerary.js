@@ -36,7 +36,6 @@ const Itinerary = (props) =>{
             }
         })
     }
-    
     return(
         <div className="itineraryCard">
             <div className="itineraryVisibleInfo">
@@ -46,7 +45,7 @@ const Itinerary = (props) =>{
                         <p>Author: {author.name}</p>
                     </div>
                     <h2>{title}</h2>
-                    <p className="likesHeader">Likes: <span onClick={heartHandler} className="heartEmoji">{props.likedItineraries.indexOf(_id) === -1 ? '🤍' : '❤️'}</span>{likes}</p>
+                    <p className="likesHeader">Likes: <span onClick={heartHandler} className="heartEmoji">{props.likedItineraries.find(element => element._id === _id) ? '❤️' : props.likedItineraries.indexOf(_id) !== -1 ? '❤️' : '🤍'}</span>{likes}</p>
                 </div>
                 <div className="itineraryDescriptionContainer">
                     <h4>{description}</h4>
@@ -73,7 +72,8 @@ const Itinerary = (props) =>{
 const mapStateToProps = (state) =>{
     return{
         token: state.usersRed.token,
-        likedItineraries: state.usersRed.likedItineraries
+        likedItineraries: state.usersRed.likedItineraries,
+        itinerariesArePopulated: state.usersRed.itinerariesArePopulated
     }
 }
 const mapDispatchToProps = {

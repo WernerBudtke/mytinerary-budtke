@@ -53,6 +53,7 @@ const itinerariesControllers = {
     likeAnItinerary: (req, res) =>{
         console.log("Received Like An Itinerary Petition:" + Date())
         let foundItinerary =  req.user.likedItineraries.indexOf(req.params.id)
+        // let fullItinerary = await Itinerary.findOne({_id : req.params.id})
         User.findOneAndUpdate({_id: req.user._id}, { [`$${foundItinerary !== -1 ? 'pull' : 'push'}`]: { likedItineraries: req.params.id } }, {new:true})
         .then(modifiedUser => {
             Itinerary.findOneAndUpdate({_id: req.params.id}, { $inc: {'likes' : foundItinerary !== -1 ? -1 : 1}})

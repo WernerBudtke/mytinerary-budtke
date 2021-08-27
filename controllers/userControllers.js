@@ -17,7 +17,8 @@ const userControllers = {
             eMail,
             photoURL,
             country,
-            admin
+            admin,
+            likedItineraries:[]
         })
         newUser.save() // encrypta los datos que grabo en la base de datos, con la frase secreta.
         .then(user => {
@@ -62,5 +63,12 @@ const userControllers = {
             res.json({success: false})
         }
     },
+    populateItineraries: (req, res)=>{
+        console.log("Received Populate Favourites Petition:" + Date())
+        User.findOne({ _id: req.user._id }).populate({
+          path: 'likedItineraries',
+          populate: { path: 'city' }
+        }).then(response => res.json({success: true, response: response.likedItineraries}))
+    }
 }
 module.exports = userControllers

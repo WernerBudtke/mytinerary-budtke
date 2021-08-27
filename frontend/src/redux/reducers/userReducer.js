@@ -2,7 +2,8 @@ const initState = {
     photoURL:"",
     token: "",
     firstName: "",
-    likedItineraries:[]
+    likedItineraries:[],
+    itinerariesArePopulated: false
 }
 const userReducer = (state = initState, action) =>{
     switch(action.type){
@@ -25,7 +26,13 @@ const userReducer = (state = initState, action) =>{
             return{
                 ...state,
                 likedItineraries:action.payload
-            }  
+            } 
+        case 'FAVOURITE_ITINERARIES':
+            return{
+                ...state,
+                likedItineraries:action.payload,
+                itinerariesArePopulated: true
+            }
         default:
             return state
     }
