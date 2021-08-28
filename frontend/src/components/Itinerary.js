@@ -1,15 +1,41 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
+import axios from "axios"
 import { connect } from "react-redux"
 import userActions from "../redux/actions/userActions"
+import itinerariesActions from "../redux/actions/itinerariesActions"
+import { Link } from "react-router-dom"
+import Comment from "./Comment"
 const Itinerary = (props) =>{
     // console.log(props.itinerary)
-    const {author, description, hashtags, price, duration, likes, title, _id} = props.itinerary
+    const {author, description, hashtags, price, duration, likes, title, _id, comments} = props.itinerary
     // console.log(_id)
     const [render, setRender] = useState(false)
     const [disabled, setDisabled] = useState(false)
+    const [logged, setLogged] = useState(false)
+    const [idUser, setidUser] = useState('')
+    const [activities, setActivities] = useState([])
+    useEffect(()=>{
+        if(!props.token){
+            setidUser('')
+            return
+        }
+        axios.get('http://localhost:4000/api/user/validowner',{
+            headers:{
+                Authorization: 'Bearer ' + props.token
+            }
+        })
+        .then(res => res.data.success && setidUser(res.data.response))
+        .catch(err => console.log(err))
+    },[props.token])
+    const [loggedComment, setloggedComment] = useState(false)
     const clickHandler = (e) =>{
         e.target.innerText = e.target.innerText === "View more" ? 'View less' : 'View more'
-        setRender(!render)
+        axios.get(`http://localhost:4000/api/activity/${_id}`)
+        .then(res => {
+            res.data.success && setActivities(res.data.response)
+            setRender(!render)
+        })
+        .catch(err => console.log(err))  
     }
     const priceHandler = ()=>{
         let arrayPrice = []
@@ -23,9 +49,11 @@ const Itinerary = (props) =>{
             return
         }
         if(!props.token){ // comunicar que debe estar logueado
+            setLogged(true)
             return
         }
         setDisabled(true) // desabilito el input handler
+        setLogged(false)
         props.likeAnItinerary(_id, props.token)
         .then((res) => {
             if(res.success){
@@ -35,6 +63,32 @@ const Itinerary = (props) =>{
                 console.error(res.response)
             }
         })
+    }
+    const [newComment, setnewComment] = useState("")
+    const commentInputHandler = (e) =>{
+        setnewComment(e.target.value)
+    }
+    const commentSendHandler = () =>{
+        if(!props.token){
+            setloggedComment(true)
+            return
+        }
+        props.sendComment(newComment, null, props.token, _id, "post").then(res => {
+            res.success && props.myFunction()
+            setnewComment('')
+        })
+    }
+    const commentEditHandler = (editedComment, commentId) =>{
+        if(!props.token){
+            return
+        }
+        props.sendComment(editedComment, commentId, props.token, _id, "update").then(res => res.success && props.myFunction())
+    }
+    const commentRemoveHandler = (commentId) =>{
+        if(!props.token){
+            return
+        }
+        props.sendComment("", commentId, props.token, _id, "delete").then(res => res.success && props.myFunction())
     }
     return(
         <div className="itineraryCard">
@@ -46,6 +100,9 @@ const Itinerary = (props) =>{
                     </div>
                     <h2>{title}</h2>
                     <p className="likesHeader">Likes: <span onClick={heartHandler} className="heartEmoji">{props.likedItineraries.find(element => element._id === _id) ? '❤️' : props.likedItineraries.indexOf(_id) !== -1 ? '❤️' : '🤍'}</span>{likes}</p>
+                </div>
+                <div className="needToBeLogged" style={logged ? {display: "block"} : {display: "none"}}>
+                    <Link to="/signin"><p>You must log in to like an itinerary! Click here</p></Link>
                 </div>
                 <div className="itineraryDescriptionContainer">
                     <h4>{description}</h4>
@@ -64,7 +121,39 @@ const Itinerary = (props) =>{
                 <button onClick={clickHandler}>View more</button>
             </div>
             <div className="itineraryActivitiesContainer" style={render ? {display:"block"} : {display:"none"}}>
-                <p>Under construction</p>
+                <h2>Activities</h2>
+                <div className="activitiesContainer">
+                    {activities.length > 0 
+                    ? 
+                    activities.map((activity, index) => {
+                        return(
+                            <div style={{backgroundImage: `url(${activity.photo})`}} key={index}>
+                                <p>{activity.title}</p>
+                            </div>
+                        )
+                    })
+                    :<p>No activities yet!</p>
+                    }
+                </div>
+                <h2>Comments</h2>
+                <div className="commentsContainer">
+                    <div>
+                        {comments.length > 0 
+                        ?
+                        comments.map((comment, index) => <Comment key={index} idUser={idUser} removeComment={commentRemoveHandler} editComment={commentEditHandler} comment={comment}/>)
+                        :
+                        <p>No comments yet! be the first</p>
+                    }
+                    </div>
+                    <div className="sendContainer">
+                        <p>Send a new message:</p>
+                        <input type="text" onChange={commentInputHandler} value={newComment}></input>
+                        <p className="buttonComment" onClick={commentSendHandler}>{'>'}</p>
+                    </div>
+                    <div className="needToBeLogged" style={loggedComment ? {display: "block"} : {display: "none"}}>
+                            <Link to="/signin"><p>You must log in to post a comment! Click here</p></Link>
+                    </div>
+                </div>
             </div>
         </div>
     )
@@ -73,10 +162,13 @@ const mapStateToProps = (state) =>{
     return{
         token: state.usersRed.token,
         likedItineraries: state.usersRed.likedItineraries,
-        itinerariesArePopulated: state.usersRed.itinerariesArePopulated
+        // itinerariesArePopulated: state.usersRed.itinerariesArePopulated
+        // itineraryComments: state.itinerariesRed.itineraryComments
     }
 }
 const mapDispatchToProps = {
-    likeAnItinerary : userActions.likeAnItinerary
+    likeAnItinerary : userActions.likeAnItinerary,
+    sendComment : itinerariesActions.sendComment,
+    // getComments : itinerariesActions.getCommentsFromItinerary
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Itinerary)

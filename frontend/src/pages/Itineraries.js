@@ -53,12 +53,12 @@ const Itineraries = (props) =>{
             <main className="mainItinerary">
                 <div className="photoItinerary" style={{backgroundImage:`url('/assets/${dataHandler("image")}')`}}>
                     <h3>In: {dataHandler("country")} you can...</h3>
-                    <h2>{Math.random() > 0.5 ? "Discover" : "Unfold"} the {Math.random() > 0.5 ? "beauty" : "charm"} of: {dataHandler("city")}</h2>
+                    <h2>Unfold the beauty of: {dataHandler("city")}</h2>
                 </div>
                 <div className="shortCityDescription">
                     <p><span className="specialText">Sneak peek:</span> {dataHandler("description")}</p>
                 </div>
-                <div className="itinerariesContainer">{itineraries && itineraries.length === 0 ? <p className="noItineraries">OOPS, NO ITINERARIES YET IN THIS CITY!</p> : itineraries.map((itinerary, index) => <Itinerary key={index} itinerary={itinerary} myFunction={fetchAgain}/>)}</div>
+                <div className="itinerariesContainer">{itineraries && itineraries.length === 0 ? <p className="noItineraries">OOPS, NO ITINERARIES YET IN THIS CITY!</p> : itineraries.map((itinerary, index) => <Itinerary key={index} itinerary={itinerary}  myFunction={fetchAgain}/>)}</div>
                 <Link to="/cities"><button>Back to cities</button></Link>
             </main>
             <Footer/>

@@ -11,7 +11,8 @@ const userSchema = new mongoose.Schema({
     country: {type: String, required: true},
     likedItineraries: [{type: mongoose.Types.ObjectId, ref:'itinerary'}],
     // para q cuando toque usuario pueda popular sus itinerarios favoritos, de ahi popular propiedad ciudad. para que pueda incluso hasta filtrar por city.
-    admin: {type: Boolean, default: false}
+    admin: {type: Boolean, default: false},
+    google: {type: Boolean, default: false}
 })
 const User = mongoose.model('user', userSchema)
 module.exports = User

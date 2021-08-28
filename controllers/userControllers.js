@@ -8,7 +8,7 @@ const handleError = (res,err) =>{
 const userControllers = {
     registerUser: (req, res) =>{
         console.log("Received Register User Petition:" + Date())
-        const {lastName, firstName, password, eMail, photoURL, country, admin} = req.body
+        const {lastName, firstName, password, eMail, photoURL, country, admin, google} = req.body
         const name = {lastName, firstName}
         let hashedPass = bcryptjs.hashSync(password)
         const newUser = new User({
@@ -18,7 +18,8 @@ const userControllers = {
             photoURL,
             country,
             admin,
-            likedItineraries:[]
+            likedItineraries:[],
+            google
         })
         newUser.save() // encrypta los datos que grabo en la base de datos, con la frase secreta.
         .then(user => {
@@ -31,11 +32,14 @@ const userControllers = {
     logUser: (req, res)=>{
         console.log("Received SIGN IN USER Petition:" + Date())
         const errMessage = "Invalid username or pass"
-        const {eMail, password} = req.body
+        const {eMail, password, google} = req.body
         User.exists({eMail: eMail}).then(exists => {
             if(exists){
                 User.findOne({eMail: eMail})
                 .then(userFound => {
+                    if(userFound.google === true && google === false){
+                        throw new Error('Log in with Google!')
+                    }
                     if(!bcryptjs.compareSync(password, userFound.password))throw new Error(errMessage)
                     const token = jwt.sign({...userFound}, process.env.SECRETORKEY, {expiresIn: '1d'}) 
                     res.json({success: true, response: {photoURL: userFound.photoURL, token, firstName: userFound.name.firstName, likedItineraries: userFound.likedItineraries}})
@@ -59,6 +63,14 @@ const userControllers = {
         console.log("Received Valid from Local Storage User Check Petition:" + Date())
         if(req.user){
             res.json({success: true})
+        }else{
+            res.json({success: false})
+        }
+    },
+    isThisUserTheOwner: (req, res)=>{
+        console.log("Received validation to edit Comments or Delete")
+        if(req.user){
+            res.json({success: true, response: req.user._id})
         }else{
             res.json({success: false})
         }

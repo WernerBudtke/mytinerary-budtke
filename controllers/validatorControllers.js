@@ -7,7 +7,8 @@ const validatorControllers ={
             eMail: joi.string().trim().min(6).max(255).email().required(),
             password: joi.string().alphanum().trim().min(4).max(255).required(),
             photoURL: joi.string().trim().min(6).max(2048).required(),
-            country: joi.string().trim().min(4).max(56).required()
+            country: joi.string().trim().min(4).max(56).required(),
+            google: joi.boolean().required()
         })
         // regexp ('[a-zA-Z]')
         // regexp ('\d[a-Z]')

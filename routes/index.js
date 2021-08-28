@@ -24,12 +24,19 @@ router.route('/itinerary/id/:id')
 .get(itinerariesControllers.getAnItinerary)
 router.route('/itinerary/:id')
 .get(itinerariesControllers.getAllItinerariesFromCity)
+// router.route('/itinerary/comments/:id')
+// .get(itinerariesControllers.getCommentsFromItinerary)
 router.route('/additinerary')
 .post(itinerariesControllers.postAnItinerary)
 router.route('/modifyanitinerary')
 .put(itinerariesControllers.modifyAnItinerary)
 router.route('/deleteanitinerary')
 .delete(itinerariesControllers.removeAnItinerary)
+router.route('/itinerary/comments')
+.put(
+    passport.authenticate('jwt', {session:false}),
+    itinerariesControllers.updateComments
+)
 
 
 const userControllers = require('../controllers/userControllers')
@@ -47,6 +54,11 @@ router.route('/user/valid')
     passport.authenticate('jwt', {session: false}),
     userControllers.isValidUser
 )
+router.route('/user/validowner')
+.get(
+    passport.authenticate('jwt', {session: false}),
+    userControllers.isThisUserTheOwner
+)
 router.route('/user/like/:id')
 .put(
     passport.authenticate('jwt', {session: false}), 
@@ -57,5 +69,11 @@ router.route('/user/favourites')
     passport.authenticate('jwt', {session: false}),
     userControllers.populateItineraries
 )
+
+const activitiesControllers = require('../controllers/activitiesControllers')
+router.route('/activity/add')
+.post(activitiesControllers.postAnActivity)
+router.route('/activity/:id')
+.get(activitiesControllers.getAllActivitiesFromItinerary)
 
 module.exports = router

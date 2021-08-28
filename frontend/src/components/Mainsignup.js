@@ -2,6 +2,8 @@ import { useState, useEffect } from "react"
 import { connect } from "react-redux"
 import { Link } from "react-router-dom"
 import userActions from "../redux/actions/userActions"
+import { GoogleLogin } from 'react-google-login';
+// 367408341558-omu79fduq0sjoipof12r4h673m14dv7l.apps.googleusercontent.com
 const Mainsignup = (props) =>{   // hacerlo con on changes al salir de los inputs? copada la idea
     const [renderError, setRenderError] = useState({error: ''})
     const countries = ["Argentina", "Chile", "Brazil", "Uruguay", "Perú", "Bolivia", "Paraguay", "Rest of the World"]
@@ -11,7 +13,8 @@ const Mainsignup = (props) =>{   // hacerlo con on changes al salir de los input
         eMail: '',
         password: '',
         photoURL: '',
-        country: countries[0]
+        country: countries[0],
+        google: false
     })
     useEffect(()=>{
         if(renderError.error.includes('Network')){
@@ -52,6 +55,21 @@ const Mainsignup = (props) =>{   // hacerlo con on changes al salir de los input
     const handleError = (string) =>{
         return renderError.error.includes(string) ? 'fieldError' : ''
     }
+    const responseGoogle = response =>{
+        // console.log(response)
+        let googleUser = {
+            firstName: response.profileObj.givenName || null,
+            lastName: response.profileObj.familyName || null,
+            eMail: response.profileObj.email || null,
+            password: response.profileObj.googleId || null,
+            photoURL: response.profileObj.imageUrl || null,
+            country: "Rest of the World",
+            google: true
+        }
+        console.log(googleUser.password)
+        props.registerUser(googleUser).then(res => !res.success && setRenderError({error: res.error}))
+        // console.log(googleUser)
+    }
     return(
         <main className='signUpMain'>
             <form className='signUpForm'>
@@ -72,6 +90,14 @@ const Mainsignup = (props) =>{   // hacerlo con on changes al salir de los input
                 })}
                 </select>
                 <button type="button" onClick={submitNewUser}>SIGN UP</button>
+                <GoogleLogin
+                    clientId="367408341558-omu79fduq0sjoipof12r4h673m14dv7l.apps.googleusercontent.com"
+                    render={renderProps => (
+                    <button className='googleButton' onClick={renderProps.onClick} disabled={renderProps.disabled}>Sign Up With Google</button>
+                    )}
+                    onSuccess={responseGoogle}
+                    cookiePolicy={'single_host_origin'}
+                />
             </form>
             <div className="errorContainer" style={renderError.error === "" ? {display:"none"} : {display:"block"}}>
                 <h4>ERRORS!: Please read carefully</h4>

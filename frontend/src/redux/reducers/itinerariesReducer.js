@@ -1,6 +1,7 @@
 const initState = {
     itineraries:[],
     fetching: true,
+    // itineraryComments:[]
 }
 const itinerariesReducer = (state = initState, action) =>{
     switch(action.type){
@@ -12,6 +13,11 @@ const itinerariesReducer = (state = initState, action) =>{
             }
         case "RESET":
             return initState
+        // case "GET_COMMENTS":
+        //     return{
+        //         ...state,
+        //         itineraryComments:action.payload
+        //     }
         default:
             return state
     }

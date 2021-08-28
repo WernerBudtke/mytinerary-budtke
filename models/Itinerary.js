@@ -3,6 +3,11 @@ const authorSchema = new mongoose.Schema({
     name: {type:String, required:true},
     image: {type:String, required:true}
 })
+const commentSchema = new mongoose.Schema({
+    comment: {type:String},
+    author: {type: mongoose.Types.ObjectId, ref:'user'}
+})
+// darle schema
 const itinerarySchema = new mongoose.Schema({
     author: authorSchema,
     description: {type: String, required: true},
@@ -11,7 +16,7 @@ const itinerarySchema = new mongoose.Schema({
     duration: {type: Number, required: true},
     likes: {type: Number, required: true, min: 0},
     hashtags: {type: Array, required: true},
-    comments: {type: Array},
+    comments: [commentSchema],
     city: {type: mongoose.Types.ObjectId, ref:'city', required: true}
     // deberia haber usado cityId, si tuvier  q poner muchas es [{type: mongoose.Types.ObjectId}] de esa manera tengo un arreglo con muchas "activies" por ej
 })

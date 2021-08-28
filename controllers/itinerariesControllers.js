@@ -14,7 +14,10 @@ const itinerariesControllers = {
     },
     getAllItinerariesFromCity: (req, res) =>{
         console.log("Received Get Itineraries F/ City Petition:" + Date())
-        Itinerary.find({city:req.params.id}) //.populate('city')
+        Itinerary.find({city:req.params.id}).populate({
+            path: 'comments',
+            populate: {path: 'author', select:['name', 'photoURL']}
+        })
         .then(itineraries => res.json({success: true, response: itineraries}))
         .catch(err => handleError(res, err))
     },
@@ -61,6 +64,56 @@ const itinerariesControllers = {
                 res.json({success: true, response: modifiedUser.likedItineraries})
             })
         }).catch(err => handleError(res, err))
+    },
+    updateComments: (req, res)=>{
+        console.log("Received Update a Comment Petition:" + Date())
+        console.log(req.body.action)
+        let newComment = req.body.newComment
+        let oldComment = req.body.oldComment
+        let idItinerary = req.body.id
+        let actionToDo = req.body.action
+        let author = req.user._id
+        let newPackedComment = {
+            comment: newComment,
+            author: author
+        }
+        console.log(oldComment)
+        console.log(newPackedComment)
+        console.log(actionToDo)
+        if(actionToDo === 'post'){
+            console.log("Received POST a Comment Petition:" + Date())
+            Itinerary.findOneAndUpdate({_id: idItinerary}, {$push: {comments: newPackedComment}}, {new:true}).populate({
+                path: 'comments',
+                populate: {path: 'author', select:['name', 'photoURL']}
+            })
+            .then(modifiedItinerary =>{
+                console.log(modifiedItinerary.comments)
+                res.json({success: false})
+            }).catch(err => console.log(err))
+        }
+        if(actionToDo === 'update'){
+            console.log("Received UPDATE a Comment Petition:" + Date())
+            Itinerary.findOneAndUpdate({"comments._id": oldComment}, {$set: {"comments.$.comment": newComment}}, {new:true}).populate({
+                path: 'comments',
+                populate: {path: 'author', select:['name', 'photoURL']}
+            })
+            .then(modifiedItinerary =>{
+                console.log(modifiedItinerary.comments)
+                res.json({success: false})
+            }).catch(err => console.log(err))         
+        }
+        if(actionToDo === 'delete'){
+            console.log("Received DELETE a Comment Petition:" + Date())
+            Itinerary.findOneAndUpdate({_id: idItinerary}, {$pull: {comments: {_id: oldComment}}}, {new:true}).populate({
+                path: 'comments',
+                populate: {path: 'author', select:['name', 'photoURL']}
+            })
+            .then(modifiedItinerary =>{
+                console.log(modifiedItinerary.comments)
+                res.json({success: false})
+            }).catch(err => console.log(err))
+            
+        }
     }
 }
 module.exports = itinerariesControllers

@@ -3,6 +3,7 @@ import { connect } from "react-redux"
 import Footer from "../components/Footer"
 import Header from "../components/Header"
 import userActions from "../redux/actions/userActions"
+import { Link } from "react-router-dom"
 const Favourites = (props) =>{
     const [render, setRender] = useState(false)
     const {likedItineraries} = props
@@ -20,33 +21,32 @@ const Favourites = (props) =>{
     if(!render){
         return(
             <>
-            <Header/>
-            <main>
-                <h1>Loading.... please wait!</h1>
-            </main>
-            <Footer/>
+                <Header/>
+                <main className="mainCities"><div className="noCitiesContainer"><p>Loading...</p></div></main>
+                <Footer/>
             </>
         )
     }
     return(
         <>
             <Header/>
-            <main>
+            <main className="favItiMain">
                 {likedItineraries.map(itinerary => {
                     return(
-                        <div key={itinerary._id}>
-                        <p>City: {itinerary.city.city}</p>
-                        <p>Country: {itinerary.city.country}</p>
-                        <p>Description: {itinerary.city.description}</p>
-                        <p>Title: {itinerary.title}</p>
-                        <p>Author: {itinerary.author.name}</p>
-                        <p>Iti Description: {itinerary.description}</p>
-                        <div>
-                            {itinerary.hashtags.map((hashtag,index) => <p key={index}>{hashtag}</p>)}
-                        </div>
-                        <p>Price: {itinerary.price}</p>
-                        <p>Likes: {itinerary.likes}</p>
-                    </div>
+                        <Link key={itinerary._id} to={`/itineraries/${itinerary.city._id}`}>
+                            <div className="favItiContainer">
+                                <div className="favItiHeader" style={{backgroundImage:`url('assets/${itinerary.city.image}')`}}>
+                                    <p>Country: {itinerary.city.country}</p>
+                                    <p>City: {itinerary.city.city}</p>
+                                    <p>Description: {itinerary.city.description}</p>
+                                </div>
+                                <div className="favItiContent">
+                                    <p>Title: {itinerary.title}</p>
+                                    <p>Author: {itinerary.author.name}</p>
+                                    <p>Description: {itinerary.description}</p>
+                                </div>
+                            </div>
+                        </Link>
                     ) 
                 })}
             </main>
