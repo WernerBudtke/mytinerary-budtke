@@ -48,6 +48,11 @@ const citiesActions = {
         return(dispatch)=>{
             dispatch({type: 'RESET'})
         }
+    },
+    resetFilter: () =>{
+        return dispatch =>{
+            dispatch({type: 'RESET_FILTER'})
+        }
     }
 }
 export default citiesActions

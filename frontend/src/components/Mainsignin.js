@@ -55,7 +55,7 @@ const Mainsignin = (props) =>{
                 <input type="email" placeholder="placeholder@mail.com" id="eMail" name="eMail" value={dataUser.eMail} onChange={inputHandler} required/>
                 <label htmlFor="password">Password:</label>
                 <input type="password" placeholder="Password" id="password" name="password" value={dataUser.password} onChange={inputHandler} required/>
-                <button type="button" onClick={submitHandler}>SIGN IN</button>
+                <button id="signInBtn" type="button" onClick={submitHandler}>SIGN IN</button>
                 <GoogleLogin
                     clientId="367408341558-omu79fduq0sjoipof12r4h673m14dv7l.apps.googleusercontent.com"
                     render={renderProps => (

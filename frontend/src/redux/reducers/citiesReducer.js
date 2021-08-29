@@ -25,13 +25,17 @@ const citiesReducer = (state = initState, action) =>{
                 city:action.payload,
                 fetchingCity: false,
             }
-        case "RESET":{
+        case "RESET":
             return{
                 ...state,
                 fetchingCity: true,
                 city:{}
             }
-        }
+        case "RESET_FILTER":
+            return{
+                ...state,
+                filteredCities:state.cities
+            }
         default:
             return state
     }

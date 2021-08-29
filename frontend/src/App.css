@@ -557,6 +557,12 @@ span.specialText{
 .signUpInputs p{
     margin-left: 1rem;
 }
+.signUpForm select{
+    margin-bottom: 1rem;
+}
+#signInBtn{
+    margin-top: 0.5rem;
+}
 .signUpForm button{
     background-color: goldenrod;
     border: none;
@@ -822,6 +828,30 @@ span.specialText{
     .likesHeader{
         white-space: nowrap;
     }
+    /* SIGN UP FORM */
+    .signUpMain a{
+        font-size: 2.5rem;
+    }
+    .signUpForm, .errorContainer{
+        margin-top: 1rem;
+        width: 75%;
+    }
+    .signUpForm * {
+        font-size: 2.5rem;
+    }
+    .signUpForm button{
+        font-size: 2.2rem;
+    }
+    /* ERROR INPUTS */
+    .errorContainer h4{
+        font-size: 2rem;
+    }
+    .errorContainer p{
+        font-size: 2rem;
+    }
+    .personalWelcome{
+        display: none;
+    }
 }
 @media screen and (max-width: 800px) {
     html{
@@ -958,6 +988,27 @@ span.specialText{
     .personalWelcome{
         display:none;
     }
+    /* SIGN UP FORM */
+     .signUpMain a{
+        font-size: 2.5rem;
+    }
+    .signUpForm, .errorContainer{
+        margin-top: 1rem;
+        width: 85%;
+    }
+    .signUpForm * {
+        font-size: 2.5rem;
+    }
+    .signUpForm button{
+        font-size: 2.2rem;
+    }
+    /* ERROR INPUTS */
+    .errorContainer h4{
+        font-size: 2rem;
+    }
+    .errorContainer p{
+        font-size: 2rem;
+    }
 }
 @media screen and (max-width: 600px){
     html{
@@ -1066,6 +1117,27 @@ span.specialText{
         width: 4rem;
         height:4rem;
         margin-right: 0.5rem;
+    }
+    /* SIGN UP FORM */
+    .signUpMain a{
+        font-size: 2.5rem;
+    }
+    .signUpForm, .errorContainer{
+        margin-top: 1rem;
+        width: 95%;
+    }
+    .signUpForm * {
+        font-size: 2.5rem;
+    }
+    .signUpForm button{
+        font-size: 2.2rem;
+    }
+    /* ERROR INPUTS */
+    .errorContainer h4{
+        font-size: 2rem;
+    }
+    .errorContainer p{
+        font-size: 1.5rem;
     }
 }
 @media screen and (max-width: 500px){

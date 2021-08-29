@@ -17,7 +17,10 @@ const Cities = (props) =>{
         }
         window.scrollTo(0, 0)
         document.title = "myTinerary - Cities"
-        return () => document.title = "myTinerary"
+        return () => {
+            document.title = "myTinerary"
+            props.resetFilter()
+        }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     },[])
     return(
@@ -35,7 +38,8 @@ const mapStateToProps = (state) =>{
 }
 const mapDispatchToProps = {
     // propiedadProps : queFuncionMeTrae
-    getCities:citiesActions.getAllCities
+    getCities:citiesActions.getAllCities,
+    resetFilter:citiesActions.resetFilter
 }
 
 export default connect(mapStateToProps,mapDispatchToProps)(Cities)
