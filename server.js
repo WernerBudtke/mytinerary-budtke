@@ -12,11 +12,11 @@ app.use(cors())
 app.use(express.json())
 
 // verificar path de produccion
+app.use('/api', router) // cuando haga cualquier pedido a la /api, ejecuto el router
 if(process.env.NODE_ENV === 'production'){
     app.use(express.static('client/build'))
     app.get('*', (req, res)=>{
         res.sendFile(path.join(__dirname + "/client/build/index.html"))
     })
 }
-app.use('/api', router) // cuando haga cualquier pedido a la /api, ejecuto el router
 app.listen(process.env.PORT || 4000,process.env.MYHOST || '0.0.0.0', () => console.log("Server listening!")) // que comienze a escuchar en puerto 4000, una vez escuchado ejecutar función
