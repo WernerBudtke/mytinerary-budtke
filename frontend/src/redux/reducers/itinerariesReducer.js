@@ -13,11 +13,6 @@ const itinerariesReducer = (state = initState, action) =>{
             }
         case "RESET":
             return initState
-        // case "GET_COMMENTS":
-        //     return{
-        //         ...state,
-        //         itineraryComments:action.payload
-        //     }
         default:
             return state
     }

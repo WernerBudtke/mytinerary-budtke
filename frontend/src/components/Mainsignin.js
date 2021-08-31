@@ -5,6 +5,7 @@ import userActions from "../redux/actions/userActions"
 import { GoogleLogin } from 'react-google-login';
 const Mainsignin = (props) =>{
     const [renderError, setRenderError] = useState({error: '', errorEffect: true})
+    const [loading, setLoading] = useState(false)
     const [dataUser, setDataUser] = useState({
         eMail: '',
         password: '',
@@ -22,14 +23,18 @@ const Mainsignin = (props) =>{
             [e.target.name] : e.target.value
         })
     }
-    const submitHandler = (e) =>{
+    const submitHandler = (e) =>{ // agregar preloader?
         e.preventDefault()
         let badFields = missingFields()
-        badFields === ''
-        ?
-        props.loginUser(dataUser).then(res => !res.success && setRenderError({error: res.error, errorEffect:!renderError.errorEffect}))
-        :
-        setRenderError({error: badFields, errorEffect:!renderError.errorEffect})
+        if(badFields === ''){
+            setLoading(true)
+            props.loginUser(dataUser).then(res => {
+                !res.success && setRenderError({error: res.error, errorEffect:!renderError.errorEffect})
+                setLoading(false)
+            })
+        }else{
+            setRenderError({error: badFields, errorEffect:!renderError.errorEffect})
+        }   
     }
     useEffect(()=>{
         if(renderError.error.includes('Network')){
@@ -47,6 +52,9 @@ const Mainsignin = (props) =>{
         }
         props.loginUser(googleUser).then(res => !res.success && setRenderError({error: res.error}))
         // console.log(googleUser)
+    }
+    if(loading){
+        return <main className="mainCities"><div className="noCitiesContainer"><p>Loading...</p></div></main>
     }
     return(
         <main className="signUpMain">

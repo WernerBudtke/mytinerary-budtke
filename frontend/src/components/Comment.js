@@ -10,7 +10,7 @@ const Comment = (props) =>{
     // console.log(comment)
     // console.log(props.idUser)
     let ownerCondition = comment.author._id === props.idUser
-    let oldComment = comment.comment
+    // let oldComment = comment.comment
     
     const inputHandler = (e) =>{
         setnewComment(e.target.value)
@@ -25,15 +25,15 @@ const Comment = (props) =>{
     const didGuess = (e)=>{
         let option = e.target.id
         if (option === 'positive'){
-            console.log(option)
-            console.log(newComment)
-            console.log(comment._id)
+            // console.log(option)
+            // console.log(newComment)
+            // console.log(comment._id)
             guessing.what === 'edit' ? props.editComment(newComment, comment._id) : props.removeComment(comment._id)
         }
         setGuessing(false)
     }
-    console.log(oldComment)
-    console.log(newComment)
+    // console.log(oldComment)
+    // console.log(newComment)
     if(!comment.author){
         return <p>placeholder</p>
     }

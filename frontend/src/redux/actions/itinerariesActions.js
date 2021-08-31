@@ -11,24 +11,13 @@ const itinerariesActions = {
             }
         }
     },
-    // getCommentsFromItinerary: (id)=>{
-    //     return async (dispatch) =>{
-    //         try{
-    //             let res = await axios.get(`http://localhost:4000/api/itinerary/comments/${id}`)
-    //             dispatch({type: 'GET_COMMENTS', payload: res.data.response})
-    //             return {success:true}
-    //         }catch(err){
-    //             return {success:false, error: err}
-    //         }
-    //     }
-    // },
     resetItineraries: () =>{
         return(dispatch)=>{
             dispatch({type: 'RESET'})
         }
     },
     sendComment: (newComment, oldComment, token, id, action) =>{
-        return async (dispatch)=>{
+        return async ()=>{
             let data = {
                 newComment: newComment,
                 oldComment: oldComment,
@@ -41,9 +30,25 @@ const itinerariesActions = {
                         authorization: 'Bearer ' + token
                     }
                 })
-                console.log('test')
-                // dispatch({type: 'UPDATE_ITINERARY', payload: res.data.response})
-                return {success: true, response: res.data.response}
+                if(res.data.success){
+                    return {success: true}
+                }else{
+                    throw new Error('comm problem with db')
+                }
+            }catch(err){
+                return {success: false, response: err}
+            }
+        }
+    },
+    getActivities: (id) =>{
+        return async () => {
+            try{
+                let res = await axios.get(`http://localhost:4000/api/activity/${id}`)
+                if(res.data.success){
+                    return {success: true, response: res.data.response}
+                }else{
+                    throw new Error('comm problem with db')
+                }
             }catch(err){
                 return {success: false, response: err}
             }

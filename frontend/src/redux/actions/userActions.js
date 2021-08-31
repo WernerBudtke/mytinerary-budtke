@@ -96,6 +96,24 @@ const userActions = {
                 return {success: false, response: err}
             }
         }
+    },
+    isValidOwner: (token) =>{
+        return async dispatch =>{
+            try{
+                let res = await axios.get('http://localhost:4000/api/user/validowner',{
+                    headers:{
+                        Authorization: 'Bearer ' + token
+                    }
+                })
+                if(res.data.success){
+                    return {success: true, response: res.data.response}
+                }else{
+                    throw new Error('not a valid owner')
+                }
+            }catch(err){
+                return {success: false, response: err}
+            }
+        }
     }
     // colocarle return al axios.get, si luego lo voy a usar con then y catch. que tengan return dentro
 }

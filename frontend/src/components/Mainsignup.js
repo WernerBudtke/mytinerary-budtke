@@ -7,6 +7,7 @@ import { GoogleLogin } from 'react-google-login';
 const Mainsignup = (props) =>{   // hacerlo con on changes al salir de los inputs? copada la idea
     const [renderError, setRenderError] = useState({error: ''})
     const countries = ["Argentina", "Chile", "Brazil", "Uruguay", "Perú", "Bolivia", "Paraguay", "Rest of the World"]
+    const [loading, setLoading] = useState(false)
     const [newUser, setNewUser] = useState({
         firstName: '',
         lastName: '',
@@ -34,14 +35,18 @@ const Mainsignup = (props) =>{   // hacerlo con on changes al salir de los input
         let bodyFields = [...Object.values(newUser)]
         return namesOfFields.filter((field, index) => bodyFields[index] === "").join(' ')
     }
-    const submitNewUser = (e) =>{
+    const submitNewUser = (e) =>{ // poner preloader?
         e.preventDefault()
         let badFields = missingFields()
-        badFields === '' 
-        ? 
-        props.registerUser(newUser).then(res => !res.success && setRenderError({error: res.error}))
-        :
-        setRenderError({error: badFields})
+        if(badFields === ''){
+            setLoading(true)
+            props.registerUser(newUser).then(res => {
+                !res.success && setRenderError({error: res.error})
+                setLoading(false)
+            })
+        }else{
+            setRenderError({error: badFields})
+        } 
     }
     let myErrors = {
         firstName: "First name must have 2 chars atleast, max 35",
@@ -69,6 +74,9 @@ const Mainsignup = (props) =>{   // hacerlo con on changes al salir de los input
         console.log(googleUser.password)
         props.registerUser(googleUser).then(res => !res.success && setRenderError({error: res.error}))
         // console.log(googleUser)
+    }
+    if(loading){
+        return <main className="mainCities"><div className="noCitiesContainer"><p>Loading...</p></div></main>
     }
     return(
         <main className='signUpMain'>

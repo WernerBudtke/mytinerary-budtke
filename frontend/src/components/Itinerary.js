@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react"
-import axios from "axios"
 import { connect } from "react-redux"
 import userActions from "../redux/actions/userActions"
 import itinerariesActions from "../redux/actions/itinerariesActions"
@@ -10,32 +9,30 @@ const Itinerary = (props) =>{
     const {author, description, hashtags, price, duration, likes, title, _id, comments} = props.itinerary
     // console.log(_id)
     const [render, setRender] = useState(false)
+    const [blankComment, setblankComment] = useState(false)
     const [disabled, setDisabled] = useState(false)
     const [logged, setLogged] = useState(false)
     const [idUser, setidUser] = useState('')
     const [activities, setActivities] = useState([])
-    useEffect(()=>{
+    console.log(comments)
+    useEffect(()=>{ 
         if(!props.token){
             setidUser('')
             return
         }
-        axios.get('http://localhost:4000/api/user/validowner',{
-            headers:{
-                Authorization: 'Bearer ' + props.token
-            }
-        })
-        .then(res => res.data.success && setidUser(res.data.response))
-        .catch(err => console.log(err))
+        props.isValidOwner(props.token)
+        .then(res => res.success && setidUser(res.response))
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     },[props.token])
     const [loggedComment, setloggedComment] = useState(false)
     const clickHandler = (e) =>{
         e.target.innerText = e.target.innerText === "View more" ? 'View less' : 'View more'
-        axios.get(`http://localhost:4000/api/activity/${_id}`)
+        !activities.length && props.getActivities(_id)
         .then(res => {
-            res.data.success && setActivities(res.data.response)
-            setRender(!render)
+            res.success && setActivities(res.response)
+            
         })
-        .catch(err => console.log(err))  
+        setRender(!render)
     }
     const priceHandler = ()=>{
         let arrayPrice = []
@@ -73,22 +70,48 @@ const Itinerary = (props) =>{
             setloggedComment(true)
             return
         }
+        if(newComment === ''){
+            setblankComment(true)
+            return
+        }
         props.sendComment(newComment, null, props.token, _id, "post").then(res => {
-            res.success && props.myFunction()
-            setnewComment('')
+            if(res.success){
+                props.myFunction()
+                setnewComment('')
+                setblankComment(false)
+            }else{
+                console.error('was not able to send comment')
+                props.history.push('/error')
+            } 
         })
+    }
+    const focusInput = () =>{
+        !props.token && setloggedComment(true)
+    }
+    const keySubmit = (e)=>{
+        console.log(e.key)
+        e.key === 'Enter' && commentSendHandler()
+    }
+    const handleResponse = (res) =>{
+        if(res.success){
+            props.myFunction()
+        }else{
+            console.error('was not able to edit comment')
+            props.history.push('/error')
+        }
     }
     const commentEditHandler = (editedComment, commentId) =>{
         if(!props.token){
             return
         }
-        props.sendComment(editedComment, commentId, props.token, _id, "update").then(res => res.success && props.myFunction())
+        props.sendComment(editedComment, commentId, props.token, _id, "update").then(res => handleResponse(res))
     }
     const commentRemoveHandler = (commentId) =>{
         if(!props.token){
             return
         }
-        props.sendComment("", commentId, props.token, _id, "delete").then(res => res.success && props.myFunction())
+        props.sendComment("", commentId, props.token, _id, "delete")
+        .then(res => handleResponse(res))
     }
     return(
         <div className="itineraryCard">
@@ -147,11 +170,11 @@ const Itinerary = (props) =>{
                     </div>
                     <div className="sendContainer">
                         <p>Send a new message:</p>
-                        <input type="text" onChange={commentInputHandler} value={newComment}></input>
+                        <input type="text" onChange={commentInputHandler} value={newComment} onKeyDown={keySubmit} onFocus={focusInput}></input>
                         <p className="buttonComment" onClick={commentSendHandler}>{'>'}</p>
                     </div>
-                    <div className="needToBeLogged" style={loggedComment ? {display: "block"} : {display: "none"}}>
-                            <Link to="/signin"><p>You must log in to post a comment! Click here</p></Link>
+                    <div className="needToBeLogged" style={loggedComment || blankComment ? {display: "block"} : {display: "none"}}>
+                        <Link to="/signin"><p>You must log in to post a comment! Click here</p></Link>
                     </div>
                 </div>
             </div>
@@ -162,13 +185,12 @@ const mapStateToProps = (state) =>{
     return{
         token: state.usersRed.token,
         likedItineraries: state.usersRed.likedItineraries,
-        // itinerariesArePopulated: state.usersRed.itinerariesArePopulated
-        // itineraryComments: state.itinerariesRed.itineraryComments
     }
 }
 const mapDispatchToProps = {
     likeAnItinerary : userActions.likeAnItinerary,
     sendComment : itinerariesActions.sendComment,
-    // getComments : itinerariesActions.getCommentsFromItinerary
+    isValidOwner : userActions.isValidOwner,
+    getActivities : itinerariesActions.getActivities
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Itinerary)

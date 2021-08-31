@@ -67,53 +67,58 @@ const itinerariesControllers = {
     },
     updateComments: (req, res)=>{
         console.log("Received Update a Comment Petition:" + Date())
-        console.log(req.body.action)
-        let newComment = req.body.newComment
-        let oldComment = req.body.oldComment
-        let idItinerary = req.body.id
-        let actionToDo = req.body.action
-        let author = req.user._id
+        const {newComment, oldComment, id, action} = req.body
+        const {_id} = req.user
         let newPackedComment = {
             comment: newComment,
-            author: author
+            author: _id
         }
-        console.log(oldComment)
-        console.log(newPackedComment)
-        console.log(actionToDo)
-        if(actionToDo === 'post'){
-            console.log("Received POST a Comment Petition:" + Date())
-            Itinerary.findOneAndUpdate({_id: idItinerary}, {$push: {comments: newPackedComment}}, {new:true}).populate({
-                path: 'comments',
-                populate: {path: 'author', select:['name', 'photoURL']}
-            })
-            .then(modifiedItinerary =>{
-                console.log(modifiedItinerary.comments)
-                res.json({success: false})
-            }).catch(err => console.log(err))
+        switch(action){
+            case "post":
+                console.log("Received POST a Comment Petition:" + Date())
+                Itinerary.findOneAndUpdate({_id: id}, {$push: {comments: newPackedComment}})
+                .then(() =>{
+                    res.json({success: true})
+                }).catch(err => handleError(res, err))
+                break
+            case "update":
+                console.log("Received UPDATE a Comment Petition:" + Date())
+                Itinerary.findOneAndUpdate({"comments._id": oldComment}, {$set: {"comments.$.comment": newComment}})
+                .then(() =>{
+                    res.json({success: true})
+                }).catch(err => handleError(res, err))  
+                break
+            case "delete":
+                console.log("Received DELETE a Comment Petition:" + Date())
+                Itinerary.findOneAndUpdate({_id: id}, {$pull: {comments: {_id: oldComment}}})
+                .then(() =>{
+                    res.json({success: true})
+                }).catch(err => handleError(res, err))
+                break
+            default:
+                return console.log('update comments had a problem')
         }
-        if(actionToDo === 'update'){
-            console.log("Received UPDATE a Comment Petition:" + Date())
-            Itinerary.findOneAndUpdate({"comments._id": oldComment}, {$set: {"comments.$.comment": newComment}}, {new:true}).populate({
-                path: 'comments',
-                populate: {path: 'author', select:['name', 'photoURL']}
-            })
-            .then(modifiedItinerary =>{
-                console.log(modifiedItinerary.comments)
-                res.json({success: false})
-            }).catch(err => console.log(err))         
-        }
-        if(actionToDo === 'delete'){
-            console.log("Received DELETE a Comment Petition:" + Date())
-            Itinerary.findOneAndUpdate({_id: idItinerary}, {$pull: {comments: {_id: oldComment}}}, {new:true}).populate({
-                path: 'comments',
-                populate: {path: 'author', select:['name', 'photoURL']}
-            })
-            .then(modifiedItinerary =>{
-                console.log(modifiedItinerary.comments)
-                res.json({success: false})
-            }).catch(err => console.log(err))
-            
-        }
+        // if(action === 'post'){
+        //     console.log("Received POST a Comment Petition:" + Date())
+        //     Itinerary.findOneAndUpdate({_id: id}, {$push: {comments: newPackedComment}})
+        //     .then(() =>{
+        //         res.json({success: true})
+        //     }).catch(err => console.log(err))
+        // }
+        // if(action === 'update'){
+        //     console.log("Received UPDATE a Comment Petition:" + Date())
+        //     Itinerary.findOneAndUpdate({"comments._id": oldComment}, {$set: {"comments.$.comment": newComment}})
+        //     .then(() =>{
+        //         res.json({success: true})
+        //     }).catch(err => console.log(err))         
+        // }
+        // if(action === 'delete'){
+        //     console.log("Received DELETE a Comment Petition:" + Date())
+        //     Itinerary.findOneAndUpdate({_id: id}, {$pull: {comments: {_id: oldComment}}})
+        //     .then(() =>{
+        //         res.json({success: true})
+        //     }).catch(err => console.log(err))  
+        // }
     }
 }
 module.exports = itinerariesControllers

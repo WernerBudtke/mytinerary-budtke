@@ -8,8 +8,6 @@ import Itineraries from "./pages/Itineraries";
 import Error from "./pages/Error";
 import Signup from "./pages/Signup";
 import Signin from "./pages/Signin";
-import User from "./pages/User";
-// import { useEffect } from "react";
 import {connect} from 'react-redux'
 import { useEffect } from "react";
 import userActions from "./redux/actions/userActions";
@@ -27,16 +25,6 @@ function App(props) {
       }
       props.logLs(savedUser)
     }
-    // let objetito = {
-    //   prop1: "pepe",
-    //   prop2: 3,
-    //   prop3: ["pp", 1, {pepe: "pupi"}],
-    //   prop4: {kaka:"kuki"}
-    // }
-    // console.log(objetito)
-    // localStorage.setItem("objetote", JSON.stringify(objetito))
-    // let objetitoparsed = JSON.parse(localStorage.getItem("objetote"))
-    // console.log(objetitoparsed)
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[])
   // if (!token){
@@ -54,7 +42,6 @@ function App(props) {
         <Route path="/itineraries/:id" component={Itineraries}/>
         {token && <Route path="/favourites" component={Favourites}/>}
         <Route path="/error/" component={Error}/>
-        <Route path="/user/:action" component={User}/>
         <Redirect to="/"/>
       </Switch>
     </BrowserRouter>
