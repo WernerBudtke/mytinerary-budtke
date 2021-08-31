@@ -3,7 +3,7 @@ const userActions = {
     registerUser: (dataUser) =>{
         return async (dispatch) =>{
             try{
-                let res = await axios.post(`http://localhost:4000/api/user/register`, dataUser)
+                let res = await axios.post(`https://mytinerary-budtke.herokuapp.com/api/user/register`, dataUser)
                 if (res.data.success){
                     dispatch({type:'USER_LOGGED', payload: res.data.response})
                     return {success:true, response:res.data.response}
@@ -18,7 +18,7 @@ const userActions = {
     loginUser: (dataUser)=>{
         return async (dispatch) =>{
             try{
-                let res = await axios.post(`http://localhost:4000/api/user/login`, dataUser)
+                let res = await axios.post(`https://mytinerary-budtke.herokuapp.com/api/user/login`, dataUser)
                 if (res.data.success){
                     dispatch({type:'USER_LOGGED', payload: res.data.response})
                     return {success:true , response:res.data.response}
@@ -40,7 +40,7 @@ const userActions = {
     logInLS: (savedUser) =>{
         return async (dispatch) => {
             try{
-                let res = await axios.get('http://localhost:4000/api/user/valid',{
+                let res = await axios.get('https://mytinerary-budtke.herokuapp.com/api/user/valid',{
                     headers:{
                         Authorization: 'Bearer ' + savedUser.token
                     }
@@ -61,7 +61,7 @@ const userActions = {
         // console.log(token)
         return async (dispatch) =>{
             try{
-                let res = await axios.put(`http://localhost:4000/api/user/like/${idItinerary}`,{},{
+                let res = await axios.put(`https://mytinerary-budtke.herokuapp.com/api/user/like/${idItinerary}`,{},{
                     headers:{
                         Authorization: 'Bearer ' + token
                     }
@@ -81,7 +81,7 @@ const userActions = {
     populateItineraries: (token) =>{
         return async (dispatch)=>{
             try{
-                let res = await axios.get('http://localhost:4000/api/user/favourites',{
+                let res = await axios.get('https://mytinerary-budtke.herokuapp.com/api/user/favourites',{
                     headers:{
                         Authorization: 'Bearer ' + token
                     }
@@ -100,7 +100,7 @@ const userActions = {
     isValidOwner: (token) =>{
         return async dispatch =>{
             try{
-                let res = await axios.get('http://localhost:4000/api/user/validowner',{
+                let res = await axios.get('https://mytinerary-budtke.herokuapp.com/api/user/validowner',{
                     headers:{
                         Authorization: 'Bearer ' + token
                     }
