@@ -173,7 +173,8 @@ const Itinerary = (props) =>{
                         <p className="buttonComment" onClick={commentSendHandler}>{'>'}</p>
                     </div>
                     <div className="needToBeLogged" style={loggedComment || blankComment ? {display: "block"} : {display: "none"}}>
-                        <Link to="/signin"><p>You must log in to post a comment! Click here</p></Link>
+                        <Link to="/signin"><p>You must log in to post a comment! Click here</p></Link> 
+                        <p style={blankComment ? {display: "block"} : {display: "none"}}>Please write something</p>
                     </div>
                 </div>
             </div>

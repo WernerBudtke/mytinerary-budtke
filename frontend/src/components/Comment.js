@@ -25,13 +25,14 @@ const Comment = (props) =>{
     const didGuess = (e)=>{
         let option = e.target.id
         if (option === 'positive'){
-            // console.log(option)
-            // console.log(newComment)
-            // console.log(comment._id)
+            if(newComment === ''){
+                return
+            }
             guessing.what === 'edit' ? props.editComment(newComment, comment._id) : props.removeComment(comment._id)
         }
         setGuessing(false)
     }
+    // CORREGIR EL EDITAR
     // console.log(oldComment)
     // console.log(newComment)
     if(!comment.author){
