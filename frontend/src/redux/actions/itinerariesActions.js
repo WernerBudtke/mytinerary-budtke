@@ -40,6 +40,11 @@ const itinerariesActions = {
             }
         }
     },
+    sentTheComment: () =>{
+        return dispatch =>{
+            dispatch({type:"SENT_COMMENT"})
+        }
+    },
     getActivities: (id) =>{
         return async () => {
             try{

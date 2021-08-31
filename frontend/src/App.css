@@ -759,6 +759,11 @@ span.specialText{
     border-radius: 100%;
     text-align: center;
 }
+.commentsScroll{
+    max-height: 30rem;
+    flex-direction: column-reverse;
+    overflow:auto;
+}
 .commentsContainer div p{
     text-align: center;
 }

@@ -11,7 +11,6 @@ const Comment = (props) =>{
     // console.log(props.idUser)
     let ownerCondition = comment.author._id === props.idUser
     // let oldComment = comment.comment
-    console.log("me monté")
     const inputHandler = (e) =>{
         setnewComment(e.target.value)
         setdidEdit(true)
