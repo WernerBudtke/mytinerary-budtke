@@ -616,6 +616,9 @@ span.specialText{
     text-decoration: none;
     font-size: 1.5rem;
 }
+.needToBeLogged p{
+    font-size: 1.5rem;
+}
 .needToBeLogged a:hover{
     text-decoration: underline;
 }
