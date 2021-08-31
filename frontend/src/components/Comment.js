@@ -40,7 +40,7 @@ const Comment = (props) =>{
     return(
         <div className="commentContainer" key={comment._id} id={comment._id}>
             <div className="photoUserComment" style={{backgroundImage: `url(${comment.author.photoURL})`}}></div>
-            <p>{comment.author.name.firstName}</p>
+            <p className="firstName">{comment.author.name.firstName}</p>
             <p>{comment.author.name.lastName}:</p>
             <div className="userComment">
                 <input type="text" className={ownerCondition ? 'commentOwner' : ''} disabled={!ownerCondition} value={didEdit ? newComment : comment.comment} onChange={inputHandler}></input>

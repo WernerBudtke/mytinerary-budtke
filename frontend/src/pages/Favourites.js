@@ -11,10 +11,10 @@ const Favourites = (props) =>{
         document.title = "myTinerary - Favourites"
         props.populateItineraries(props.token)
         .then(res =>{
-            console.log(res)
+            // console.log(res)
             setRender(!render)
         })
-        console.log(likedItineraries)
+        // console.log(likedItineraries)
         return () => document.title = "myTinerary"
     // eslint-disable-next-line react-hooks/exhaustive-deps
     },[])

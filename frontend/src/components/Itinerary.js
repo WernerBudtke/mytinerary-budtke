@@ -14,7 +14,6 @@ const Itinerary = (props) =>{
     const [logged, setLogged] = useState(false)
     const [idUser, setidUser] = useState('')
     const [activities, setActivities] = useState([])
-    console.log(comments)
     useEffect(()=>{ 
         if(!props.token){
             setidUser('')
@@ -89,7 +88,7 @@ const Itinerary = (props) =>{
         !props.token && setloggedComment(true)
     }
     const keySubmit = (e)=>{
-        console.log(e.key)
+        // console.log(e.key)
         e.key === 'Enter' && commentSendHandler()
     }
     const handleResponse = (res) =>{

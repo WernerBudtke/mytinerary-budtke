@@ -71,7 +71,7 @@ const Mainsignup = (props) =>{   // hacerlo con on changes al salir de los input
             country: "Rest of the World",
             google: true
         }
-        console.log(googleUser.password)
+        // console.log(googleUser.password)
         props.registerUser(googleUser).then(res => !res.success && setRenderError({error: res.error}))
         // console.log(googleUser)
     }

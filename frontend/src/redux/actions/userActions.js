@@ -23,11 +23,11 @@ const userActions = {
                     dispatch({type:'USER_LOGGED', payload: res.data.response})
                     return {success:true , response:res.data.response}
                 }else{
-                    console.log(res.data.response)
+                    // console.log(res.data.response)
                     throw new Error(res.data.response)
                 }
             }catch(err){
-                console.log(err)
+                // console.log(err)
                 return {success:false, error: err.message}
             }
         }
