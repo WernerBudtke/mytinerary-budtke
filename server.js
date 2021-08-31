@@ -16,4 +16,4 @@ app.use(express.json())
 //     password: process.env.MAILPASS
 // }
 app.use('/api', router) // cuando haga cualquier pedido a la /api, ejecuto el router
-app.listen(4000, () => console.log("Server listening on port 4000")) // que comienze a escuchar en puerto 4000, una vez escuchado ejecutar función
+app.listen(process.env.PORT || 4000, process.env.HOST || '0.0.0.0', () => console.log("Server listening on port 4000")) // que comienze a escuchar en puerto 4000, una vez escuchado ejecutar función
