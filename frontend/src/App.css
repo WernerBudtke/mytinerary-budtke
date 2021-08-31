@@ -727,7 +727,7 @@ span.specialText{
     justify-content: space-evenly;
 }
 .activitiesContainer div{
-    width: 32%;
+    width: 20rem;
     background-position: center;
     background-size: cover;
     height: 20rem;
