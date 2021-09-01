@@ -71,7 +71,7 @@ const Mainsignup = (props) =>{   // hacerlo con on changes al salir de los input
             country: "Rest of the World",
             google: true
         }
-        console.log(googleUser.password)
+        // console.log(googleUser.password)
         props.registerUser(googleUser).then(res => !res.success && setRenderError({error: res.error}))
         // console.log(googleUser)
     }
@@ -99,7 +99,7 @@ const Mainsignup = (props) =>{   // hacerlo con on changes al salir de los input
                 </select>
                 <button type="button" onClick={submitNewUser}>SIGN UP</button>
                 <GoogleLogin
-                    clientId="367408341558-omu79fduq0sjoipof12r4h673m14dv7l.apps.googleusercontent.com"
+                    clientId="367408341558-2t0f5ucqmmg4fhp1per1drrfmv5i611r.apps.googleusercontent.com"
                     render={renderProps => (
                     <button className='googleButton' onClick={renderProps.onClick} disabled={renderProps.disabled}>Sign Up With Google</button>
                     )}

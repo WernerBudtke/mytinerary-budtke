@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import { connect } from "react-redux"
 import userActions from "../redux/actions/userActions"
 import itinerariesActions from "../redux/actions/itinerariesActions"
@@ -14,7 +14,6 @@ const Itinerary = (props) =>{
     const [logged, setLogged] = useState(false)
     const [idUser, setidUser] = useState('')
     const [activities, setActivities] = useState([])
-    console.log(comments)
     useEffect(()=>{ 
         if(!props.token){
             setidUser('')
@@ -24,6 +23,16 @@ const Itinerary = (props) =>{
         .then(res => res.success && setidUser(res.response))
     // eslint-disable-next-line react-hooks/exhaustive-deps
     },[props.token])
+    const commentsEndRef = useRef(null)
+    const scrollToBottom = () => {
+        commentsEndRef.current.scrollTo({  
+            top: commentsEndRef.current.scrollHeight,
+            behavior: 'smooth' 
+        })
+    }
+    useEffect(() =>{
+        scrollToBottom()
+    },[render, props.itineraryComment])
     const [loggedComment, setloggedComment] = useState(false)
     const clickHandler = (e) =>{
         e.target.innerText = e.target.innerText === "View more" ? 'View less' : 'View more'
@@ -33,6 +42,7 @@ const Itinerary = (props) =>{
             
         })
         setRender(!render)
+        scrollToBottom()
     }
     const priceHandler = ()=>{
         let arrayPrice = []
@@ -76,20 +86,20 @@ const Itinerary = (props) =>{
         }
         props.sendComment(newComment, null, props.token, _id, "post").then(res => {
             if(res.success){
-                props.myFunction()
+                props.myFunction("post")
                 setnewComment('')
                 setblankComment(false)
             }else{
                 console.error('was not able to send comment')
                 props.history.push('/error')
-            } 
+            }
         })
     }
     const focusInput = () =>{
         !props.token && setloggedComment(true)
     }
     const keySubmit = (e)=>{
-        console.log(e.key)
+        // console.log(e.key)
         e.key === 'Enter' && commentSendHandler()
     }
     const handleResponse = (res) =>{
@@ -160,13 +170,14 @@ const Itinerary = (props) =>{
                 </div>
                 <h2>Comments</h2>
                 <div className="commentsContainer">
-                    <div>
+                    <div className="commentsScroll" ref={commentsEndRef}>
                         {comments.length > 0 
                         ?
-                        comments.map((comment, index) => <Comment key={index} idUser={idUser} removeComment={commentRemoveHandler} editComment={commentEditHandler} comment={comment}/>)
+                        comments.map((comment, index) => <Comment key={comment._id} idUser={idUser} removeComment={commentRemoveHandler} editComment={commentEditHandler} comment={comment}/>)
                         :
                         <p>No comments yet! be the first</p>
-                    }
+                        }
+                        {/* <div ref={commentsEndRef}></div> */}
                     </div>
                     <div className="sendContainer">
                         <p>Send a new message:</p>
@@ -174,7 +185,8 @@ const Itinerary = (props) =>{
                         <p className="buttonComment" onClick={commentSendHandler}>{'>'}</p>
                     </div>
                     <div className="needToBeLogged" style={loggedComment || blankComment ? {display: "block"} : {display: "none"}}>
-                        <Link to="/signin"><p>You must log in to post a comment! Click here</p></Link>
+                        <Link to="/signin" style={loggedComment ? {display: "block"} : {display: "none"}}><p>You must log in to post a comment! Click here</p></Link> 
+                        <p style={blankComment ? {display: "block"} : {display: "none"}}>Please write something</p>
                     </div>
                 </div>
             </div>
@@ -185,6 +197,7 @@ const mapStateToProps = (state) =>{
     return{
         token: state.usersRed.token,
         likedItineraries: state.usersRed.likedItineraries,
+        itineraryComment: state.itinerariesRed.itineraryComment
     }
 }
 const mapDispatchToProps = {

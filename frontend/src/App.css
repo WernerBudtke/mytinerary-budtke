@@ -616,6 +616,9 @@ span.specialText{
     text-decoration: none;
     font-size: 1.5rem;
 }
+.needToBeLogged p{
+    font-size: 1.5rem;
+}
 .needToBeLogged a:hover{
     text-decoration: underline;
 }
@@ -727,7 +730,7 @@ span.specialText{
     justify-content: space-evenly;
 }
 .activitiesContainer div{
-    width: 32%;
+    width: 20rem;
     background-position: center;
     background-size: cover;
     height: 20rem;
@@ -755,6 +758,11 @@ span.specialText{
     height: 2rem;
     border-radius: 100%;
     text-align: center;
+}
+.commentsScroll{
+    max-height: 30rem;
+    flex-direction: column-reverse;
+    overflow:auto;
 }
 .commentsContainer div p{
     text-align: center;
@@ -1138,6 +1146,9 @@ span.specialText{
     }
     .errorContainer p{
         font-size: 1.5rem;
+    }
+    .commentContainer p.firstName{
+        display:none;
     }
 }
 @media screen and (max-width: 500px){

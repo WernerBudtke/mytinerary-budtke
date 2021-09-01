@@ -65,7 +65,7 @@ const Mainsignin = (props) =>{
                 <input type="password" placeholder="Password" id="password" name="password" value={dataUser.password} onChange={inputHandler} required/>
                 <button id="signInBtn" type="button" onClick={submitHandler}>SIGN IN</button>
                 <GoogleLogin
-                    clientId="367408341558-omu79fduq0sjoipof12r4h673m14dv7l.apps.googleusercontent.com"
+                    clientId="367408341558-2t0f5ucqmmg4fhp1per1drrfmv5i611r.apps.googleusercontent.com"
                     render={renderProps => (
                     <button className='googleButton' onClick={renderProps.onClick} disabled={renderProps.disabled}>Sign In with Google</button>
                     )}

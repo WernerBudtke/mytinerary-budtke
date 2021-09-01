@@ -11,7 +11,6 @@ const Comment = (props) =>{
     // console.log(props.idUser)
     let ownerCondition = comment.author._id === props.idUser
     // let oldComment = comment.comment
-    
     const inputHandler = (e) =>{
         setnewComment(e.target.value)
         setdidEdit(true)
@@ -25,13 +24,14 @@ const Comment = (props) =>{
     const didGuess = (e)=>{
         let option = e.target.id
         if (option === 'positive'){
-            // console.log(option)
-            // console.log(newComment)
-            // console.log(comment._id)
-            guessing.what === 'edit' ? props.editComment(newComment, comment._id) : props.removeComment(comment._id)
+            guessing.what === 'edit' ? props.editComment((newComment === '' ? comment.comment : newComment), comment._id) : props.removeComment(comment._id)
+        }
+        if(option === 'negative'){
+            guessing.what === 'edit' && setdidEdit(false)
         }
         setGuessing(false)
     }
+    // CORREGIR EL EDITAR
     // console.log(oldComment)
     // console.log(newComment)
     if(!comment.author){
@@ -40,7 +40,7 @@ const Comment = (props) =>{
     return(
         <div className="commentContainer" key={comment._id} id={comment._id}>
             <div className="photoUserComment" style={{backgroundImage: `url(${comment.author.photoURL})`}}></div>
-            <p>{comment.author.name.firstName}</p>
+            <p className="firstName">{comment.author.name.firstName}</p>
             <p>{comment.author.name.lastName}:</p>
             <div className="userComment">
                 <input type="text" className={ownerCondition ? 'commentOwner' : ''} disabled={!ownerCondition} value={didEdit ? newComment : comment.comment} onChange={inputHandler}></input>
