@@ -26,6 +26,9 @@ const Comment = (props) =>{
         if (option === 'positive'){
             guessing.what === 'edit' ? props.editComment((newComment === '' ? comment.comment : newComment), comment._id) : props.removeComment(comment._id)
         }
+        if(option === 'negative'){
+            guessing.what === 'edit' && setdidEdit(false)
+        }
         setGuessing(false)
     }
     // CORREGIR EL EDITAR
