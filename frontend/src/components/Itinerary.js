@@ -173,7 +173,7 @@ const Itinerary = (props) =>{
                     <div className="commentsScroll" ref={commentsEndRef}>
                         {comments.length > 0 
                         ?
-                        comments.map((comment, index) => <Comment key={index} idUser={idUser} removeComment={commentRemoveHandler} editComment={commentEditHandler} comment={comment}/>)
+                        comments.map((comment, index) => <Comment key={comment._id} idUser={idUser} removeComment={commentRemoveHandler} editComment={commentEditHandler} comment={comment}/>)
                         :
                         <p>No comments yet! be the first</p>
                         }
