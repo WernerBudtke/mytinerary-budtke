@@ -49,12 +49,12 @@ const Mainsignup = (props) =>{   // hacerlo con on changes al salir de los input
         } 
     }
     let myErrors = {
-        firstName: "First name must have 2 chars atleast, max 35",
-        lastName: "First name must have 2 chars atleast, max 35",
+        firstName: "First name must be 2 chars min, max 35. No numbers",
+        lastName: "Last name must be 2 chars min, max 35. No numbers",
         eMail: renderError.error.includes('eMail already in use') ? "Email already in use!" : "Email must be a valid one, for example jwb@gmail.com",
-        password: "Password must have atleast 4 chars or numbers!",
-        photoURL: "The URL of the photo should be atleast 6 characters long",
-        country: "Country should be a valid one!"
+        password: "Password must be atleast 4 chars or numbers!",
+        photoURL: "The URL of the photo must be atleast 6 characters long",
+        country: "Country must be a valid one!"
     }
     let myErrorsKeys = Object.keys(myErrors).filter(key => renderError.error.includes(key)) 
     const handleError = (string) =>{
