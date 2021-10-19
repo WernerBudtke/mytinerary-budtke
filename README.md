@@ -29,8 +29,15 @@ npm install
 ```sh
 npm run start
 ```
+## Technologies
+```
+MongoDB
+Express
+React
+Node.js
+Redux
 
-
+```
 ## Author
 
 👤 **Federico Budtke**
