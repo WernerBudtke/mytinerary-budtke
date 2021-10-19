@@ -26,6 +26,7 @@ npm install
 
 ```sh
 npm run start
+You have to set up your own .env
 ```
 ## Technologies
 ```
