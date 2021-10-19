@@ -29,12 +29,13 @@ npm run start
 ```
 ## Technologies
 ```
-MongoDB
+MongoDB / Mongoose
 Express
 React
 Node.js
 Redux
-
+JWT / Passport
+Joi
 ```
 ## Author
 
