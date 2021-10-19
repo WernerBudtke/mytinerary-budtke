@@ -30,11 +30,6 @@ npm install
 npm run start
 ```
 
-## Run tests
-
-```sh
-npm run test
-```
 
 ## Author
 
@@ -45,7 +40,7 @@ npm run test
 
 ## 🤝 Contributing
 
-Contributions, issues and feature requests are welcome!<br />Feel free to check [issues page](https://github.com/WernerBudtke/mytinerary-budtke/issues). You can also take a look at the [contributing guide](https://github.com/WernerBudtke/mytinerary-budtke/blob/master/CONTRIBUTING.md).
+Contributions, issues and feature requests are welcome!<br />Feel free to check [issues page](https://github.com/WernerBudtke/mytinerary-budtke/issues).
 
 ## Show your support
 
@@ -55,6 +50,3 @@ Give a ⭐️ if this project helped you!
 
 Copyright © 2021 [Federico Budtke](https://github.com/WernerBudtke).<br />
 This project is [ISC](https://github.com/WernerBudtke/mytinerary-budtke/blob/master/LICENSE) licensed.
-
-***
-_This README was generated with ❤️ by [readme-md-generator](https://github.com/kefranabg/readme-md-generator)_
