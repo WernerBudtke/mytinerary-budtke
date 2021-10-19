@@ -56,4 +56,3 @@ Give a ⭐️ if this project helped you!
 ## 📝 License
 
 Copyright © 2021 [Federico Budtke](https://github.com/WernerBudtke).<br />
-This project is [ISC](https://github.com/WernerBudtke/mytinerary-budtke/blob/master/LICENSE) licensed.
