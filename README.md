@@ -15,6 +15,7 @@
 > WebApp for travellers around the world to describe their itineraries and help other people decide if a city is the perfect place to enjoy vacation or not.
 
 ### ✨ [Demo](https://mytinerary-budtke.herokuapp.com/)
+### [Video in spanish](https://www.youtube.com/watch?v=3mt5EXRBIhM)
 
 ## Install
 
